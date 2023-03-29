@@ -9,7 +9,7 @@ This project is one of the freest project of your first year. Create your own RP
 Your main challenge for this game will be to create a complete product using everything that you and your team know.
 
 To give the users the feeling that you’re delivering a complete product you need to polish as much as possible your game.
-Your game must follow the following rules:
+Your game must follow the following rules :
 
 - Having a pleasant user interface.
 - Create a coherent universe (visual assets, audio assets, scenario, ...)
@@ -43,7 +43,7 @@ Any repository exceeding this limit might not be evaluated at all.
 ### TECHNICAL REQUIEREMENTS
 
 This project, being the last project of the module, the following requierement are the mathematical and
-technical parts which has to be present in your final project:
+technical parts which has to be present in your final project :
 
 - A collision system including moving and static elements with different shapes.
 - Camera movements (zoom, translation, rotation).
@@ -81,7 +81,7 @@ You can try to use sfView elements
 
 **In game menu**
 
-- Must be accessible by pressing theEscapekey
+- Must be accessible by pressing the Escape key
 - Must contain at least these options
     - Character options
        - equipment and inventory management
