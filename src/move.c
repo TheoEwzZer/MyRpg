@@ -9,7 +9,7 @@
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var)
 {
-    for (int i = 0; i < 62; i++) {
+    for (int i = 0; i < 65; i++) {
         if (sfFloatRect_intersects(&p_bounds, &var->collider_bounds[i], NULL))
             return true;
     }
@@ -23,7 +23,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         if (check_intersects(p_bounds, var))
             return;
         sfView_move(var->view, (sfVector2f){0, -10});
-        sfSprite_move(var->mc->mc_sprite, (sfVector2f){0, -10});
+        sfSprite_move(var->mc->sprite, (sfVector2f){0, -10});
         sfRectangleShape_move(var->hitbox, (sfVector2f){0, -10});
         back_move(var);
     }
@@ -32,7 +32,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         if (check_intersects(p_bounds, var))
             return;
         sfView_move(var->view, (sfVector2f){0, 10});
-        sfSprite_move(var->mc->mc_sprite, (sfVector2f){0, 10});
+        sfSprite_move(var->mc->sprite, (sfVector2f){0, 10});
         sfRectangleShape_move(var->hitbox, (sfVector2f){0, 10});
         front_move(var);
     }
@@ -45,7 +45,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
         if (check_intersects(p_bounds, var))
             return;
         sfView_move(var->view, (sfVector2f){-10, 0});
-        sfSprite_move(var->mc->mc_sprite, (sfVector2f){-10, 0});
+        sfSprite_move(var->mc->sprite, (sfVector2f){-10, 0});
         sfRectangleShape_move(var->hitbox, (sfVector2f){-10, 0});
         left_move(var);
     }
@@ -54,7 +54,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
         if (check_intersects(p_bounds, var))
             return;
         sfView_move(var->view, (sfVector2f){10, 0});
-        sfSprite_move(var->mc->mc_sprite, (sfVector2f){10, 0});
+        sfSprite_move(var->mc->sprite, (sfVector2f){10, 0});
         sfRectangleShape_move(var->hitbox, (sfVector2f){10, 0});
         right_move(var);
     }
@@ -63,7 +63,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
 
 void check_move(var_t *var, sfEvent event)
 {
-    sfFloatRect p_bounds = sfSprite_getGlobalBounds(var->mc->mc_sprite);
+    sfFloatRect p_bounds = sfSprite_getGlobalBounds(var->mc->sprite);
     sfVector2f size = {0, 0};
 
     float tmp = p_bounds.height;
