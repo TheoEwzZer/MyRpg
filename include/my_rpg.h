@@ -13,20 +13,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
 #ifndef MY_RPG_H_
 
     #define MY_RPG_H_
 
+    #define GET_BOUNDS(rectangle) \
+    sfRectangleShape_getGlobalBounds(rectangle)
+
+    #define DRAW_RECTANGLE(rectangle) \
+    sfRenderWindow_drawRectangleShape(var->window, rectangle, NULL)
+
+    #define DRAW_SPRITE(sprite) \
+    sfRenderWindow_drawSprite(var->window, sprite, NULL)
+
+typedef struct character {
+    sfSprite *mc_sprite;
+    sfTexture *clothes;
+    sfIntRect rect;
+    sfTime times;
+    sfClock *walk;
+    float second;
+} char_t ;
+
 typedef struct var {
     sfRenderWindow *window;
     sfView *view;
-    sfSprite *character_sprite;
+    char_t *mc;
     sfSprite *background_sprite;
+    sfRectangleShape *rect;
+    sfRectangleShape *hitbox;
+    sfRectangleShape **collider;
+    sfFloatRect *collider_bounds;
 } var_t;
 
+bool check_intersects(sfFloatRect p_bounds, var_t *var);
 sfRenderWindow *create_window(void);
+void back_move(var_t *var);
 void check_event(var_t *var, sfEvent event);
-void create_sprite(var_t *var);
+void check_move(var_t *var, sfEvent event);
+void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
+void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
+void create_barrer_collider(var_t *var);
+void create_collider(var_t *var);
+void create_house_collider(var_t *var);
+void create_north_ouest_position(var_t *var);
+void create_north_ouest_size(var_t *var);
+void create_sud_collider(var_t *var);
+void create_tree_collider(var_t *var);
+void create_water_collider(var_t *var);
+void create_west_collider(var_t *var);
+void front_move(var_t *var);
+void init_player(var_t *var);
+void init_struct(var_t *var);
+void left_move(var_t *var);
+void right_move(var_t *var);
 
 #endif /* MY_RPG_H_ */
