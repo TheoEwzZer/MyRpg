@@ -29,6 +29,9 @@
     #define DRAW_SPRITE(sprite) \
     sfRenderWindow_drawSprite(var->window, sprite, NULL)
 
+    #define CREATE_FROM_FILE(filename) \
+    sfTexture_createFromFile(filename, NULL)
+
 typedef struct character {
     sfSprite *sprite;
     sfTexture *clothes;
@@ -55,6 +58,7 @@ typedef struct var {
     sfSprite *background_sprite;
     sfView *view;
     sound_t *sound;
+    sfSprite **foreground;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
@@ -66,6 +70,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void create_barrer_collider(var_t *var);
 void create_collider(var_t *var);
+void create_foreground(var_t *var);
 void create_house_collider(var_t *var);
 void create_north_ouest_position(var_t *var);
 void create_north_ouest_size(var_t *var);
@@ -84,5 +89,6 @@ void init_struct(var_t *var);
 void left_move(var_t *var);
 void pnj_move(var_t *var);
 void right_move(var_t *var);
+void set_foreground_position(var_t *var);
 
 #endif /* MY_RPG_H_ */

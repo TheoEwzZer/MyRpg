@@ -24,6 +24,7 @@ void create_collider(var_t *var)
     create_west_collider(var);
     create_sud_collider(var);
     create_png_collider(var);
+    create_foreground(var);
     for (int i = 0; i < 65; i++)
         var->collider_bounds[i] = GET_BOUNDS(var->collider[i]);
 }

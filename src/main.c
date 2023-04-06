@@ -46,6 +46,7 @@ void init_struct(var_t *var)
 {
     sfImage *image = sfImage_createFromFile("assets/map/map.png");
     sfTexture *texture = sfTexture_createFromImage(image, NULL);
+    var->mc = malloc(sizeof(char_t));
     init_player(var);
     var->background_sprite = sfSprite_create();
     sfSprite_setTexture(var->background_sprite, texture, sfTrue);
@@ -60,7 +61,6 @@ int main(void)
 {
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
-    var->mc = malloc(sizeof(char_t));
     init_game(var);
     init_struct(var);
     sfMusic_setLoop(var->sound->theme, sfTrue);
@@ -75,6 +75,8 @@ int main(void)
         girl_move(var);
         pnj_move(var);
         DRAW_SPRITE(var->mc->sprite);
+        for (int i = 0; i < 9; i++)
+            DRAW_SPRITE(var->foreground[i]);
         sfRenderWindow_display(var->window);
     }
 }
