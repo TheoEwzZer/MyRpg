@@ -21,55 +21,54 @@ void check_event(var_t *var, sfEvent event)
 {
     if (event.type == sfEvtClosed)
         sfRenderWindow_close(var->window);
-    if (event.type == sfEvtKeyPressed) {
-        if (event.key.code == sfKeyLeft) {
-            sfView_move(var->view, (sfVector2f){-4, 0});
-            sfSprite_move(var->character_sprite, (sfVector2f){-4, 0});
-        }
-        if (event.key.code == sfKeyRight) {
-            sfView_move(var->view, (sfVector2f){4, 0});
-            sfSprite_move(var->character_sprite, (sfVector2f){4, 0});
-        }
-        if (event.key.code == sfKeyUp) {
-            sfView_move(var->view, (sfVector2f){0, -4});
-            sfSprite_move(var->character_sprite, (sfVector2f){0, -4});
-        }
-        if (event.key.code == sfKeyDown) {
-            sfView_move(var->view, (sfVector2f){0, 4});
-            sfSprite_move(var->character_sprite, (sfVector2f){0, 4});
-        }
-    }
+    if (event.type == sfEvtKeyPressed)
+        check_move(var, event);
 }
 
-void create_sprite(var_t *var)
+void init_player(var_t *var)
+{
+    var->mc->clothes = sfTexture_createFromFile("assets/player.png", NULL);
+    var->mc->mc_sprite = sfSprite_create();
+    sfSprite_setTexture(var->mc->mc_sprite, var->mc->clothes, sfTrue);
+    var->mc->walk = sfClock_create();
+    var->mc->rect.top = 0;
+    var->mc->rect.width = 77;
+    var->mc->rect.height = 77;
+    var->mc->rect.left = 0;
+    sfSprite_setTextureRect(var->mc->mc_sprite, var->mc->rect);
+    sfSprite_setPosition(var->mc->mc_sprite, (sfVector2f){1685, 1300});
+    sfSprite_setScale(var->mc->mc_sprite, (sfVector2f){0.75f, 0.75f});
+    var->hitbox = sfRectangleShape_create();
+    sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700, 1340});
+}
+
+void init_struct(var_t *var)
 {
     sfImage *image = sfImage_createFromFile("assets/map.png");
     sfTexture *texture = sfTexture_createFromImage(image, NULL);
-    sfImage *character = sfImage_createFromFile("assets/character.png");
-    sfTexture *character_texture = sfTexture_createFromImage(character, NULL);
+    init_player(var);
     var->background_sprite = sfSprite_create();
     sfSprite_setTexture(var->background_sprite, texture, sfTrue);
-    var->character_sprite = sfSprite_create();
-    sfSprite_setTexture(var->character_sprite, character_texture, sfTrue);
+    var->window = create_window();
+    var->view = sfView_createFromRect((sfFloatRect){0, 0, 640, 360});
+    sfView_setCenter(var->view, (sfVector2f){1685, 1275});
+    create_collider(var);
+    sfView_zoom(var->view, 1.15f);
 }
 
 int main(void)
 {
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
-    create_sprite(var);
-    var->window = create_window();
-    var->view = sfView_createFromRect((sfFloatRect){0, 0, 462, 258});
-    sfView_setCenter(var->view, (sfVector2f){231, 129});
-    sfSprite_setPosition(var->character_sprite, (sfVector2f){231, 129});
-    sfSprite_setScale(var->character_sprite, (sfVector2f){0.25f, 0.25f});
+    var->mc = malloc(sizeof(char_t));
+    init_struct(var);
     while (sfRenderWindow_isOpen(var->window)) {
         if (sfRenderWindow_pollEvent(var->window, &event))
             check_event(var, event);
-        sfRenderWindow_setView(var->window, var->view);
         sfRenderWindow_clear(var->window, sfBlack);
-        sfRenderWindow_drawSprite(var->window, var->background_sprite, NULL);
-        sfRenderWindow_drawSprite(var->window, var->character_sprite, NULL);
+        sfRenderWindow_setView(var->window, var->view);
+        DRAW_SPRITE(var->background_sprite);
+        DRAW_SPRITE(var->mc->mc_sprite);
         sfRenderWindow_display(var->window);
     }
 }
