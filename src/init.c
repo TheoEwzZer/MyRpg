@@ -58,6 +58,7 @@ void init_player(var_t *var)
     sfSprite_setPosition(var->mc->sprite, (sfVector2f){1685, 1300});
     sfSprite_setScale(var->mc->sprite, (sfVector2f){0.75f, 0.75f});
     var->hitbox = sfRectangleShape_create();
+    var->mc->attack = false;
     sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700, 1340});
 }
 

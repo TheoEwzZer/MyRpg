@@ -12,6 +12,8 @@ void game_engine(var_t *var, sfSprite *particle_sprite)
     sfRenderWindow_clear(var->window, sfBlack);
     sfRenderWindow_setView(var->window, var->view);
     DRAW_SPRITE(var->background_sprite);
+    if (var->mc->attack)
+        attack_move(var);
     forge_move(var);
     girl_move(var);
     pnj_move(var);

@@ -58,6 +58,7 @@
     "Now you need to defeat the boss\nGo at the bottom of the map !"
 
 typedef struct character {
+    bool attack;
     float second;
     sfClock *walk;
     sfIntRect rect;
@@ -119,10 +120,16 @@ typedef struct var {
     bool has_talk_to_blacksmith;
     bool is_talking_to_blacksmith;
     bool has_kill_all_mobs;
+    int direction;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
 sfRenderWindow *create_window(void);
+void attack_back(var_t *var);
+void attack_front(var_t *var);
+void attack_left(var_t *var);
+void attack_move(var_t *var);
+void attack_right(var_t *var);
 void back_move(var_t *var);
 void blacksmith_dialog(var_t *var);
 void bob_dialog(var_t *var);

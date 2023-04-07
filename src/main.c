@@ -22,9 +22,14 @@ void check_event(var_t *var, sfEvent event)
     sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
     if (event.type == sfEvtClosed)
         sfRenderWindow_close(var->window);
-    if (event.type == sfEvtKeyPressed)
+    if (event.type == sfEvtKeyPressed && !var->mc->attack)
         check_move(var, event);
-    if (sprite_pos.x >= 480 && sprite_pos.x <= 580 && sprite_pos.y >= 1070
+    if (var->has_armor == true && event.type == sfEvtMouseButtonPressed) {
+        var->mc->rect.left = 616 - 77;
+        var->mc->rect.width = 77;
+        var->mc->rect.height = 77;
+        var->mc->attack = true;
+    } if (sprite_pos.x >= 480 && sprite_pos.x <= 580 && sprite_pos.y >= 1070
     && sprite_pos.y <= 1170 && !var->has_armor) {
         sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
         var->mc->rect.top = 0;

@@ -1,84 +1,84 @@
 /*
 ** EPITECH PROJECT, 2023
-** character_move
+** attack.c
 ** File description:
-** character_move
+** attack.c
 */
 
 #include "my_rpg.h"
 
-void right_move(var_t *var)
+void attack_right(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
     var->mc->rect.top = 154;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
+    if (var->mc->second > 0.1f) {
+        var->mc->rect.left += 77;
+        if (var->mc->rect.left >= 924) {
             var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
+            var->mc->attack = 0;
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 3;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void left_move(var_t *var)
-{
-    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
-    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
-    var->mc->rect.top = 77;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
-            var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
-        }
-        sfClock_restart(var->mc->walk);
-    }
-    var->direction = 2;
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-}
-
-void back_move(var_t *var)
+void attack_back(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
     var->mc->rect.top = 231;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
+    if (var->mc->second > 0.1f) {
+        var->mc->rect.left += 77;
+        if (var->mc->rect.left >= 924) {
             var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
+            var->mc->attack = 0;
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 4;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void front_move(var_t *var)
+void attack_front(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
     var->mc->rect.top = 0;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
+    if (var->mc->second > 0.1f) {
+        var->mc->rect.left += 77;
+        if (var->mc->rect.left >= 924) {
             var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
+            var->mc->attack = 0;
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 1;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+}
+
+void attack_left(var_t *var)
+{
+    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
+    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
+    var->mc->rect.top = 77;
+    if (var->mc->second > 0.1f) {
+        var->mc->rect.left += 77;
+        if (var->mc->rect.left >= 924) {
+            var->mc->rect.left = 0;
+            var->mc->attack = false;
+        }
+        sfClock_restart(var->mc->walk);
+    }
+    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+}
+
+void attack_move(var_t *var)
+{
+    if (var->direction == 1)
+        attack_front(var);
+    if (var->direction == 2)
+        attack_left(var);
+    if (var->direction == 3)
+        attack_right(var);
+    if (var->direction == 4)
+        attack_back(var);
 }
