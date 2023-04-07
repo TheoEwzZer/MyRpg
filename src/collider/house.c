@@ -11,7 +11,7 @@ void create_house_collider(var_t *var)
 {
     sfRectangleShape_setPosition(var->collider[0], (sfVector2f){1656, 1144});
     sfRectangleShape_setPosition(var->collider[26], (sfVector2f){864, 1000});
-    sfRectangleShape_setPosition(var->collider[27], (sfVector2f){1080, 1000});
+    sfRectangleShape_setPosition(var->collider[27], (sfVector2f){HEIGHT, 1000});
     sfRectangleShape_setPosition(var->collider[28], (sfVector2f){576, 1324});
     sfRectangleShape_setPosition(var->collider[29], (sfVector2f){252, 1432});
     sfRectangleShape_setPosition(var->collider[30], (sfVector2f){144, 1144});
@@ -34,7 +34,7 @@ void create_house_collider(var_t *var)
 void set_foreground_position(var_t *var)
 {
     var->foreground = malloc(sizeof(sfSprite *) * 9);
-    for (int i = 0; i < 9; i++)
+    for (unsigned int i = 0; i < 9; i++)
         var->foreground[i] = sfSprite_create();
     sfSprite_setPosition(var->foreground[0], (sfVector2f){1656, 1114});
     sfSprite_setPosition(var->foreground[1], (sfVector2f){252, 1402});

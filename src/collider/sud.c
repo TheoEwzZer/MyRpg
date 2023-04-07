@@ -22,7 +22,7 @@ void create_sud_collider(var_t *var)
     sfRectangleShape_setSize(var->collider[10], (sfVector2f){360, 35});
     sfRectangleShape_setSize(var->collider[11], (sfVector2f){179, 35});
     sfRectangleShape_setSize(var->collider[12], (sfVector2f){143, 35});
-    sfRectangleShape_setSize(var->collider[2], (sfVector2f){30, 1920});
+    sfRectangleShape_setSize(var->collider[2], (sfVector2f){30, WIDTH});
     sfRectangleShape_setSize(var->collider[3], (sfVector2f){1150, 360});
     sfRectangleShape_setSize(var->collider[4], (sfVector2f){465, 360});
     sfRectangleShape_setSize(var->collider[5], (sfVector2f){323, 360});

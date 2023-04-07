@@ -28,7 +28,7 @@ void create_north_ouest_position(var_t *var)
 
 void create_north_ouest_size(var_t *var)
 {
-    sfRectangleShape_setSize(var->collider[13], (sfVector2f){33, 1920});
+    sfRectangleShape_setSize(var->collider[13], (sfVector2f){33, WIDTH});
     sfRectangleShape_setSize(var->collider[19], (sfVector2f){1869, 211});
     sfRectangleShape_setSize(var->collider[49], (sfVector2f){144, 73});
     sfRectangleShape_setSize(var->collider[50], (sfVector2f){72, 80});

@@ -40,5 +40,5 @@ void create_tree_collider(var_t *var)
     sfRectangleShape_setSize(var->collider[39], (sfVector2f){36, 108});
     sfRectangleShape_setSize(var->collider[40], (sfVector2f){180, 30});
     sfRectangleShape_setSize(var->collider[41], (sfVector2f){34, 34});
-    sfRectangleShape_setSize(var->collider[9], (sfVector2f){1920, 35});
+    sfRectangleShape_setSize(var->collider[9], (sfVector2f){WIDTH, 35});
 }
