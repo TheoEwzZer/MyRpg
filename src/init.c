@@ -73,7 +73,7 @@ void init_struct(var_t *var)
     var->view = sfView_createFromRect((sfFloatRect){0, 0, 640, 360});
     sfView_setCenter(var->view, (sfVector2f){1685, 1275});
     create_collider(var);
-    sfView_zoom(var->view, 6.15f);
+    sfView_zoom(var->view, 1.15f);
     var->frame_count = 0;
     var->has_armor = false;
 }
