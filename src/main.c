@@ -51,5 +51,10 @@ int main(void)
     sfSprite_setTexture(particle_sprite, leaf_texture, sfTrue);
     sfSprite_setScale(particle_sprite, (sfVector2f){0.005f, 0.005f});
     generate_particle(var);
-    game_engine(var, particle_sprite, event);
+    create_dialog_box(var);
+    while (sfRenderWindow_isOpen(var->window)) {
+        if (sfRenderWindow_pollEvent(var->window, &event))
+            check_event(var, event);
+        game_engine(var, particle_sprite);
+    }
 }

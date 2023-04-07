@@ -39,6 +39,24 @@
     #define CREATE_FROM_FILE(filename) \
     sfTexture_createFromFile(filename, NULL)
 
+    #define BLACKSMITH_DIALOG1 \
+    "Take this armor !"
+
+    #define BLACKSMITH_DIALOG2 \
+    "Attack enemies who\nare higher up !"
+
+    #define PRICILLA_DIALOG1 \
+    "Our village need you !\nTalk to the blacksmith !"
+
+    #define PRICILLA_DIALOG2 \
+    "Attack enemies who\nare higher up !"
+
+    #define BOB_DIALOG1 \
+    "Talk to me later !"
+
+    #define BOB_DIALOG2 \
+    "Now you need to defeat the boss\nGo at the bottom of the map !"
+
 typedef struct character {
     float second;
     sfClock *walk;
@@ -64,6 +82,16 @@ typedef struct particle_s {
     sfVector2f direction;
 } particle_t;
 
+typedef struct dialog_s {
+    sfFont *font;
+    sfText *text;
+    sfText *name;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfVector2f pos;
+    sfVector2f scale;
+} dialog_t;
+
 typedef struct var {
     bool has_armor;
     bool switch_side;
@@ -87,11 +115,17 @@ typedef struct var {
     sfView *view;
     size_t frame_count;
     sound_t *sound;
+    dialog_t *dialog;
+    bool has_talk_to_blacksmith;
+    bool is_talking_to_blacksmith;
+    bool has_kill_all_mobs;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
 sfRenderWindow *create_window(void);
 void back_move(var_t *var);
+void blacksmith_dialog(var_t *var);
+void bob_dialog(var_t *var);
 void check_ennemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
 void check_move(var_t *var, sfEvent event);
@@ -99,6 +133,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void create_barrer_collider(var_t *var);
 void create_collider(var_t *var);
+void create_dialog_box(var_t *var);
 void create_foreground(var_t *var);
 void create_house_collider(var_t *var);
 void create_north_ouest_position(var_t *var);
@@ -114,7 +149,7 @@ void display_skel(var_t *var);
 void display_skel2(var_t *var);
 void forge_move(var_t *var);
 void front_move(var_t *var);
-void game_engine(var_t *var, sfSprite *particle_sprite, sfEvent event);
+void game_engine(var_t *var, sfSprite *particle_sprite);
 void generate_particle(var_t *var);
 void girl_move(var_t *var);
 void init_char(var_t *var);
@@ -125,7 +160,13 @@ void init_struct(var_t *var);
 void left_move(var_t *var);
 void move_particle(var_t *var, sfSprite *particle_sprite);
 void pnj_move(var_t *var);
+void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
 void set_foreground_position(var_t *var);
+void show_blacksmith_dialog(var_t *var);
+void show_bob_dialog(var_t *var);
+void show_priscilla_dialog(var_t *var);
+void zoom_in(var_t *var, bool *has_zoom);
+void zoom_out(var_t *var, bool *has_zoom);
 
 #endif /* MY_RPG_H_ */
