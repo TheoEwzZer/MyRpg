@@ -42,6 +42,6 @@ void move_particle(var_t *var, sfSprite *particle_sprite)
         position = (sfVector2f){p->x + view_offset.x, p->y + view_offset.y};
         sfSprite_setPosition(particle_sprite, position);
         sfSprite_setRotation(particle_sprite, p->rotation);
-        sfRenderWindow_drawSprite(var->window, particle_sprite, NULL);
+        DRAW_SPRITE(particle_sprite);
     }
 }

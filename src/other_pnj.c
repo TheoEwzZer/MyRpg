@@ -9,19 +9,19 @@
 
 void init_char(var_t *var)
 {
-    var->forge->clothes = sfTexture_createFromFile("assets/pnj/forg.png", NULL);
+    var->forge->clothes = CREATE_FROM_FILE("assets/pnj/forg.png");
     var->forge->sprite = sfSprite_create();
     sfSprite_setTexture(var->forge->sprite, var->forge->clothes, sfTrue);
     var->forge->walk = sfClock_create();
     sfSprite_setPosition(var->forge->sprite, (sfVector2f){530, 1120});
     sfSprite_setScale(var->forge->sprite, (sfVector2f){0.75f, 0.75f});
-    var->girl->clothes = sfTexture_createFromFile("assets/pnj/Woman.png", NULL);
+    var->girl->clothes = CREATE_FROM_FILE("assets/pnj/Woman.png");
     var->girl->sprite = sfSprite_create();
     sfSprite_setTexture(var->girl->sprite, var->girl->clothes, sfTrue);
     var->girl->walk = sfClock_create();
     sfSprite_setPosition(var->girl->sprite, (sfVector2f){1100, 1150});
     sfSprite_setScale(var->girl->sprite, (sfVector2f){0.75f, 0.75f});
-    var->pnj->clothes = sfTexture_createFromFile("assets/pnj/pnj.png", NULL);
+    var->pnj->clothes = CREATE_FROM_FILE("assets/pnj/pnj.png");
     var->pnj->sprite = sfSprite_create();
     sfSprite_setTexture(var->pnj->sprite, var->pnj->clothes, sfTrue);
     var->pnj->walk = sfClock_create();
@@ -44,7 +44,7 @@ void forge_move(var_t *var)
         sfClock_restart(var->forge->walk);
     }
     sfSprite_setTextureRect(var->forge->sprite, var->forge->rect);
-    sfRenderWindow_drawSprite(var->window, var->forge->sprite, NULL);
+    DRAW_SPRITE(var->forge->sprite);
 }
 
 void girl_move(var_t *var)
@@ -62,7 +62,7 @@ void girl_move(var_t *var)
         sfClock_restart(var->girl->walk);
     }
     sfSprite_setTextureRect(var->girl->sprite, var->girl->rect);
-    sfRenderWindow_drawSprite(var->window, var->girl->sprite, NULL);
+    DRAW_SPRITE(var->girl->sprite);
 }
 
 void pnj_move(var_t *var)
@@ -80,5 +80,5 @@ void pnj_move(var_t *var)
         sfClock_restart(var->pnj->walk);
     }
     sfSprite_setTextureRect(var->pnj->sprite, var->pnj->rect);
-    sfRenderWindow_drawSprite(var->window, var->pnj->sprite, NULL);
+    DRAW_SPRITE(var->pnj->sprite);
 }

@@ -40,7 +40,7 @@ int main(void)
 {
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
-    sfTexture *leaf_texture = sfTexture_createFromFile("assets/leaf.png", NULL);
+    sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
     sfSprite *particle_sprite = sfSprite_create();
     srand((unsigned)time(NULL));
     init_game(var);

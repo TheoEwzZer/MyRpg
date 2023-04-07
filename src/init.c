@@ -26,14 +26,14 @@ void init_game(var_t *var)
 
 void init_ennemies(var_t *var)
 {
-    var->orc->clothes = sfTexture_createFromFile("assets/pnj/orc.png", NULL);
+    var->orc->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
     var->orc->sprite = sfSprite_create();
     sfSprite_setTexture(var->orc->sprite, var->orc->clothes, sfTrue);
     var->orc->walk = sfClock_create();
     sfSprite_setPosition(var->orc->sprite, (sfVector2f){720, 700});
     var->orc->rect.left = 0;
     sfSprite_setScale(var->orc->sprite, (sfVector2f){0.75f, 0.75f});
-    var->skel->clothes = sfTexture_createFromFile("assets/pnj/skel.png", NULL);
+    var->skel->clothes = CREATE_FROM_FILE("assets/pnj/skel.png");
     var->skel->sprite = sfSprite_create();
     var->skel->rect.left = 0;
     sfSprite_setTexture(var->skel->sprite, var->skel->clothes, sfTrue);
@@ -45,9 +45,9 @@ void init_ennemies(var_t *var)
 
 void init_player(var_t *var)
 {
-    var->mc->clothes = sfTexture_createFromFile("assets/player/mc.png", NULL);
+    var->mc->clothes = CREATE_FROM_FILE("assets/player/mc.png");
     var->mc->sprite = sfSprite_create();
-    var->armor = sfTexture_createFromFile("assets/player/armor.png", NULL);
+    var->armor = CREATE_FROM_FILE("assets/player/armor.png");
     sfSprite_setTexture(var->mc->sprite, var->mc->clothes, sfTrue);
     var->mc->walk = sfClock_create();
     var->mc->rect.top = 0;
