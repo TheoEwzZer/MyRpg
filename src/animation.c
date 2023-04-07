@@ -23,7 +23,6 @@ void right_move(var_t *var)
         sfClock_restart(var->mc->walk);
     }
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    DRAW_SPRITE(var->mc->sprite);
 }
 
 void left_move(var_t *var)
@@ -42,7 +41,6 @@ void left_move(var_t *var)
         sfClock_restart(var->mc->walk);
     }
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    DRAW_SPRITE(var->mc->sprite);
 }
 
 void back_move(var_t *var)
@@ -61,7 +59,6 @@ void back_move(var_t *var)
         sfClock_restart(var->mc->walk);
     }
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    DRAW_SPRITE(var->mc->sprite);
 }
 
 void front_move(var_t *var)
@@ -80,5 +77,4 @@ void front_move(var_t *var)
         sfClock_restart(var->mc->walk);
     }
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    DRAW_SPRITE(var->mc->sprite);
 }
