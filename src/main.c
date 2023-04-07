@@ -9,7 +9,7 @@
 
 sfRenderWindow *create_window(void)
 {
-    sfVideoMode mode = {1920, 1080, 24};
+    sfVideoMode mode = {WIDTH, HEIGHT, 24};
     sfUint32 style = sfDefaultStyle;
     sfRenderWindow *window = sfRenderWindow_create(
         mode, "My Rpg", style, NULL
@@ -55,28 +55,22 @@ void init_struct(var_t *var)
     sfView_setCenter(var->view, (sfVector2f){1685, 1275});
     create_collider(var);
     sfView_zoom(var->view, 1.15f);
+    var->frame_count = 0;
 }
 
 int main(void)
 {
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
+    sfTexture *leaf_texture = sfTexture_createFromFile("assets/leaf.png", NULL);
+    sfSprite *particle_sprite = sfSprite_create();
+    srand((unsigned)time(NULL));
     init_game(var);
     init_struct(var);
     sfMusic_setLoop(var->sound->theme, sfTrue);
     sfMusic_play(var->sound->theme);
-    while (sfRenderWindow_isOpen(var->window)) {
-        if (sfRenderWindow_pollEvent(var->window, &event))
-            check_event(var, event);
-        sfRenderWindow_clear(var->window, sfBlack);
-        sfRenderWindow_setView(var->window, var->view);
-        DRAW_SPRITE(var->background_sprite);
-        forge_move(var);
-        girl_move(var);
-        pnj_move(var);
-        DRAW_SPRITE(var->mc->sprite);
-        for (int i = 0; i < 9; i++)
-            DRAW_SPRITE(var->foreground[i]);
-        sfRenderWindow_display(var->window);
-    }
+    sfSprite_setTexture(particle_sprite, leaf_texture, sfTrue);
+    sfSprite_setScale(particle_sprite, (sfVector2f){0.005f, 0.005f});
+    generate_particle(var);
+    game_engine(var, particle_sprite, event);
 }

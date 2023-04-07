@@ -20,6 +20,13 @@
 
     #define MY_RPG_H_
 
+    #define PI 3.14159265358979323846f
+
+    #define MAX_PARTICLES 10
+
+    #define WIDTH 1920
+    #define HEIGHT 1080
+
     #define GET_BOUNDS(rectangle) \
     sfRectangleShape_getGlobalBounds(rectangle)
 
@@ -33,32 +40,46 @@
     sfTexture_createFromFile(filename, NULL)
 
 typedef struct character {
+    float second;
+    sfClock *walk;
+    sfIntRect rect;
     sfSprite *sprite;
     sfTexture *clothes;
-    sfIntRect rect;
     sfTime times;
-    sfClock *walk;
-    float second;
 } char_t ;
 
 typedef struct sound_s {
     sfMusic *theme;
 } sound_t ;
 
+typedef struct particle_s {
+    float life;
+    float oscillation;
+    float rotation;
+    float rotationSpeed;
+    float size;
+    float speed;
+    float x;
+    float y;
+    sfVector2f direction;
+} particle_t;
+
 typedef struct var {
     char_t *forge;
     char_t *girl;
     char_t *mc;
     char_t *pnj;
+    particle_t particles[MAX_PARTICLES];
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *hitbox;
     sfRectangleShape *rect;
     sfRenderWindow *window;
+    sfSprite **foreground;
     sfSprite *background_sprite;
     sfView *view;
+    size_t frame_count;
     sound_t *sound;
-    sfSprite **foreground;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
@@ -81,12 +102,15 @@ void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
 void forge_move(var_t *var);
 void front_move(var_t *var);
+void game_engine(var_t *var, sfSprite *particle_sprite, sfEvent event);
+void generate_particle(var_t *var);
 void girl_move(var_t *var);
 void init_char(var_t *var);
 void init_game(var_t *var);
 void init_player(var_t *var);
 void init_struct(var_t *var);
 void left_move(var_t *var);
+void move_particle(var_t *var, sfSprite *particle_sprite);
 void pnj_move(var_t *var);
 void right_move(var_t *var);
 void set_foreground_position(var_t *var);
