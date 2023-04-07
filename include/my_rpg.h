@@ -20,7 +20,7 @@
 
     #define MY_RPG_H_
 
-    #define PI 3.14159265358979323846f
+    #define PI 3.141592741f
 
     #define MAX_PARTICLES 10
 
@@ -65,10 +65,14 @@ typedef struct particle_s {
 } particle_t;
 
 typedef struct var {
+    bool has_armor;
+    bool switch_side;
     char_t *forge;
     char_t *girl;
     char_t *mc;
+    char_t *orc;
     char_t *pnj;
+    char_t *skel;
     particle_t particles[MAX_PARTICLES];
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
@@ -77,6 +81,9 @@ typedef struct var {
     sfRenderWindow *window;
     sfSprite **foreground;
     sfSprite *background_sprite;
+    sfTexture *armor;
+    sfVector2f orc_pos;
+    sfVector2f skel_pos;
     sfView *view;
     size_t frame_count;
     sound_t *sound;
@@ -85,6 +92,7 @@ typedef struct var {
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
 sfRenderWindow *create_window(void);
 void back_move(var_t *var);
+void check_ennemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
 void check_move(var_t *var, sfEvent event);
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
@@ -100,12 +108,17 @@ void create_sud_collider(var_t *var);
 void create_tree_collider(var_t *var);
 void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
+void display_orc(var_t *var);
+void display_orc2(var_t *var);
+void display_skel(var_t *var);
+void display_skel2(var_t *var);
 void forge_move(var_t *var);
 void front_move(var_t *var);
 void game_engine(var_t *var, sfSprite *particle_sprite, sfEvent event);
 void generate_particle(var_t *var);
 void girl_move(var_t *var);
 void init_char(var_t *var);
+void init_ennemies(var_t *var);
 void init_game(var_t *var);
 void init_player(var_t *var);
 void init_struct(var_t *var);

@@ -23,6 +23,8 @@ void game_engine(var_t *var, sfSprite *particle_sprite, sfEvent event)
             DRAW_SPRITE(var->foreground[i]);
         var->frame_count++;
         move_particle(var, particle_sprite);
+        if (var->has_armor)
+            check_ennemies(var);
         sfRenderWindow_display(var->window);
     }
 }
