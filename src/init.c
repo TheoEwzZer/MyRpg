@@ -78,3 +78,10 @@ void init_struct(var_t *var)
     var->frame_count = 0;
     var->has_armor = false;
 }
+
+void init_rpg(var_t *var)
+{
+    init_game(var);
+    init_struct(var);
+    init_ennemies(var);
+}
