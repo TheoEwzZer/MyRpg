@@ -19,6 +19,7 @@ void init_game(var_t *var)
     var->forge->rect.left = 0;
     var->girl->rect.left = 0;
     var->pnj->rect.left = 0;
+    var->is_particle_active = false;
     var->sound->theme = sfMusic_createFromFile("assets/music/main_theme.ogg");
     sfMusic_setVolume(var->sound->theme, 50);
     init_char(var);
