@@ -46,20 +46,18 @@ int main(void)
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
-    sfSprite *particle_sprite = sfSprite_create();
     srand((unsigned)time(NULL));
     init_rpg(var);
     sfMusic_setLoop(var->sound->theme, sfTrue);
     sfMusic_play(var->sound->theme);
-    sfSprite_setTexture(particle_sprite, leaf_texture, sfTrue);
-    sfSprite_setScale(particle_sprite, (sfVector2f){0.005f, 0.005f});
-    generate_particle(var);
+    generate_leaves(var, leaf_texture);
     create_dialog_box(var);
     load_game("save", var);
+    generate_particle_pnj(var, (sfVector2f){1630.0f, 1350.0f});
     while (sfRenderWindow_isOpen(var->window)) {
         if (sfRenderWindow_pollEvent(var->window, &event))
             check_event(var, event);
-        game_engine(var, particle_sprite);
+        game_engine(var);
     }
     save_game("save", var);
 }
