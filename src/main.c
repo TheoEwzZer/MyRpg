@@ -53,7 +53,7 @@ int main(void)
     generate_leaves(var, leaf_texture);
     create_dialog_box(var);
     load_game("save", var);
-    generate_particle_pnj(var, (sfVector2f){1630.0f, 1350.0f});
+    generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
     while (sfRenderWindow_isOpen(var->window)) {
         if (sfRenderWindow_pollEvent(var->window, &event))
             check_event(var, event);
