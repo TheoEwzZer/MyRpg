@@ -23,7 +23,8 @@
 
     #define PI 3.141592741f
 
-    #define MAX_PARTICLES 50
+    #define MAX_LEAVES 25
+    #define MAX_PARTICLES_LEAVES 50
 
     #define WIDTH 1920
     #define HEIGHT 1080
@@ -109,8 +110,8 @@ typedef struct var {
     char_t *pnj;
     char_t *skel;
     dialog_t *dialog;
-    particle_t particles2[MAX_PARTICLES];
-    particle_t particles[MAX_PARTICLES];
+    particle_t particles_leaves[MAX_PARTICLES_LEAVES];
+    particle_t particles_pnj[MAX_LEAVES];
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *hitbox;
