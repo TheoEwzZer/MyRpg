@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -124,6 +125,11 @@ typedef struct var {
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
+bool load_position_map(var_t *var, char *line);
+bool load_position_player(var_t *var, char *line);
+bool load_quest(var_t *var, char *line);
+char *int_to_str(int nb, size_t *n);
+int get_digits(int nb);
 sfRenderWindow *create_window(void);
 void attack_back(var_t *var);
 void attack_front(var_t *var);
@@ -163,12 +169,18 @@ void init_char(var_t *var);
 void init_ennemies(var_t *var);
 void init_game(var_t *var);
 void init_player(var_t *var);
+void init_rpg(var_t *var);
 void init_struct(var_t *var);
 void left_move(var_t *var);
+void load_game(const char *file_name, var_t *var);
 void move_particle(var_t *var, sfSprite *particle_sprite);
 void pnj_move(var_t *var);
 void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
+void save_game(const char *file_name, var_t *var);
+void save_position_map(var_t *var, FILE *file);
+void save_position_player(var_t *var, FILE *file);
+void save_quest(var_t *var, FILE *file);
 void set_foreground_position(var_t *var);
 void show_blacksmith_dialog(var_t *var);
 void show_bob_dialog(var_t *var);
