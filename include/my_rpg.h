@@ -73,11 +73,9 @@ typedef struct sound_s {
 } sound_t ;
 
 typedef struct particle_s {
-    float life;
     float oscillation;
     float rotation;
     float rotationSpeed;
-    float size;
     float speed;
     float x;
     float y;
