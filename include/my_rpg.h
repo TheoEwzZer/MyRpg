@@ -23,7 +23,7 @@
 
     #define PI 3.141592741f
 
-    #define MAX_PARTICLES 10
+    #define MAX_PARTICLES 50
 
     #define WIDTH 1920
     #define HEIGHT 1080
@@ -73,27 +73,34 @@ typedef struct sound_s {
 } sound_t ;
 
 typedef struct particle_s {
-    float oscillation;
+    float direction_x;
+    float osci;
     float rotation;
-    float rotationSpeed;
+    float size;
     float speed;
-    float x;
-    float y;
+    sfRectangleShape *shape;
+    sfSprite *sprite;
+    sfVector2f actu_pos;
+    sfVector2f base_pos;
     sfVector2f direction;
 } particle_t;
 
 typedef struct dialog_s {
     sfFont *font;
-    sfText *text;
-    sfText *name;
-    sfTexture *texture;
     sfSprite *sprite;
+    sfText *name;
+    sfText *text;
+    sfTexture *texture;
     sfVector2f pos;
     sfVector2f scale;
 } dialog_t;
 
 typedef struct var {
     bool has_armor;
+    bool has_kill_all_mobs;
+    bool has_talk_to_blacksmith;
+    bool is_particle_active;
+    bool is_talking_to_blacksmith;
     bool switch_side;
     char_t *forge;
     char_t *girl;
@@ -101,6 +108,8 @@ typedef struct var {
     char_t *orc;
     char_t *pnj;
     char_t *skel;
+    dialog_t *dialog;
+    particle_t particles2[MAX_PARTICLES];
     particle_t particles[MAX_PARTICLES];
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
@@ -115,11 +124,7 @@ typedef struct var {
     sfView *view;
     size_t frame_count;
     sound_t *sound;
-    dialog_t *dialog;
-    bool has_talk_to_blacksmith;
-    bool is_talking_to_blacksmith;
-    bool has_kill_all_mobs;
-    int direction;
+    unsigned int direction;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
@@ -160,8 +165,9 @@ void display_skel(var_t *var);
 void display_skel2(var_t *var);
 void forge_move(var_t *var);
 void front_move(var_t *var);
-void game_engine(var_t *var, sfSprite *particle_sprite);
-void generate_particle(var_t *var);
+void game_engine(var_t *var);
+void generate_leaves(var_t *var, sfTexture *leaf_texture);
+void generate_particle_pnj(var_t *var, sfVector2f pos);
 void girl_move(var_t *var);
 void init_char(var_t *var);
 void init_ennemies(var_t *var);
@@ -171,7 +177,8 @@ void init_rpg(var_t *var);
 void init_struct(var_t *var);
 void left_move(var_t *var);
 void load_game(const char *file_name, var_t *var);
-void move_particle(var_t *var, sfSprite *particle_sprite);
+void move_leaves(var_t *var);
+void move_particle_pnj(var_t *var);
 void pnj_move(var_t *var);
 void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
