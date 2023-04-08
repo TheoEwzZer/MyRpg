@@ -11,18 +11,20 @@ void generate_particle_pnj(var_t *var, sfVector2f pos)
 {
     particle_t *p = NULL;
 
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
-        p = &var->particles2[i];
+    sfTexture *texture = CREATE_FROM_FILE("assets/particle/pnj.png");
+    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+        p = &var->particles_pnj[i];
         p->base_pos.x = pos.x;
         p->base_pos.y = pos.y;
         p->actu_pos.x = (float)(rand() % 21) + pos.x - 10.0f;
         p->actu_pos.y = pos.y;
-        p->speed = (float)(rand() % 16 + 5) / 1000.0f;
+        p->speed = (float)(rand() % 15 + 1) / 1000.0f;
         p->shape = sfRectangleShape_create();
-        p->size = 5.0f;
+        p->size = 0.2f;
         p->direction_x = (float)(rand() % 3 - 1) / 1.0f;
-        sfRectangleShape_setSize(p->shape, (sfVector2f){p->size, p->size});
-        sfRectangleShape_setFillColor(p->shape, sfWhite);
+        p->sprite = sfSprite_create();
+        sfSprite_setTexture(p->sprite, texture, sfTrue);
+        sfSprite_setScale(p->sprite, (sfVector2f){p->size, p->size});
     }
 }
 
@@ -32,21 +34,21 @@ void move_particle_pnj(var_t *var)
     sfVector2f position = {0, 0};
     if (!var->is_particle_active)
         return;
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
-        p = &var->particles2[i];
+    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+        p = &var->particles_pnj[i];
         p->actu_pos.x += (float)(p->direction_x) * p->speed / 2.0f;
         p->actu_pos.y -= p->speed;
-        p->size -= 0.001f;
-        if (p->actu_pos.y < p->base_pos.y - 25.0f || p->size < 0.0f) {
+        p->size -= 0.0001f;
+        if (p->actu_pos.y < p->base_pos.y - 10.0f || p->size < 0.0f) {
             p->actu_pos.y = p->base_pos.y;
-            p->size = 5.0f;
+            p->size = 0.2f;
             p->actu_pos.x = (float)(rand() % 21) + p->base_pos.x - 10.0f;
             p->direction_x = (float)(rand() % 3) - 1;
         }
         position = (sfVector2f){p->actu_pos.x, p->actu_pos.y};
-        sfRectangleShape_setPosition(p->shape, position);
-        sfRectangleShape_setSize(p->shape, (sfVector2f){p->size, p->size});
-        sfRenderWindow_drawRectangleShape(var->window, p->shape, NULL);
+        sfSprite_setPosition(p->sprite, position);
+        sfSprite_setScale(p->sprite, (sfVector2f){p->size, p->size});
+        DRAW_SPRITE(p->sprite);
     }
 }
 
@@ -54,11 +56,11 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture)
 {
     particle_t *leaf = NULL;
 
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
-        leaf = &var->particles[i];
-        leaf->actu_pos.x = (float)(rand() % WIDTH - 200) + 200;
+    for (unsigned int i = 0; i < MAX_PARTICLES_LEAVES; i++) {
+        leaf = &var->particles_leaves[i];
+        leaf->actu_pos.x = (float)(rand() % WIDTH - 1000) + 1000;
         leaf->actu_pos.y = 0.0f;
-        leaf->speed = (float)(rand() % 5 + 1) / 10.0f;
+        leaf->speed = (float)(rand() % 25 + 1) / 100.0f;
         leaf->osci = (float)(rand() / RAND_MAX) * 2.0f * (float)PI;
         leaf->rotation = 0.0f;
         leaf->sprite = sfSprite_create();
@@ -71,20 +73,20 @@ void move_leaves(var_t *var)
 {
     sfVector2f offset = sfView_getCenter(var->view);
     particle_t *leaf = NULL;
-    sfVector2f position = {0, 0};
+    sfVector2f position = {0, 0}; float x = 0.0f;
     offset.x -= sfView_getSize(var->view).x / 2;
     offset.y -= sfView_getSize(var->view).y / 2;
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
-        leaf = &var->particles[i];
-        leaf->actu_pos.x += sinf(leaf->osci + (float)var->frame_count * 0.005f);
+    for (unsigned int i = 0; i < MAX_PARTICLES_LEAVES; i++) {
+        x = (float)var->frame_count * (float)(i / 2 + 1) * 0.0005f;
+        leaf = &var->particles_leaves[i];
+        leaf->actu_pos.x += sinf(leaf->osci + x) / 10.0f;
         leaf->actu_pos.y += leaf->speed;
-        leaf->rotation -= sinf(leaf->osci + (float)var->frame_count * 0.005f);
-        if (leaf->actu_pos.y > HEIGHT) {
+        leaf->rotation -= sinf(leaf->osci + x) / 10.0f;
+        if (leaf->actu_pos.y > 1920) {
             leaf->actu_pos.y = 0.0f;
-            leaf->speed = (float)(rand() % 5 + 1) / 10.0f;
+            leaf->speed = (float)(rand() % 25 + 1) / 100.0f;
         }
-        position.x = leaf->actu_pos.x + offset.x;
-        position.y = leaf->actu_pos.y + offset.y;
+        position = leaf->actu_pos;
         sfSprite_setPosition(leaf->sprite, position);
         sfSprite_setRotation(leaf->sprite, leaf->rotation);
         DRAW_SPRITE(leaf->sprite);
