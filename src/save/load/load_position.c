@@ -35,7 +35,6 @@ bool load_position_map(var_t *var, char *line)
     char *pos_str = NULL;
     int pos_int = 0;
     sfVector2f pos = sfView_getCenter(var->view);
-
     if (my_strstr(line, "map_position_x: ")) {
         pos_str = line + 16;
         pos = sfView_getCenter(var->view);
