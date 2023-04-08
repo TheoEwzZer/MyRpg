@@ -14,7 +14,11 @@ char *my_strstr(char *str, char const *to_find)
 {
     int len_str = my_strlen(str);
     int len_to_find = my_strlen(to_find);
-    for (int i = 0; i < len_str; i++) {
+
+    if (len_to_find == 0)
+        return str;
+    int max_iterations = len_str - len_to_find + 1;
+    for (int i = 0; i < max_iterations; i++) {
         if (my_strncmp(str, to_find, len_to_find) == 0) {
             return str;
         }
