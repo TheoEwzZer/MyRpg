@@ -33,6 +33,7 @@ void blacksmith_dialog(var_t *var)
 {
     sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
+
     if (sprite_pos.x >= 480 && sprite_pos.x <= 580
     && sprite_pos.y >= 1100 && sprite_pos.y <= 1170) {
         zoom_in(var, &has_zoom);
@@ -49,6 +50,7 @@ void priscilla_dialog(var_t *var)
 {
     sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
+
     if (sprite_pos.x >= 1000 && sprite_pos.x <= 1150
     && sprite_pos.y >= 1125 && sprite_pos.y <= 1200) {
         zoom_in(var, &has_zoom);
