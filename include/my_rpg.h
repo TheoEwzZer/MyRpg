@@ -50,10 +50,10 @@
     #define BLACKSMITH_DIALOG2 \
     "Attack enemies who\nare higher up !"
 
-    #define PRICILLA_DIALOG1 \
+    #define PRISCILLA_DIALOG1 \
     "Our village need you !\nTalk to the blacksmith !"
 
-    #define PRICILLA_DIALOG2 \
+    #define PRISCILLA_DIALOG2 \
     "Attack enemies who\nare higher up !"
 
     #define BOB_DIALOG1 \
@@ -61,6 +61,14 @@
 
     #define BOB_DIALOG2 \
     "Now you need to defeat the boss\nGo at the bottom of the map !"
+
+typedef enum quest_e {
+    PRISCILLA,
+    ARMOR,
+    ENEMIES,
+    BOB,
+    BOSS
+} quest_t;
 
 typedef struct character {
     bool attack;
@@ -100,8 +108,6 @@ typedef struct dialog_s {
 } dialog_t;
 
 typedef struct var {
-    bool has_armor;
-    bool has_kill_all_mobs;
     bool has_talk_to_blacksmith;
     bool is_particle_active;
     bool is_talking_to_blacksmith;
@@ -115,6 +121,7 @@ typedef struct var {
     dialog_t *dialog;
     particle_t particles_leaves[MAX_PARTICLES_LEAVES];
     particle_t particles_pnj[MAX_LEAVES];
+    quest_t quest_progress;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *hitbox;
@@ -145,6 +152,7 @@ void attack_move(var_t *var);
 void attack_right(var_t *var);
 void back_move(var_t *var);
 void blacksmith_dialog(var_t *var);
+void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
 void check_enemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
@@ -167,7 +175,6 @@ void display_orc(var_t *var);
 void display_orc2(var_t *var);
 void display_skeleton(var_t *var);
 void display_skeleton2(var_t *var);
-void blacksmith_move(var_t *var);
 void front_move(var_t *var);
 void game_engine(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
@@ -183,6 +190,7 @@ void left_move(var_t *var);
 void load_game(const char *file_name, var_t *var);
 void move_leaves(var_t *var);
 void move_particle_pnj(var_t *var);
+void move_particle_position_pnj(var_t *var, sfVector2f position);
 void pnj_move(var_t *var);
 void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
