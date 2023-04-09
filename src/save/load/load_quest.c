@@ -7,6 +7,20 @@
 
 #include "my_rpg.h"
 
+void change_quest_text(var_t *var)
+{
+    if (var->quest_progress == PRISCILLA)
+        sfText_setString(var->quest_text->text, "Talk to Priscilla");
+    if (var->quest_progress == ARMOR)
+        sfText_setString(var->quest_text->text, "Go to the blacksmith");
+    if (var->quest_progress == ENEMIES)
+        sfText_setString(var->quest_text->text, "Kill the enemies");
+    if (var->quest_progress == BOB)
+        sfText_setString(var->quest_text->text, "Talk to Bob");
+    if (var->quest_progress == BOSS)
+        sfText_setString(var->quest_text->text, "Kill the boss");
+}
+
 bool load_quest(var_t *var, char *line)
 {
     if (!my_strncmp(line, "quest_progress: ", 16)) {
@@ -21,6 +35,7 @@ bool load_quest(var_t *var, char *line)
         }
         if (var->quest_progress == ARMOR || var->quest_progress == ENEMIES)
             move_particle_position_pnj(var, (sfVector2f){555.0f, 1110.0f});
+        change_quest_text(var);
         return true;
     }
     return false;
