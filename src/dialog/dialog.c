@@ -55,6 +55,10 @@ void priscilla_dialog(var_t *var)
     if (sprite_position.x >= 1000.0f && sprite_position.x <= 1150.0f
     && sprite_position.y >= 1125.0f && sprite_position.y <= 1200.0f) {
         if (var->quest_progress == PRISCILLA) {
+            sfText_setString(var->quest_text->text, "Go to the blacksmith");
+            var->quest_text->position = (sfVector2f){5.0f, 10.0f};
+            var->quest_text->scale = (sfVector2f){0.4f, 0.4f};
+            sfText_setScale(var->quest_text->text, var->quest_text->scale);
             var->quest_progress = ARMOR;
             move_particle_position_pnj(var, (sfVector2f){555.0f, 1110.0f});
         }
@@ -79,4 +83,11 @@ void bob_dialog(var_t *var)
     } else {
         zoom_out(var, &has_zoom);
     }
+}
+
+void dialog(var_t *var)
+{
+    priscilla_dialog(var);
+    bob_dialog(var);
+    blacksmith_dialog(var);
 }
