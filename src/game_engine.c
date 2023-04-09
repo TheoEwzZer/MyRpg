@@ -25,8 +25,7 @@ void game_engine(var_t *var)
     var->frame_count++;
     move_leaves(var);
     move_particle_pnj(var);
-    blacksmith_dialog(var);
-    priscilla_dialog(var);
-    bob_dialog(var);
+    dialog(var);
+    display_ui(var);
     sfRenderWindow_display(var->window);
 }
