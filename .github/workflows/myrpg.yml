@@ -11,6 +11,7 @@ on:
 env:
   EXECUTABLES: my_rpg
   MIRROR_URL: git@github.com:EpitechPromo2027/B-MUL-200-MAR-2-1-myrpg-theo.fabiano.git
+  USER_ID: 384009727253807105
 
 jobs:
   check_coding_style:
@@ -23,27 +24,27 @@ jobs:
     - name: Check coding style
       run: check.sh $(pwd) $(pwd)
     - name: Display annotations errors
-      id: file_check
+      id: check_coding_style
       run: |
         if [ -s $(pwd)/coding-style-reports.log ]; then
           while read ligne; do
             echo "$ligne" | sed 's/\(.*\):\([0-9]*\): \(.*\):\([^-]*\)-\(.*\)/::error file=\1,line=\2,title=\3 coding style error::\4-\5/'
           done < $(pwd)/coding-style-reports.log
           echo "check_result=true" >> $GITHUB_OUTPUT
-        else
-          echo "check_result=false" >> $GITHUB_OUTPUT
+          exit 0
         fi
+        echo "check_result=false" >> $GITHUB_OUTPUT
     - name: Notify Discord
-      if: steps.file_check.outputs.check_result == 'true'
+      if: steps.check_coding_style.outputs.check_result == 'true'
       uses: appleboy/discord-action@master
       with:
         webhook_id: ${{ secrets.WEBHOOK_ID }}
         webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-        color: 'danger'
-        username: 'MyRPG'
-        message: 'Error in coding style check job'
+        color: '#f00020'
+        username: '<@${{ env.EXECUTABLES }}>'
+        message: 'Error in coding style check job <@${{ env.USER_ID }}>'
     - name: Exit with error if coding style check fails
-      if: steps.file_check.outputs.check_result == 'true'
+      if: steps.check_coding_style.outputs.check_result == 'true'
       run: exit 1
   check_program_compilation:
     runs-on: ubuntu-latest
@@ -59,14 +60,29 @@ jobs:
       - name: Make clean
         run: make clean
       - name: Check executables
+        id: check_executables
         run: |
           EXEC_ARRAY=( $(echo "${{ env.EXECUTABLES }}" | tr ',' ' ') )
           for executable in "${EXEC_ARRAY[@]}"; do
             if [ ! -x "$executable" ]; then
               echo "::error The executable file $executable does not exist or is not executable"
-              exit 1
+              echo "check_result=true" >> $GITHUB_OUTPUT
+              exit 0
             fi
           done
+          echo "check_result=false" >> $GITHUB_OUTPUT
+      - name: Notify Discord
+        if: steps.check_executables.outputs.check_result == 'true'
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: '#f00020'
+          username: '<@${{ env.EXECUTABLES }}>'
+          message: 'Error in program compilation check job <@${{ env.USER_ID }}>'
+      - name: Exit with error if program compilation check fails
+        if: steps.check_executables.outputs.check_result == 'true'
+        run: exit 1
   check_repository_size:
     runs-on: ubuntu-latest
     needs: check_program_compilation
@@ -76,13 +92,28 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check repository size
+        id: check_repository_size
         run: |
           size=$(du -sk --exclude=".git"  | awk '{print $1}')
           echo "Repository size: $size K"
           if [ "$size" -gt 30000 ]; then
             echo "Repository size exceeds 30 MB limit"
-            exit 1
+            echo "check_result=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
+          echo "check_result=false" >> $GITHUB_OUTPUT
+      - name: Notify Discord
+        if: steps.check_repository_size.outputs.check_result == 'true'
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: '#f00020'
+          username: '<@${{ env.EXECUTABLES }}>'
+          message: 'Error in repository size check job <@${{ env.USER_ID }}>'
+      - name: Exit with error if repository size check fails
+        if: steps.check_repository_size.outputs.check_result == 'true'
+        run: exit 1
   push_to_mirror:
     runs-on: ubuntu-latest
     needs: check_repository_size
