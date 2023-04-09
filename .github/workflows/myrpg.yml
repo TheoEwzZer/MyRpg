@@ -11,7 +11,6 @@ on:
 env:
   EXECUTABLES: my_rpg
   MIRROR_URL: git@github.com:EpitechPromo2027/B-MUL-200-MAR-2-1-myrpg-theo.fabiano.git
-  USER_ID: 384009727253807105
 
 jobs:
   check_coding_style:
@@ -41,8 +40,8 @@ jobs:
         webhook_id: ${{ secrets.WEBHOOK_ID }}
         webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
         color: '#f00020'
-        username: '<@${{ env.EXECUTABLES }}>'
-        message: 'Error in coding style check job <@${{ env.USER_ID }}>'
+        username: '${{ env.EXECUTABLES }}'
+        message: 'Error in coding style check job <@384009727253807105>'
     - name: Exit with error if coding style check fails
       if: steps.check_coding_style.outputs.check_result == 'true'
       run: exit 1
@@ -78,8 +77,8 @@ jobs:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: '#f00020'
-          username: '<@${{ env.EXECUTABLES }}>'
-          message: 'Error in program compilation check job <@${{ env.USER_ID }}>'
+          username: '${{ env.EXECUTABLES }}'
+          message: 'Error in program compilation check job <@384009727253807105>'
       - name: Exit with error if program compilation check fails
         if: steps.check_executables.outputs.check_result == 'true'
         run: exit 1
@@ -109,8 +108,8 @@ jobs:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: '#f00020'
-          username: '<@${{ env.EXECUTABLES }}>'
-          message: 'Error in repository size check job <@${{ env.USER_ID }}>'
+          username: '${{ env.EXECUTABLES }}'
+          message: 'Error in repository size check job <@384009727253807105>'
       - name: Exit with error if repository size check fails
         if: steps.check_repository_size.outputs.check_result == 'true'
         run: exit 1
