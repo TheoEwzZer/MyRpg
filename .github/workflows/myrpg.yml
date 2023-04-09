@@ -41,7 +41,7 @@ jobs:
         webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
         color: '#f00020'
         username: '${{ env.EXECUTABLES }}'
-        message: 'Error in coding style check job <@384009727253807105>'
+        message: 'Error in coding style check job <@everyone>'
     - name: Exit with error if coding style check fails
       if: steps.check_coding_style.outputs.check_result == 'true'
       run: exit 1
@@ -78,7 +78,7 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: '#f00020'
           username: '${{ env.EXECUTABLES }}'
-          message: 'Error in program compilation check job <@384009727253807105>'
+          message: 'Error in program compilation check job <@everyone>'
       - name: Exit with error if program compilation check fails
         if: steps.check_executables.outputs.check_result == 'true'
         run: exit 1
@@ -109,7 +109,7 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: '#f00020'
           username: '${{ env.EXECUTABLES }}'
-          message: 'Error in repository size check job <@384009727253807105>'
+          message: 'Error in repository size check job <@everyone>'
       - name: Exit with error if repository size check fails
         if: steps.check_repository_size.outputs.check_result == 'true'
         run: exit 1
