@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT.0f, 2023
+** EPITECH PROJECT, 2023
 ** my_rpg
 ** File description:
 ** main.c

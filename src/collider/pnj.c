@@ -9,12 +9,12 @@
 
 void create_png_collider(var_t *var)
 {
-    sfRectangleShape_setPosition(var->collider[62], (sfVector2f){1100, 1150});
-    sfRectangleShape_setSize(var->collider[62], (sfVector2f){33, 60});
+    sfRectangleShape_setPosition(COLLIDER[62], (sfVector2f){1100.0f, 1150.0f});
+    sfRectangleShape_setSize(COLLIDER[62], (sfVector2f){33.0f, 60.0f});
 
-    sfRectangleShape_setPosition(var->collider[63], (sfVector2f){1000, 800});
-    sfRectangleShape_setSize(var->collider[63], (sfVector2f){33, 60});
+    sfRectangleShape_setPosition(COLLIDER[63], (sfVector2f){1000, 800.0f});
+    sfRectangleShape_setSize(COLLIDER[63], (sfVector2f){33.0f, 60});
 
-    sfRectangleShape_setPosition(var->collider[64], (sfVector2f){530, 1120});
-    sfRectangleShape_setSize(var->collider[64], (sfVector2f){33, 60});
+    sfRectangleShape_setPosition(COLLIDER[64], (sfVector2f){530, 1120.0f});
+    sfRectangleShape_setSize(COLLIDER[64], (sfVector2f){33.0f, 60.0f});
 }
