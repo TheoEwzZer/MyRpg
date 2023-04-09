@@ -13,7 +13,7 @@ void create_dialog_box(var_t *var)
     var->dialog->texture = CREATE_FROM_FILE("assets/dialog_box.png");
     var->dialog->sprite = sfSprite_create();
     sfSprite_setTexture(var->dialog->sprite, var->dialog->texture, sfTrue);
-    var->dialog->position = (sfVector2f){500, 1100};
+    var->dialog->position = (sfVector2f){500.0f, 1100.0f};
     var->dialog->scale = (sfVector2f){0.05f, 0.05f};
     sfSprite_setScale(var->dialog->sprite, var->dialog->scale);
     var->dialog->font = sfFont_createFromFile("assets/font/arial.ttf");
@@ -33,8 +33,8 @@ void blacksmith_dialog(var_t *var)
     sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_position.x >= 480 && sprite_position.x <= 580
-    && sprite_position.y >= 1100 && sprite_position.y <= 1170
+    if (sprite_position.x >= 480.0f && sprite_position.x <= 580.0f
+    && sprite_position.y >= 1100.0f && sprite_position.y <= 1170.0f
     && var->quest_progress > PRISCILLA) {
         if (var->quest_progress == ENEMIES)
             zoom_in(var, &has_zoom);
@@ -52,11 +52,11 @@ void priscilla_dialog(var_t *var)
     sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_position.x >= 1000 && sprite_position.x <= 1150
-    && sprite_position.y >= 1125 && sprite_position.y <= 1200) {
+    if (sprite_position.x >= 1000.0f && sprite_position.x <= 1150.0f
+    && sprite_position.y >= 1125.0f && sprite_position.y <= 1200.0f) {
         if (var->quest_progress == PRISCILLA) {
             var->quest_progress = ARMOR;
-            move_particle_position_pnj(var, (sfVector2f){555, 1110});
+            move_particle_position_pnj(var, (sfVector2f){555.0f, 1110.0f});
         }
         if (var->quest_progress < ENEMIES)
             zoom_in(var, &has_zoom);
@@ -71,8 +71,8 @@ void bob_dialog(var_t *var)
     sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_position.x >= 950 && sprite_position.x <= 1100
-    && sprite_position.y >= 755 && sprite_position.y <= 860) {
+    if (sprite_position.x >= 950.0f && sprite_position.x <= 1100.0f
+    && sprite_position.y >= 755.0f && sprite_position.y <= 860.0f) {
         if (var->quest_progress == BOB)
             zoom_in(var, &has_zoom);
         show_bob_dialog(var);
