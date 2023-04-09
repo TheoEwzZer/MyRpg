@@ -21,8 +21,13 @@
 
     #define MY_RPG_H_
 
-    #define SKELETON var->skeleton
+    #define COLLIDER var->collider
+
     #define BLACKSMITH var->blacksmith
+    #define ORC var->orc
+    #define SKELETON var->skeleton
+
+    #define ENEMY_SPEED 0.05f
 
     #define PI 3.141592741f
 
@@ -122,7 +127,6 @@ typedef struct var {
     bool has_talk_to_blacksmith;
     bool is_particle_active;
     bool is_talking_to_blacksmith;
-    bool switch_side;
     char_t *blacksmith;
     char_t *girl;
     char_t *mc;
@@ -142,8 +146,6 @@ typedef struct var {
     sfSprite **foreground;
     sfSprite *background_sprite;
     sfTexture *armor;
-    sfVector2f orc_position;
-    sfVector2f skeleton_position;
     sfView *view;
     size_t frame_count;
     sound_t *sound;
