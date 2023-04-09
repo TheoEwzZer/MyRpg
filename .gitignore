@@ -42,6 +42,7 @@ my_rpg
 *.su
 *.idb
 *.pdb
+*.log
 
 # Kernel Module Compile Results
 *.mod*
