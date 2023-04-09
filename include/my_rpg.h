@@ -109,6 +109,13 @@ typedef struct particle_s {
     sfVector2f direction;
 } particle_t;
 
+typedef struct quest_text_s {
+    sfSprite *box;
+    sfText *text;
+    sfVector2f position;
+    sfVector2f scale;
+} quest_text_t;
+
 typedef enum quest_e {
     PRISCILLA,
     ARMOR,
@@ -138,6 +145,7 @@ typedef struct var {
     particle_t particles_leaves[MAX_LEAVES];
     particle_t particles_pnj[MAX_PARTICLES];
     quest_t quest_progress;
+    quest_text_t *quest_text;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *hitbox;
@@ -166,6 +174,8 @@ void attack_up(var_t *var);
 void blacksmith_dialog(var_t *var);
 void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
+void change_quest_text(var_t *var);
+void change_quest_to_enemies(var_t *var);
 void check_enemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
 void check_move(var_t *var, sfEvent event);
@@ -183,10 +193,10 @@ void create_sud_collider(var_t *var);
 void create_tree_collider(var_t *var);
 void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
+void dialog(var_t *var);
 void display_orc(var_t *var);
-void display_orc2(var_t *var);
 void display_skeleton(var_t *var);
-void display_skeleton2(var_t *var);
+void display_ui(var_t *var);
 void down_move(var_t *var);
 void game_engine(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
@@ -199,6 +209,7 @@ void init_player(var_t *var);
 void init_rpg(var_t *var);
 void init_sound(var_t *var);
 void init_struct(var_t *var);
+void init_ui(var_t *var);
 void left_move(var_t *var);
 void load_game(const char *file_name, var_t *var);
 void move_leaves(var_t *var);
