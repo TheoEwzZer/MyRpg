@@ -77,7 +77,7 @@ void init_struct(var_t *var)
     create_collider(var);
     sfView_zoom(var->view, 1.15f);
     var->frame_count = 0;
-    var->has_armor = false;
+    var->quest_progress = PRISCILLA;
 }
 
 void init_rpg(var_t *var)
