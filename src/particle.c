@@ -84,11 +84,10 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture)
 
 void move_leaves(var_t *var)
 {
-    sfVector2f offset = sfView_getCenter(var->view);
+    float x = 0.0f;
     particle_t *leaf = NULL;
-    sfVector2f position = {0.0f, 0.0f}; float x = 0.0f;
-    offset.x -= sfView_getSize(var->view).x / 2.0f;
-    offset.y -= sfView_getSize(var->view).y / 2.0f;
+    sfVector2f position = {0.0f, 0.0f};
+
     for (unsigned int i = 0; i < MAX_LEAVES; i++) {
         x = (float)var->frame_count * (float)(i / 2 + 1) * 0.0005f;
         leaf = &var->particles_leaves[i];
