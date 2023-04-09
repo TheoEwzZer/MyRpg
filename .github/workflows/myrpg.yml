@@ -35,11 +35,9 @@ jobs:
         echo "check_result=false" >> $GITHUB_OUTPUT
     - name: Notify Discord
       if: steps.check_coding_style.outputs.check_result == 'true'
-      uses: appleboy/discord-action@master
+      uses: cl8dep/action-discord@0.1
       with:
-        webhook_id: ${{ secrets.WEBHOOK_ID }}
-        webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-        color: '#f00020'
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
         username: '${{ env.EXECUTABLES }}'
         message: 'Error in coding style check job <@everyone>'
     - name: Exit with error if coding style check fails
@@ -72,11 +70,9 @@ jobs:
           echo "check_result=false" >> $GITHUB_OUTPUT
       - name: Notify Discord
         if: steps.check_executables.outputs.check_result == 'true'
-        uses: appleboy/discord-action@master
+        uses: cl8dep/action-discord@0.1
         with:
-          webhook_id: ${{ secrets.WEBHOOK_ID }}
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          color: '#f00020'
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: '${{ env.EXECUTABLES }}'
           message: 'Error in program compilation check job <@everyone>'
       - name: Exit with error if program compilation check fails
@@ -103,11 +99,9 @@ jobs:
           echo "check_result=false" >> $GITHUB_OUTPUT
       - name: Notify Discord
         if: steps.check_repository_size.outputs.check_result == 'true'
-        uses: appleboy/discord-action@master
+        uses: cl8dep/action-discord@0.1
         with:
-          webhook_id: ${{ secrets.WEBHOOK_ID }}
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          color: '#f00020'
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: '${{ env.EXECUTABLES }}'
           message: 'Error in repository size check job <@everyone>'
       - name: Exit with error if repository size check fails
