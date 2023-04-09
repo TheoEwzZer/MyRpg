@@ -7,7 +7,7 @@
 
 #include "my_rpg.h"
 
-void create_north_ouest_position(var_t *var)
+void create_north_west_position(var_t *var)
 {
     sfRectangleShape_setPosition(var->collider[13], (sfVector2f){0, 0});
     sfRectangleShape_setPosition(var->collider[19], (sfVector2f){0, 0});
@@ -26,7 +26,7 @@ void create_north_ouest_position(var_t *var)
     sfRectangleShape_setPosition(var->collider[61], (sfVector2f){936, 214});
 }
 
-void create_north_ouest_size(var_t *var)
+void create_north_west_size(var_t *var)
 {
     sfRectangleShape_setSize(var->collider[13], (sfVector2f){33, WIDTH});
     sfRectangleShape_setSize(var->collider[19], (sfVector2f){1869, 211});

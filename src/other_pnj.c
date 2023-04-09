@@ -9,12 +9,12 @@
 
 void init_char(var_t *var)
 {
-    var->forge->clothes = CREATE_FROM_FILE("assets/pnj/forg.png");
-    var->forge->sprite = sfSprite_create();
-    sfSprite_setTexture(var->forge->sprite, var->forge->clothes, sfTrue);
-    var->forge->walk = sfClock_create();
-    sfSprite_setPosition(var->forge->sprite, (sfVector2f){530, 1120});
-    sfSprite_setScale(var->forge->sprite, (sfVector2f){0.75f, 0.75f});
+    BLACKSMITH->clothes = CREATE_FROM_FILE("assets/pnj/blacksmith.png");
+    BLACKSMITH->sprite = sfSprite_create();
+    sfSprite_setTexture(BLACKSMITH->sprite, BLACKSMITH->clothes, sfTrue);
+    BLACKSMITH->walk = sfClock_create();
+    sfSprite_setPosition(BLACKSMITH->sprite, (sfVector2f){530, 1120});
+    sfSprite_setScale(BLACKSMITH->sprite, (sfVector2f){0.75f, 0.75f});
     var->girl->clothes = CREATE_FROM_FILE("assets/pnj/Woman.png");
     var->girl->sprite = sfSprite_create();
     sfSprite_setTexture(var->girl->sprite, var->girl->clothes, sfTrue);
@@ -29,22 +29,22 @@ void init_char(var_t *var)
     sfSprite_setScale(var->pnj->sprite, (sfVector2f){0.75f, 0.75f});
 }
 
-void forge_move(var_t *var)
+void blacksmith_move(var_t *var)
 {
-    var->forge->times = sfClock_getElapsedTime(var->forge->walk);
-    var->forge->second = (float)var->forge->times.microseconds / 1000000.0f;
-    var->forge->rect.top = 0;
-    var->forge->rect.width = 77;
-    var->forge->rect.height = 77;
-    if (var->forge->second > 0.8f) {
-        if (var->forge->rect.left == 77)
-            var->forge->rect.left = 0;
+    BLACKSMITH->times = sfClock_getElapsedTime(BLACKSMITH->walk);
+    BLACKSMITH->second = (float)BLACKSMITH->times.microseconds / 1000000.0f;
+    BLACKSMITH->rect.top = 0;
+    BLACKSMITH->rect.width = 77;
+    BLACKSMITH->rect.height = 77;
+    if (BLACKSMITH->second > 0.8f) {
+        if (BLACKSMITH->rect.left == 77)
+            BLACKSMITH->rect.left = 0;
         else
-            var->forge->rect.left = var->forge->rect.left + 77;
-        sfClock_restart(var->forge->walk);
+            BLACKSMITH->rect.left = BLACKSMITH->rect.left + 77;
+        sfClock_restart(BLACKSMITH->walk);
     }
-    sfSprite_setTextureRect(var->forge->sprite, var->forge->rect);
-    DRAW_SPRITE(var->forge->sprite);
+    sfSprite_setTextureRect(BLACKSMITH->sprite, BLACKSMITH->rect);
+    DRAW_SPRITE(BLACKSMITH->sprite);
 }
 
 void girl_move(var_t *var)

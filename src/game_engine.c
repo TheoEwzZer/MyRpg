@@ -14,7 +14,7 @@ void game_engine(var_t *var)
     DRAW_SPRITE(var->background_sprite);
     if (var->mc->attack)
         attack_move(var);
-    forge_move(var);
+    blacksmith_move(var);
     girl_move(var);
     pnj_move(var);
     DRAW_SPRITE(var->mc->sprite);
@@ -23,7 +23,7 @@ void game_engine(var_t *var)
     var->frame_count++;
     move_leaves(var);
     if (var->has_armor)
-        check_ennemies(var);
+        check_enemies(var);
     blacksmith_dialog(var);
     priscilla_dialog(var);
     bob_dialog(var);

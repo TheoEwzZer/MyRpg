@@ -10,13 +10,13 @@
 void init_game(var_t *var)
 {
     var->mc = malloc(sizeof(char_t));
-    var->forge = malloc(sizeof(char_t));
+    BLACKSMITH = malloc(sizeof(char_t));
     var->girl = malloc(sizeof(char_t));
     var->pnj = malloc(sizeof(char_t));
     var->orc = malloc(sizeof(char_t));
-    var->skel = malloc(sizeof(char_t));
+    SKELETON = malloc(sizeof(char_t));
     var->sound = malloc(sizeof(sound_t));
-    var->forge->rect.left = 0;
+    BLACKSMITH->rect.left = 0;
     var->girl->rect.left = 0;
     var->pnj->rect.left = 0;
     var->is_particle_active = true;
@@ -25,7 +25,7 @@ void init_game(var_t *var)
     init_char(var);
 }
 
-void init_ennemies(var_t *var)
+void init_enemies(var_t *var)
 {
     var->orc->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
     var->orc->sprite = sfSprite_create();
@@ -34,13 +34,13 @@ void init_ennemies(var_t *var)
     sfSprite_setPosition(var->orc->sprite, (sfVector2f){720, 700});
     var->orc->rect.left = 0;
     sfSprite_setScale(var->orc->sprite, (sfVector2f){0.75f, 0.75f});
-    var->skel->clothes = CREATE_FROM_FILE("assets/pnj/skel.png");
-    var->skel->sprite = sfSprite_create();
-    var->skel->rect.left = 0;
-    sfSprite_setTexture(var->skel->sprite, var->skel->clothes, sfTrue);
-    var->skel->walk = sfClock_create();
-    sfSprite_setPosition(var->skel->sprite, (sfVector2f){500, 590});
-    sfSprite_setScale(var->skel->sprite, (sfVector2f){0.75f, 0.75f});
+    SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
+    SKELETON->sprite = sfSprite_create();
+    SKELETON->rect.left = 0;
+    sfSprite_setTexture(SKELETON->sprite, SKELETON->clothes, sfTrue);
+    SKELETON->walk = sfClock_create();
+    sfSprite_setPosition(SKELETON->sprite, (sfVector2f){500, 590});
+    sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
     var->switch_side = true;
 }
 
@@ -84,5 +84,5 @@ void init_rpg(var_t *var)
 {
     init_game(var);
     init_struct(var);
-    init_ennemies(var);
+    init_enemies(var);
 }

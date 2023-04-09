@@ -54,7 +54,7 @@ void create_foreground(var_t *var)
     sfTexture *medium_house = CREATE_FROM_FILE("assets/map/medium_house.png");
     sfTexture *big_house = CREATE_FROM_FILE("assets/map/big_house.png");
     sfTexture *big_house2 = CREATE_FROM_FILE("assets/map/big_house2.png");
-    sfTexture *barrer = CREATE_FROM_FILE("assets/map/barrer.png");
+    sfTexture *barrier = CREATE_FROM_FILE("assets/map/barrier.png");
     sfTexture *medium_house2 = CREATE_FROM_FILE("assets/map/medium_house2.png");
 
     set_foreground_position(var);
@@ -65,6 +65,6 @@ void create_foreground(var_t *var)
     sfSprite_setTexture(var->foreground[4], big_house, sfTrue);
     sfSprite_setTexture(var->foreground[5], big_house, sfTrue);
     sfSprite_setTexture(var->foreground[6], big_house2, sfTrue);
-    sfSprite_setTexture(var->foreground[7], barrer, sfTrue);
+    sfSprite_setTexture(var->foreground[7], barrier, sfTrue);
     sfSprite_setTexture(var->foreground[8], medium_house2, sfTrue);
 }

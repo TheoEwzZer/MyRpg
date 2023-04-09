@@ -13,7 +13,7 @@ void create_dialog_box(var_t *var)
     var->dialog->texture = CREATE_FROM_FILE("assets/dialog_box.png");
     var->dialog->sprite = sfSprite_create();
     sfSprite_setTexture(var->dialog->sprite, var->dialog->texture, sfTrue);
-    var->dialog->pos = (sfVector2f){500, 1100};
+    var->dialog->position = (sfVector2f){500, 1100};
     var->dialog->scale = (sfVector2f){0.05f, 0.05f};
     sfSprite_setScale(var->dialog->sprite, var->dialog->scale);
     var->dialog->font = sfFont_createFromFile("assets/font/arial.ttf");
@@ -31,11 +31,11 @@ void create_dialog_box(var_t *var)
 
 void blacksmith_dialog(var_t *var)
 {
-    sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_pos.x >= 480 && sprite_pos.x <= 580
-    && sprite_pos.y >= 1100 && sprite_pos.y <= 1170) {
+    if (sprite_position.x >= 480 && sprite_position.x <= 580
+    && sprite_position.y >= 1100 && sprite_position.y <= 1170) {
         zoom_in(var, &has_zoom);
         var->is_talking_to_blacksmith = true;
         show_blacksmith_dialog(var);
@@ -48,11 +48,11 @@ void blacksmith_dialog(var_t *var)
 
 void priscilla_dialog(var_t *var)
 {
-    sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_pos.x >= 1000 && sprite_pos.x <= 1150
-    && sprite_pos.y >= 1125 && sprite_pos.y <= 1200) {
+    if (sprite_position.x >= 1000 && sprite_position.x <= 1150
+    && sprite_position.y >= 1125 && sprite_position.y <= 1200) {
         zoom_in(var, &has_zoom);
         show_priscilla_dialog(var);
     } else {
@@ -62,11 +62,11 @@ void priscilla_dialog(var_t *var)
 
 void bob_dialog(var_t *var)
 {
-    sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
     static bool has_zoom = false;
 
-    if (sprite_pos.x >= 950 && sprite_pos.x <= 1100
-    && sprite_pos.y >= 755 && sprite_pos.y <= 860) {
+    if (sprite_position.x >= 950 && sprite_position.x <= 1100
+    && sprite_position.y >= 755 && sprite_position.y <= 860) {
         zoom_in(var, &has_zoom);
         show_bob_dialog(var);
     } else {

@@ -25,8 +25,8 @@ void zoom_in(var_t *var, bool *has_zoom)
 
 void show_blacksmith_dialog(var_t *var)
 {
-    var->dialog->pos = (sfVector2f){500, 1100};
-    sfSprite_setPosition(var->dialog->sprite, var->dialog->pos);
+    var->dialog->position = (sfVector2f){500, 1100};
+    sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){522, 1102});
     DRAW_SPRITE(var->dialog->sprite);
     if (!var->has_talk_to_blacksmith) {
@@ -45,8 +45,8 @@ void show_blacksmith_dialog(var_t *var)
 
 void show_priscilla_dialog(var_t *var)
 {
-    var->dialog->pos = (sfVector2f){1075, 1125};
-    sfSprite_setPosition(var->dialog->sprite, var->dialog->pos);
+    var->dialog->position = (sfVector2f){1075, 1125};
+    sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){1100, 1127});
     DRAW_SPRITE(var->dialog->sprite);
     if (!var->has_armor) {
@@ -65,8 +65,8 @@ void show_priscilla_dialog(var_t *var)
 
 void show_bob_dialog(var_t *var)
 {
-    var->dialog->pos = (sfVector2f){975, 775};
-    sfSprite_setPosition(var->dialog->sprite, var->dialog->pos);
+    var->dialog->position = (sfVector2f){975, 775};
+    sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){1000, 777});
     DRAW_SPRITE(var->dialog->sprite);
     if (!var->has_kill_all_mobs) {

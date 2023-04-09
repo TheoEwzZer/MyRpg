@@ -11,20 +11,20 @@ bool load_position_player(var_t *var, char *line)
 {
     char *pos_str = NULL;
     int pos_int = 0;
-    sfVector2f pos = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f position = sfSprite_getPosition(var->mc->sprite);
 
     if (my_strstr(line, "player_position_x: ")) {
         pos_str = line + 19;
         pos_int = my_getnbr(pos_str);
-        pos.x = (float)pos_int;
-        sfSprite_setPosition(var->mc->sprite, pos);
+        position.x = (float)pos_int;
+        sfSprite_setPosition(var->mc->sprite, position);
         return true;
     }
     if (my_strstr(line, "player_position_y: ")) {
         pos_str = line + 19;
         pos_int = my_getnbr(pos_str);
-        pos.y = (float)pos_int;
-        sfSprite_setPosition(var->mc->sprite, pos);
+        position.y = (float)pos_int;
+        sfSprite_setPosition(var->mc->sprite, position);
         return true;
     }
     return false;
@@ -34,21 +34,21 @@ bool load_position_map(var_t *var, char *line)
 {
     char *pos_str = NULL;
     int pos_int = 0;
-    sfVector2f pos = sfView_getCenter(var->view);
+    sfVector2f position = sfView_getCenter(var->view);
     if (my_strstr(line, "map_position_x: ")) {
         pos_str = line + 16;
-        pos = sfView_getCenter(var->view);
+        position = sfView_getCenter(var->view);
         pos_int = my_getnbr(pos_str);
-        pos.x = (float)pos_int;
-        sfView_setCenter(var->view, pos);
+        position.x = (float)pos_int;
+        sfView_setCenter(var->view, position);
         return true;
     }
     if (my_strstr(line, "map_position_y: ")) {
         pos_str = line + 16;
-        pos = sfView_getCenter(var->view);
+        position = sfView_getCenter(var->view);
         pos_int = my_getnbr(pos_str);
-        pos.y = (float)pos_int;
-        sfView_setCenter(var->view, pos);
+        position.y = (float)pos_int;
+        sfView_setCenter(var->view, position);
         return true;
     }
     return false;

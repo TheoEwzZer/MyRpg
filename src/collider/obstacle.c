@@ -7,7 +7,7 @@
 
 #include "my_rpg.h"
 
-void create_barrer_collider(var_t *var)
+void create_barrier_collider(var_t *var)
 {
     sfRectangleShape_setPosition(var->collider[21], (sfVector2f){1058, 808});
     sfRectangleShape_setPosition(var->collider[22], (sfVector2f){1094, 844});
