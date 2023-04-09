@@ -62,14 +62,6 @@
     #define BOB_DIALOG2 \
     "Now you need to defeat the boss\nGo at the bottom of the map !"
 
-typedef enum quest_e {
-    PRISCILLA,
-    ARMOR,
-    ENEMIES,
-    BOB,
-    BOSS
-} quest_t;
-
 typedef struct character {
     bool attack;
     float second;
@@ -80,9 +72,22 @@ typedef struct character {
     sfTime times;
 } char_t ;
 
-typedef struct sound_s {
-    sfMusic *theme;
-} sound_t ;
+typedef struct dialog_s {
+    sfFont *font;
+    sfSprite *sprite;
+    sfText *name;
+    sfText *text;
+    sfTexture *texture;
+    sfVector2f position;
+    sfVector2f scale;
+} dialog_t;
+
+typedef enum direction_e {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+} direction_t;
 
 typedef struct particle_s {
     float direction_x;
@@ -97,15 +102,17 @@ typedef struct particle_s {
     sfVector2f direction;
 } particle_t;
 
-typedef struct dialog_s {
-    sfFont *font;
-    sfSprite *sprite;
-    sfText *name;
-    sfText *text;
-    sfTexture *texture;
-    sfVector2f position;
-    sfVector2f scale;
-} dialog_t;
+typedef enum quest_e {
+    PRISCILLA,
+    ARMOR,
+    ENEMIES,
+    BOB,
+    BOSS
+} quest_t;
+
+typedef struct sound_s {
+    sfMusic *theme;
+} sound_t ;
 
 typedef struct var {
     bool has_talk_to_blacksmith;
@@ -119,6 +126,7 @@ typedef struct var {
     char_t *pnj;
     char_t *skeleton;
     dialog_t *dialog;
+    direction_t direction;
     particle_t particles_leaves[MAX_PARTICLES_LEAVES];
     particle_t particles_pnj[MAX_LEAVES];
     quest_t quest_progress;
@@ -135,7 +143,6 @@ typedef struct var {
     sfView *view;
     size_t frame_count;
     sound_t *sound;
-    unsigned int direction;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
@@ -145,12 +152,11 @@ bool load_quest(var_t *var, char *line);
 char *int_to_str(int nb, size_t *n);
 int get_digits(int nb);
 sfRenderWindow *create_window(void);
-void attack_back(var_t *var);
-void attack_front(var_t *var);
+void attack_down(var_t *var);
 void attack_left(var_t *var);
 void attack_move(var_t *var);
 void attack_right(var_t *var);
-void back_move(var_t *var);
+void attack_up(var_t *var);
 void blacksmith_dialog(var_t *var);
 void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
@@ -175,7 +181,7 @@ void display_orc(var_t *var);
 void display_orc2(var_t *var);
 void display_skeleton(var_t *var);
 void display_skeleton2(var_t *var);
-void front_move(var_t *var);
+void down_move(var_t *var);
 void game_engine(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
@@ -202,6 +208,7 @@ void set_foreground_position(var_t *var);
 void show_blacksmith_dialog(var_t *var);
 void show_bob_dialog(var_t *var);
 void show_priscilla_dialog(var_t *var);
+void up_move(var_t *var);
 void zoom_in(var_t *var, bool *has_zoom);
 void zoom_out(var_t *var, bool *has_zoom);
 

@@ -23,7 +23,7 @@ void attack_right(var_t *var)
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void attack_back(var_t *var)
+void attack_down(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
@@ -39,7 +39,7 @@ void attack_back(var_t *var)
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void attack_front(var_t *var)
+void attack_up(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
@@ -73,12 +73,12 @@ void attack_left(var_t *var)
 
 void attack_move(var_t *var)
 {
-    if (var->direction == 1)
-        attack_front(var);
-    if (var->direction == 2)
+    if (var->direction == UP)
+        attack_up(var);
+    if (var->direction == LEFT)
         attack_left(var);
-    if (var->direction == 3)
+    if (var->direction == RIGHT)
         attack_right(var);
-    if (var->direction == 4)
-        attack_back(var);
+    if (var->direction == DOWN)
+        attack_down(var);
 }

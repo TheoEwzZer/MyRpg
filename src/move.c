@@ -25,7 +25,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){0, -10});
         sfSprite_move(var->mc->sprite, (sfVector2f){0, -10});
         sfRectangleShape_move(var->hitbox, (sfVector2f){0, -10});
-        back_move(var);
+        down_move(var);
     }
     if (event.key.code == sfKeyDown) {
         p_bounds.height += 10;
@@ -34,7 +34,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){0, 10});
         sfSprite_move(var->mc->sprite, (sfVector2f){0, 10});
         sfRectangleShape_move(var->hitbox, (sfVector2f){0, 10});
-        front_move(var);
+        up_move(var);
     }
 }
 

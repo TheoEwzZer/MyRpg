@@ -35,8 +35,9 @@ void blacksmith_dialog(var_t *var)
 
     if (sprite_position.x >= 480 && sprite_position.x <= 580
     && sprite_position.y >= 1100 && sprite_position.y <= 1170
-    && var->quest_progress > 0) {
-        zoom_in(var, &has_zoom);
+    && var->quest_progress > PRISCILLA) {
+        if (var->quest_progress == ENEMIES)
+            zoom_in(var, &has_zoom);
         var->is_talking_to_blacksmith = true;
         show_blacksmith_dialog(var);
     } else {
@@ -57,7 +58,8 @@ void priscilla_dialog(var_t *var)
             var->quest_progress = ARMOR;
             move_particle_position_pnj(var, (sfVector2f){555, 1110});
         }
-        zoom_in(var, &has_zoom);
+        if (var->quest_progress < ENEMIES)
+            zoom_in(var, &has_zoom);
         show_priscilla_dialog(var);
     } else {
         zoom_out(var, &has_zoom);
@@ -71,7 +73,8 @@ void bob_dialog(var_t *var)
 
     if (sprite_position.x >= 950 && sprite_position.x <= 1100
     && sprite_position.y >= 755 && sprite_position.y <= 860) {
-        zoom_in(var, &has_zoom);
+        if (var->quest_progress == BOB)
+            zoom_in(var, &has_zoom);
         show_bob_dialog(var);
     } else {
         zoom_out(var, &has_zoom);

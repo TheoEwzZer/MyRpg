@@ -22,7 +22,7 @@ void right_move(var_t *var)
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 3;
+    var->direction = RIGHT;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
@@ -41,11 +41,11 @@ void left_move(var_t *var)
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 2;
+    var->direction = LEFT;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void back_move(var_t *var)
+void down_move(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
@@ -60,11 +60,11 @@ void back_move(var_t *var)
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 4;
+    var->direction = DOWN;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }
 
-void front_move(var_t *var)
+void up_move(var_t *var)
 {
     var->mc->times = sfClock_getElapsedTime(var->mc->walk);
     var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
@@ -79,6 +79,6 @@ void front_move(var_t *var)
         }
         sfClock_restart(var->mc->walk);
     }
-    var->direction = 1;
+    var->direction = UP;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
 }

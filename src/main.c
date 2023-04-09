@@ -24,7 +24,7 @@ void check_event(var_t *var, sfEvent event)
         sfRenderWindow_close(var->window);
     if (event.type == sfEvtKeyPressed && !var->mc->attack)
         check_move(var, event);
-    if (var->quest_progress > 1 && event.type == sfEvtMouseButtonPressed) {
+    if (var->quest_progress > ARMOR && event.type == sfEvtMouseButtonPressed) {
         var->mc->rect.left = 616 - 77;
         var->mc->rect.width = 77;
         var->mc->rect.height = 77;
