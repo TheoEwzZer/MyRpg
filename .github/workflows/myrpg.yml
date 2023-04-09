@@ -68,15 +68,8 @@ jobs:
             fi
           done
           echo "check_result=false" >> $GITHUB_OUTPUT
-      - name: Notify Discord on make failure
-        if: steps.make.conclusion == 'failure'
-        uses: cl8dep/action-discord@0.1
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          username: '${{ env.EXECUTABLES }}'
-          message: '**Error in program compilation check job** @everyone'
-      - name: Notify Discord on check failure
-        if: steps.check_executables.outputs.check_result == 'true' && steps.make.conclusion != 'failure'
+      - name: Notify Discord
+        if: steps.check_executables.outputs.check_result == 'true'
         uses: cl8dep/action-discord@0.1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}

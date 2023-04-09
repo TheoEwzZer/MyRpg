@@ -26,8 +26,8 @@
 
     #define PI 3.141592741f
 
-    #define MAX_LEAVES 25
-    #define MAX_PARTICLES_LEAVES 50
+    #define MAX_PARTICLES 10
+    #define MAX_LEAVES 50
 
     #define WIDTH 1920
     #define HEIGHT 1080
@@ -112,7 +112,9 @@ typedef enum quest_e {
 
 typedef struct sound_s {
     sfMusic *theme;
-} sound_t ;
+    sfSound *spear;
+    sfSoundBuffer *spear_buf;
+} sound_t;
 
 typedef struct var {
     bool has_talk_to_blacksmith;
@@ -127,8 +129,8 @@ typedef struct var {
     char_t *skeleton;
     dialog_t *dialog;
     direction_t direction;
-    particle_t particles_leaves[MAX_PARTICLES_LEAVES];
-    particle_t particles_pnj[MAX_LEAVES];
+    particle_t particles_leaves[MAX_LEAVES];
+    particle_t particles_pnj[MAX_PARTICLES];
     quest_t quest_progress;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
@@ -191,6 +193,7 @@ void init_enemies(var_t *var);
 void init_game(var_t *var);
 void init_player(var_t *var);
 void init_rpg(var_t *var);
+void init_sound(var_t *var);
 void init_struct(var_t *var);
 void left_move(var_t *var);
 void load_game(const char *file_name, var_t *var);
