@@ -17,13 +17,13 @@ void game_engine(var_t *var)
     blacksmith_move(var);
     girl_move(var);
     pnj_move(var);
+    if (var->quest_progress == ENEMIES)
+        check_enemies(var);
     DRAW_SPRITE(var->mc->sprite);
     for (unsigned int i = 0; i < 9; i++)
         DRAW_SPRITE(var->foreground[i]);
     var->frame_count++;
     move_leaves(var);
-    if (var->quest_progress == ENEMIES)
-        check_enemies(var);
     move_particle_pnj(var);
     blacksmith_dialog(var);
     priscilla_dialog(var);

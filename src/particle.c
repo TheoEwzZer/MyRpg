@@ -44,7 +44,7 @@ void generate_particle_pnj(var_t *var, sfVector2f position)
 void move_particle_pnj(var_t *var)
 {
     particle_t *p = NULL;
-    sfVector2f position = {0, 0};
+    sfVector2f position = {0.0f, 0.0f};
     if (!var->is_particle_active)
         return;
     for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
@@ -56,7 +56,7 @@ void move_particle_pnj(var_t *var)
             p->actual_pos.y = p->base_pos.y;
             p->size = 0.2f;
             p->actual_pos.x = (float)(rand() % 21) + p->base_pos.x - 10.0f;
-            p->direction_x = (float)(rand() % 3) - 1;
+            p->direction_x = (float)(rand() % 3) - 1.0f;
         }
         position = (sfVector2f){p->actual_pos.x, p->actual_pos.y};
         sfSprite_setPosition(p->sprite, position);
@@ -71,7 +71,7 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture)
 
     for (unsigned int i = 0; i < MAX_LEAVES; i++) {
         leaf = &var->particles_leaves[i];
-        leaf->actual_pos.x = (float)(rand() % WIDTH - 1000) + 1000;
+        leaf->actual_pos.x = (float)(rand() % WIDTH - 1000) + 1000.0f;
         leaf->actual_pos.y = 0.0f;
         leaf->speed = (float)(rand() % 25 + 1) / 100.0f;
         leaf->oscillation = (float)(rand() / RAND_MAX) * 2.0f * (float)PI;
@@ -86,16 +86,16 @@ void move_leaves(var_t *var)
 {
     sfVector2f offset = sfView_getCenter(var->view);
     particle_t *leaf = NULL;
-    sfVector2f position = {0, 0}; float x = 0.0f;
-    offset.x -= sfView_getSize(var->view).x / 2;
-    offset.y -= sfView_getSize(var->view).y / 2;
+    sfVector2f position = {0.0f, 0.0f}; float x = 0.0f;
+    offset.x -= sfView_getSize(var->view).x / 2.0f;
+    offset.y -= sfView_getSize(var->view).y / 2.0f;
     for (unsigned int i = 0; i < MAX_LEAVES; i++) {
         x = (float)var->frame_count * (float)(i / 2 + 1) * 0.0005f;
         leaf = &var->particles_leaves[i];
         leaf->actual_pos.x += sinf(leaf->oscillation + x) / 10.0f;
         leaf->actual_pos.y += leaf->speed;
         leaf->rotation -= sinf(leaf->oscillation + x) / 10.0f;
-        if (leaf->actual_pos.y > 1920) {
+        if (leaf->actual_pos.y > 1920.0f) {
             leaf->actual_pos.y = 0.0f;
             leaf->speed = (float)(rand() % 25 + 1) / 100.0f;
         }

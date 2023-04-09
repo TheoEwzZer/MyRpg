@@ -13,7 +13,7 @@ void init_game(var_t *var)
     BLACKSMITH = malloc(sizeof(char_t));
     var->girl = malloc(sizeof(char_t));
     var->pnj = malloc(sizeof(char_t));
-    var->orc = malloc(sizeof(char_t));
+    ORC = malloc(sizeof(char_t));
     SKELETON = malloc(sizeof(char_t));
     SOUND = malloc(sizeof(sound_t));
     BLACKSMITH->rect.left = 0;
@@ -25,21 +25,20 @@ void init_game(var_t *var)
 
 void init_enemies(var_t *var)
 {
-    var->orc->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
-    var->orc->sprite = sfSprite_create();
-    sfSprite_setTexture(var->orc->sprite, var->orc->clothes, sfTrue);
-    var->orc->walk = sfClock_create();
-    sfSprite_setPosition(var->orc->sprite, (sfVector2f){720, 700});
-    var->orc->rect.left = 0;
-    sfSprite_setScale(var->orc->sprite, (sfVector2f){0.75f, 0.75f});
+    ORC->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
+    ORC->sprite = sfSprite_create();
+    sfSprite_setTexture(ORC->sprite, ORC->clothes, sfTrue);
+    ORC->walk = sfClock_create();
+    sfSprite_setPosition(ORC->sprite, (sfVector2f){720.0f, 700.0f});
+    ORC->rect.left = 0;
+    sfSprite_setScale(ORC->sprite, (sfVector2f){0.75f, 0.75f});
     SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
     SKELETON->sprite = sfSprite_create();
     SKELETON->rect.left = 0;
     sfSprite_setTexture(SKELETON->sprite, SKELETON->clothes, sfTrue);
     SKELETON->walk = sfClock_create();
-    sfSprite_setPosition(SKELETON->sprite, (sfVector2f){500, 590});
+    sfSprite_setPosition(SKELETON->sprite, (sfVector2f){500.0f, 590.0f});
     sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
-    var->switch_side = true;
 }
 
 void init_player(var_t *var)
@@ -54,11 +53,11 @@ void init_player(var_t *var)
     var->mc->rect.height = 77;
     var->mc->rect.left = 0;
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    sfSprite_setPosition(var->mc->sprite, (sfVector2f){1685, 1300});
+    sfSprite_setPosition(var->mc->sprite, (sfVector2f){1685.0f, 1300.0f});
     sfSprite_setScale(var->mc->sprite, (sfVector2f){0.75f, 0.75f});
     var->hitbox = sfRectangleShape_create();
     var->mc->attack = false;
-    sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700, 1340});
+    sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700.0f, 1340.0f});
 }
 
 void init_struct(var_t *var)
@@ -71,7 +70,7 @@ void init_struct(var_t *var)
     sfSprite_setTexture(var->background_sprite, texture, sfTrue);
     var->window = create_window();
     var->view = sfView_createFromRect((sfFloatRect){0, 0, 640, 360});
-    sfView_setCenter(var->view, (sfVector2f){1685, 1275});
+    sfView_setCenter(var->view, (sfVector2f){1685.0f, 1275.0f});
     create_collider(var);
     sfView_zoom(var->view, 1.15f);
     var->frame_count = 0;
