@@ -24,40 +24,42 @@ void check_event(var_t *var, sfEvent event)
         sfRenderWindow_close(var->window);
     if (event.type == sfEvtKeyPressed && !var->mc->attack)
         check_move(var, event);
-    if (var->has_armor == true && event.type == sfEvtMouseButtonPressed) {
+    if (var->quest_progress > 1 && event.type == sfEvtMouseButtonPressed) {
         var->mc->rect.left = 616 - 77;
         var->mc->rect.width = 77;
         var->mc->rect.height = 77;
         var->mc->attack = true;
     } if (sprite_pos.x >= 480 && sprite_pos.x <= 580 && sprite_pos.y >= 1070
-    && sprite_pos.y <= 1170 && !var->has_armor) {
+    && sprite_pos.y <= 1170 && var->quest_progress == ARMOR) {
         sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
         var->mc->rect.top = 0;
         var->mc->rect.width = 77;
         var->mc->rect.height = 77;
         var->mc->rect.left = 0;
         sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-        var->has_armor = true;
+        var->quest_progress = ENEMIES;
     }
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     var_t *var = malloc(sizeof(var_t));
     sfEvent event;
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
+    (void)(argv);
     srand((unsigned)time(NULL));
     init_rpg(var);
     sfMusic_setLoop(var->sound->theme, sfTrue);
     sfMusic_play(var->sound->theme);
     generate_leaves(var, leaf_texture);
     create_dialog_box(var);
-    load_game("save", var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
+    if (argc == 1)
+        load_game("save.txt", var);
     while (sfRenderWindow_isOpen(var->window)) {
         if (sfRenderWindow_pollEvent(var->window, &event))
             check_event(var, event);
         game_engine(var);
     }
-    save_game("save", var);
+    save_game("save.txt", var);
 }
