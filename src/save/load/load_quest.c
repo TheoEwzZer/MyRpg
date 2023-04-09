@@ -19,7 +19,7 @@ bool load_quest(var_t *var, char *line)
             var->mc->rect.left = 0;
             sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
         }
-        if (var->quest_progress == 1)
+        if (var->quest_progress == ARMOR)
             move_particle_position_pnj(var, (sfVector2f){555, 1110});
         return true;
     }
