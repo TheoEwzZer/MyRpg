@@ -32,6 +32,8 @@
     #define WIDTH 1920
     #define HEIGHT 1080
 
+    #define SOUND var->sound
+
     #define GET_BOUNDS(rectangle) \
     sfRectangleShape_getGlobalBounds(rectangle)
 

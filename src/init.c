@@ -15,7 +15,7 @@ void init_game(var_t *var)
     var->pnj = malloc(sizeof(char_t));
     var->orc = malloc(sizeof(char_t));
     SKELETON = malloc(sizeof(char_t));
-    var->sound = malloc(sizeof(sound_t));
+    SOUND = malloc(sizeof(sound_t));
     BLACKSMITH->rect.left = 0;
     var->girl->rect.left = 0;
     var->pnj->rect.left = 0;

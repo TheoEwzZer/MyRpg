@@ -49,8 +49,8 @@ int main(int argc, char **argv)
     (void)(argv);
     srand((unsigned)time(NULL));
     init_rpg(var);
-    sfMusic_setLoop(var->sound->theme, sfTrue);
-    sfMusic_play(var->sound->theme);
+    sfMusic_setLoop(SOUND->theme, sfTrue);
+    sfMusic_play(SOUND->theme);
     generate_leaves(var, leaf_texture);
     create_dialog_box(var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});

@@ -9,11 +9,10 @@
 
 void init_sound(var_t *var)
 {
-    var->sound->theme = sfMusic_createFromFile("assets/music/main_theme.ogg");
-    sfMusic_setVolume(var->sound->theme, 50);
-    var->sound->spear = sfSound_create();
-    var->sound->spear_buf = sfSoundBuffer_createFromFile("assets/music/spear.ogg");
-    sfSound_setBuffer(var->sound->spear, var->sound->spear_buf);
-    sfSound_setVolume(var->sound->spear, 50);
+    SOUND->theme = sfMusic_createFromFile("assets/music/main_theme.ogg");
+    sfMusic_setVolume(SOUND->theme, 50);
+    SOUND->spear = sfSound_create();
+    SOUND->spear_buf = sfSoundBuffer_createFromFile("assets/music/spear.ogg");
+    sfSound_setBuffer(SOUND->spear, SOUND->spear_buf);
+    sfSound_setVolume(SOUND->spear, 50);
 }
-
