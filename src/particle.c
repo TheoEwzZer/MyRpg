@@ -47,7 +47,8 @@ void move_particle_pnj(var_t *var)
     sfVector2f position = {0, 0};
     if (!var->is_particle_active)
         return;
-    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+    for (unsigned int i = 0; i < MAX_LEAVES; i++)
+    {
         p = &var->particles_pnj[i];
         p->actual_pos.x += (float)(p->direction_x) * p->speed / 2.0f;
         p->actual_pos.y -= p->speed;
