@@ -26,7 +26,6 @@ void create_dialog_box(var_t *var)
     sfText_setScale(var->dialog->name, (sfVector2f){0.2f, 0.2f});
     var->has_talk_to_blacksmith = false;
     var->is_talking_to_blacksmith = false;
-    var->has_kill_all_mobs = false;
 }
 
 void blacksmith_dialog(var_t *var)
@@ -35,7 +34,8 @@ void blacksmith_dialog(var_t *var)
     static bool has_zoom = false;
 
     if (sprite_position.x >= 480 && sprite_position.x <= 580
-    && sprite_position.y >= 1100 && sprite_position.y <= 1170) {
+    && sprite_position.y >= 1100 && sprite_position.y <= 1170
+    && var->quest_progress > 0) {
         zoom_in(var, &has_zoom);
         var->is_talking_to_blacksmith = true;
         show_blacksmith_dialog(var);
@@ -53,6 +53,10 @@ void priscilla_dialog(var_t *var)
 
     if (sprite_position.x >= 1000 && sprite_position.x <= 1150
     && sprite_position.y >= 1125 && sprite_position.y <= 1200) {
+        if (var->quest_progress == PRISCILLA) {
+            var->quest_progress = ARMOR;
+            move_particle_position_pnj(var, (sfVector2f){555, 1110});
+        }
         zoom_in(var, &has_zoom);
         show_priscilla_dialog(var);
     } else {
