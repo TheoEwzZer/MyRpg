@@ -18,15 +18,15 @@ void display_orc(var_t *var)
     float distance = 0.0f;
     sfVector2f direction = {0.0f, 0.0f};
 
-    if (!sfFloatRect_intersects(&player_rect, &zone_rect, NULL))
-        return;
-    orc_dir.x = player_pos.x - orc_pos.x;
-    orc_dir.y = player_pos.y - orc_pos.y;
-    distance = sqrtf(powf(orc_dir.x, 2.0f) + powf(orc_dir.y, 2.0f));
-    direction.x = orc_dir.x / distance;
-    direction.y = orc_dir.y / distance;
-    direction.x *= enemy_speed;
-    direction.y *= enemy_speed;
+    if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
+        orc_dir.x = player_pos.x - orc_pos.x;
+        orc_dir.y = player_pos.y - orc_pos.y;
+        distance = sqrtf(powf(orc_dir.x, 2.0f) + powf(orc_dir.y, 2.0f));
+        direction.x = orc_dir.x / distance;
+        direction.y = orc_dir.y / distance;
+        direction.x *= enemy_speed;
+        direction.y *= enemy_speed;
+    }
     sfSprite_move(ORC->sprite, direction);
     DRAW_SPRITE(ORC->sprite);
 }
@@ -42,15 +42,15 @@ void display_skeleton(var_t *var)
     float distance = 0.0f;
     sfVector2f direction = {0.0f, 0.0f};
 
-    if (!sfFloatRect_intersects(&player_rect, &zone_rect, NULL))
-        return;
-    skeleton_dir.x = player_pos.x - skeleton_pos.x;
-    skeleton_dir.y = player_pos.y - skeleton_pos.y;
-    distance = sqrtf(powf(skeleton_dir.x, 2.0f) + powf(skeleton_dir.y, 2.0f));
-    direction.x = skeleton_dir.x / distance;
-    direction.y = skeleton_dir.y / distance;
-    direction.x *= enemy_speed;
-    direction.y *= enemy_speed;
+    if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
+        skeleton_dir.x = player_pos.x - skeleton_pos.x;
+        skeleton_dir.y = player_pos.y - skeleton_pos.y;
+        distance = sqrtf(powf(skeleton_dir.x, 2.f) + powf(skeleton_dir.y, 2.f));
+        direction.x = skeleton_dir.x / distance;
+        direction.y = skeleton_dir.y / distance;
+        direction.x *= enemy_speed;
+        direction.y *= enemy_speed;
+    }
     sfSprite_move(SKELETON->sprite, direction);
     DRAW_SPRITE(SKELETON->sprite);
 }
