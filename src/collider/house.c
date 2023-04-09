@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT.0f, 2023
 ** my_rpg
 ** File description:
 ** main.c
@@ -9,26 +9,26 @@
 
 void create_house_collider(var_t *var)
 {
-    sfRectangleShape_setPosition(var->collider[0], (sfVector2f){1656, 1144});
-    sfRectangleShape_setPosition(var->collider[26], (sfVector2f){864, 1000});
-    sfRectangleShape_setPosition(var->collider[27], (sfVector2f){HEIGHT, 1000});
-    sfRectangleShape_setPosition(var->collider[28], (sfVector2f){576, 1324});
-    sfRectangleShape_setPosition(var->collider[29], (sfVector2f){252, 1432});
-    sfRectangleShape_setPosition(var->collider[30], (sfVector2f){144, 1144});
-    sfRectangleShape_setPosition(var->collider[31], (sfVector2f){288, 784});
-    sfRectangleShape_setPosition(var->collider[32], (sfVector2f){468, 784});
-    sfRectangleShape_setPosition(var->collider[34], (sfVector2f){864, 604});
-    sfRectangleShape_setPosition(var->collider[35], (sfVector2f){900, 718});
-    sfRectangleShape_setSize(var->collider[0], (sfVector2f){144, 150});
-    sfRectangleShape_setSize(var->collider[26], (sfVector2f){216, 186});
-    sfRectangleShape_setSize(var->collider[27], (sfVector2f){36, 150});
-    sfRectangleShape_setSize(var->collider[28], (sfVector2f){144, 150});
-    sfRectangleShape_setSize(var->collider[29], (sfVector2f){144, 150});
-    sfRectangleShape_setSize(var->collider[30], (sfVector2f){180, 150});
-    sfRectangleShape_setSize(var->collider[31], (sfVector2f){180, 186});
-    sfRectangleShape_setSize(var->collider[32], (sfVector2f){72, 150});
-    sfRectangleShape_setSize(var->collider[34], (sfVector2f){252, 114});
-    sfRectangleShape_setSize(var->collider[35], (sfVector2f){180, 36});
+    sfRectangleShape_setPosition(COLLIDER[0], (sfVector2f){1656.0f, 1144.0f});
+    sfRectangleShape_setPosition(COLLIDER[26], (sfVector2f){864.0f, 1000.0f});
+    sfRectangleShape_setPosition(COLLIDER[27], (sfVector2f){HEIGHT, 1000.0f});
+    sfRectangleShape_setPosition(COLLIDER[28], (sfVector2f){576.0f, 1324.0f});
+    sfRectangleShape_setPosition(COLLIDER[29], (sfVector2f){252.0f, 1432.0f});
+    sfRectangleShape_setPosition(COLLIDER[30], (sfVector2f){144.0f, 1144.0f});
+    sfRectangleShape_setPosition(COLLIDER[31], (sfVector2f){288.0f, 784.0f});
+    sfRectangleShape_setPosition(COLLIDER[32], (sfVector2f){468.0f, 784.0f});
+    sfRectangleShape_setPosition(COLLIDER[34], (sfVector2f){864.0f, 604.0f});
+    sfRectangleShape_setPosition(COLLIDER[35], (sfVector2f){900.0f, 718.0f});
+    sfRectangleShape_setSize(COLLIDER[0], (sfVector2f){144.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[26], (sfVector2f){216.0f, 186.0f});
+    sfRectangleShape_setSize(COLLIDER[27], (sfVector2f){36.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[28], (sfVector2f){144.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[29], (sfVector2f){144.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[30], (sfVector2f){180.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[31], (sfVector2f){180.0f, 186.0f});
+    sfRectangleShape_setSize(COLLIDER[32], (sfVector2f){72.0f, 150.0f});
+    sfRectangleShape_setSize(COLLIDER[34], (sfVector2f){252.0f, 114.0f});
+    sfRectangleShape_setSize(COLLIDER[35], (sfVector2f){180.0f, 36.0f});
 }
 
 void set_foreground_position(var_t *var)
@@ -36,15 +36,15 @@ void set_foreground_position(var_t *var)
     var->foreground = malloc(sizeof(sfSprite *) * 9);
     for (unsigned int i = 0; i < 9; i++)
         var->foreground[i] = sfSprite_create();
-    sfSprite_setPosition(var->foreground[0], (sfVector2f){1656, 1114});
-    sfSprite_setPosition(var->foreground[1], (sfVector2f){252, 1402});
-    sfSprite_setPosition(var->foreground[2], (sfVector2f){576, 1294});
-    sfSprite_setPosition(var->foreground[3], (sfVector2f){144, 1114});
-    sfSprite_setPosition(var->foreground[4], (sfVector2f){288, 754});
-    sfSprite_setPosition(var->foreground[5], (sfVector2f){864, 574});
-    sfSprite_setPosition(var->foreground[6], (sfVector2f){864, 970});
-    sfSprite_setPosition(var->foreground[7], (sfVector2f){1058, 790});
-    sfSprite_setPosition(var->foreground[8], (sfVector2f){1440, 718});
+    sfSprite_setPosition(var->foreground[0], (sfVector2f){1656.0f, 1114.0f});
+    sfSprite_setPosition(var->foreground[1], (sfVector2f){252.0f, 1402.0f});
+    sfSprite_setPosition(var->foreground[2], (sfVector2f){576.0f, 1294.0f});
+    sfSprite_setPosition(var->foreground[3], (sfVector2f){144.0f, 1114.0f});
+    sfSprite_setPosition(var->foreground[4], (sfVector2f){288.0f, 754.0f});
+    sfSprite_setPosition(var->foreground[5], (sfVector2f){864.0f, 574.0f});
+    sfSprite_setPosition(var->foreground[6], (sfVector2f){864.0f, 970.0f});
+    sfSprite_setPosition(var->foreground[7], (sfVector2f){1058.0f, 790.0f});
+    sfSprite_setPosition(var->foreground[8], (sfVector2f){1440.0f, 718.0f});
 }
 
 void create_foreground(var_t *var)
