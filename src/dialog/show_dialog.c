@@ -49,12 +49,12 @@ void show_priscilla_dialog(var_t *var)
     sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){1100, 1127});
     DRAW_SPRITE(var->dialog->sprite);
-    if (!var->has_armor) {
-        sfText_setString(var->dialog->text, PRICILLA_DIALOG1);
+    if (var->quest_progress < 2) {
+        sfText_setString(var->dialog->text, PRISCILLA_DIALOG1);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){1090, 1135});
     } else {
-        sfText_setString(var->dialog->text, PRICILLA_DIALOG2);
+        sfText_setString(var->dialog->text, PRISCILLA_DIALOG2);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){1090, 1135});
     }
@@ -69,7 +69,7 @@ void show_bob_dialog(var_t *var)
     sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){1000, 777});
     DRAW_SPRITE(var->dialog->sprite);
-    if (!var->has_kill_all_mobs) {
+    if (var->quest_progress > 2) {
         sfText_setString(var->dialog->text, BOB_DIALOG1);
         sfText_setScale(var->dialog->text, (sfVector2f){0.4f, 0.4f});
         sfText_setPosition(var->dialog->text, (sfVector2f){985, 785});
