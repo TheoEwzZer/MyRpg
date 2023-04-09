@@ -52,8 +52,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Make
-        run: make
-        timeout-minutes: 2
+        id: make
+        run: make || true
       - name: Make clean
         run: make clean
       - name: Check executables
@@ -68,8 +68,15 @@ jobs:
             fi
           done
           echo "check_result=false" >> $GITHUB_OUTPUT
-      - name: Notify Discord
-        if: steps.check_executables.outputs.check_result == 'true'
+      - name: Notify Discord on make failure
+        if: steps.make.conclusion == 'failure'
+        uses: cl8dep/action-discord@0.1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: '${{ env.EXECUTABLES }}'
+          message: '**Error in program compilation check job** @everyone'
+      - name: Notify Discord on check failure
+        if: steps.check_executables.outputs.check_result == 'true' && steps.make.conclusion != 'failure'
         uses: cl8dep/action-discord@0.1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
