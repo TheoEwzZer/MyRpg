@@ -22,11 +22,11 @@ void game_engine(var_t *var)
         DRAW_SPRITE(var->foreground[i]);
     var->frame_count++;
     move_leaves(var);
-    if (var->has_armor)
+    if (var->quest_progress == 2)
         check_enemies(var);
+    move_particle_pnj(var);
     blacksmith_dialog(var);
     priscilla_dialog(var);
     bob_dialog(var);
-    move_particle_pnj(var);
     sfRenderWindow_display(var->window);
 }
