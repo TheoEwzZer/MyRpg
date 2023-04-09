@@ -7,6 +7,19 @@
 
 #include "my_rpg.h"
 
+void move_particle_position_pnj(var_t *var, sfVector2f position)
+{
+    particle_t *particle = NULL;
+
+    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+        particle = &var->particles_pnj[i];
+        particle->base_pos.x = position.x;
+        particle->base_pos.y = position.y;
+        particle->actual_pos.x = (float)(rand() % 21) + position.x - 10.0f;
+        particle->actual_pos.y = position.y;
+    }
+}
+
 void generate_particle_pnj(var_t *var, sfVector2f position)
 {
     particle_t *p = NULL;
