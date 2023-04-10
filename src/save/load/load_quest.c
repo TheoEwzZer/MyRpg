@@ -9,12 +9,18 @@
 
 void change_quest_text(var_t *var)
 {
-    if (var->quest_progress == PRISCILLA)
+    if (var->quest_progress == PRISCILLA) {
         sfText_setString(var->quest_text->text, "Talk to Priscilla");
-    if (var->quest_progress == ARMOR)
+        var->quest_text->position = (sfVector2f){10.0f, 8.0f};
+    }
+    if (var->quest_progress == ARMOR) {
         sfText_setString(var->quest_text->text, "Go to the blacksmith");
-    if (var->quest_progress == ENEMIES)
+        var->quest_text->position = (sfVector2f){5.0f, 10.0f};
+    }
+    if (var->quest_progress == ENEMIES) {
         sfText_setString(var->quest_text->text, "Kill the enemies");
+        var->quest_text->position = (sfVector2f){7.0f, 8.0f};
+    }
     if (var->quest_progress == BOB)
         sfText_setString(var->quest_text->text, "Talk to Bob");
     if (var->quest_progress == BOSS)
