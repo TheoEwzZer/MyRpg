@@ -69,7 +69,7 @@ void show_bob_dialog(var_t *var)
     sfSprite_setPosition(var->dialog->sprite, var->dialog->position);
     sfText_setPosition(var->dialog->name, (sfVector2f){1000.0f, 777.0f});
     DRAW_SPRITE(var->dialog->sprite);
-    if (var->quest_progress > ENEMIES) {
+    if (var->quest_progress <= ENEMIES) {
         sfText_setString(var->dialog->text, BOB_DIALOG1);
         sfText_setScale(var->dialog->text, (sfVector2f){0.4f, 0.4f});
         sfText_setPosition(var->dialog->text, (sfVector2f){985.0f, 785.0f});
