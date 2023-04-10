@@ -69,16 +69,6 @@
     #define BOB_DIALOG2 \
     "Now you need to defeat the boss\nGo at the bottom of the map !"
 
-typedef struct character {
-    bool attack;
-    float second;
-    sfClock *walk;
-    sfIntRect rect;
-    sfSprite *sprite;
-    sfTexture *clothes;
-    sfTime times;
-} char_t ;
-
 typedef struct dialog_s {
     sfFont *font;
     sfSprite *sprite;
@@ -95,6 +85,17 @@ typedef enum direction_e {
     LEFT,
     RIGHT
 } direction_t;
+
+typedef struct character {
+    bool attack;
+    direction_t direction;
+    float second;
+    sfClock *walk;
+    sfIntRect rect;
+    sfSprite *sprite;
+    sfTexture *clothes;
+    sfTime times;
+} char_t ;
 
 typedef struct particle_s {
     float direction_x;
@@ -166,6 +167,8 @@ bool load_quest(var_t *var, char *line);
 char *int_to_str(int nb, size_t *n);
 int get_digits(int nb);
 sfRenderWindow *create_window(void);
+void animate_orc(var_t *var);
+void animate_skeleton(var_t *var);
 void attack_down(var_t *var);
 void attack_left(var_t *var);
 void attack_move(var_t *var);
@@ -174,6 +177,8 @@ void attack_up(var_t *var);
 void blacksmith_dialog(var_t *var);
 void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
+void change_direction_orc(var_t *var, sfVector2f direction);
+void change_direction_skeleton(var_t *var, sfVector2f direction);
 void change_quest_text(var_t *var);
 void change_quest_to_enemies(var_t *var);
 void check_enemies(var_t *var);
@@ -203,10 +208,11 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
 void girl_move(var_t *var);
 void init_char(var_t *var);
-void init_enemies(var_t *var);
 void init_game(var_t *var);
+void init_orc(var_t *var);
 void init_player(var_t *var);
 void init_rpg(var_t *var);
+void init_skeleton(var_t *var);
 void init_sound(var_t *var);
 void init_struct(var_t *var);
 void init_ui(var_t *var);
