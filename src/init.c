@@ -24,24 +24,6 @@ void init_game(var_t *var)
     init_char(var);
 }
 
-void init_enemies(var_t *var)
-{
-    ORC->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
-    ORC->sprite = sfSprite_create();
-    sfSprite_setTexture(ORC->sprite, ORC->clothes, sfTrue);
-    ORC->walk = sfClock_create();
-    sfSprite_setPosition(ORC->sprite, (sfVector2f){720.0f, 700.0f});
-    ORC->rect.left = 0;
-    sfSprite_setScale(ORC->sprite, (sfVector2f){0.75f, 0.75f});
-    SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
-    SKELETON->sprite = sfSprite_create();
-    SKELETON->rect.left = 0;
-    sfSprite_setTexture(SKELETON->sprite, SKELETON->clothes, sfTrue);
-    SKELETON->walk = sfClock_create();
-    sfSprite_setPosition(SKELETON->sprite, (sfVector2f){500.0f, 590.0f});
-    sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
-}
-
 void init_player(var_t *var)
 {
     var->mc->clothes = CREATE_FROM_FILE("assets/player/mc.png");
@@ -82,6 +64,7 @@ void init_rpg(var_t *var)
 {
     init_game(var);
     init_struct(var);
-    init_enemies(var);
+    init_orc(var);
+    init_skeleton(var);
     init_sound(var);
 }
