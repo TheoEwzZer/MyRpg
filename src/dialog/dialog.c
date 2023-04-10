@@ -10,7 +10,7 @@
 void create_dialog_box(var_t *var)
 {
     var->dialog = malloc(sizeof(dialog_t));
-    var->dialog->texture = CREATE_FROM_FILE("assets/dialog_box.png");
+    var->dialog->texture = CREATE_FROM_FILE("assets/box/dialog_box.png");
     var->dialog->sprite = sfSprite_create();
     sfSprite_setTexture(var->dialog->sprite, var->dialog->texture, sfTrue);
     var->dialog->position = (sfVector2f){500.0f, 1100.0f};

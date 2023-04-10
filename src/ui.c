@@ -24,7 +24,7 @@ void display_ui(var_t *var)
 
 void init_ui(var_t *var)
 {
-    sfTexture *box_texture = CREATE_FROM_FILE("assets/quest_box.png");
+    sfTexture *box_texture = CREATE_FROM_FILE("assets/box/quest_box.png");
 
     var->quest_text->text = sfText_create();
     sfText_setString(var->quest_text->text, "Talk to Priscilla");
