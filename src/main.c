@@ -64,7 +64,7 @@ int main(int argc, char **argv)
     create_dialog_box(var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
     init_ui(var);
-    if (argc)
+    if (argc == 1)
         load_game("save.txt", var);
     while (sfRenderWindow_isOpen(var->window)) {
         if (sfRenderWindow_pollEvent(var->window, &event))
