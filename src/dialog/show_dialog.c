@@ -9,17 +9,37 @@
 
 void zoom_out(var_t *var, bool *has_zoom)
 {
+    sfVector2f scale_box = sfSprite_getScale(var->quest_text->box);
+    sfVector2f scale_text = sfText_getScale(var->quest_text->text);
+
     if (*has_zoom) {
         sfView_zoom(var->view, 1.5f);
         *has_zoom = false;
+        var->is_particle_active = true;
+        scale_box.x *= 1.5f;
+        scale_box.y *= 1.5f;
+        var->quest_text->scale.x = scale_text.x * 1.5f;
+        var->quest_text->scale.y = scale_text.y * 1.5f;
+        sfSprite_setScale(var->quest_text->box, scale_box);
+        sfText_setScale(var->quest_text->text, var->quest_text->scale);
     }
 }
 
 void zoom_in(var_t *var, bool *has_zoom)
 {
+    sfVector2f scale_box = sfSprite_getScale(var->quest_text->box);
+    sfVector2f scale_text = sfText_getScale(var->quest_text->text);
+
     if (!*has_zoom) {
         sfView_zoom(var->view, 2.0f / 3.0f);
         *has_zoom = true;
+        var->is_particle_active = false;
+        scale_box.x /= 1.5f;
+        scale_box.y /= 1.5f;
+        var->quest_text->scale.x = scale_text.x / 1.5f;
+        var->quest_text->scale.y = scale_text.y / 1.5f;
+        sfSprite_setScale(var->quest_text->box, scale_box);
+        sfText_setScale(var->quest_text->text, var->quest_text->scale);
     }
 }
 

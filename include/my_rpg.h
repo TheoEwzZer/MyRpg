@@ -27,7 +27,7 @@
     #define ORC var->orc
     #define SKELETON var->skeleton
 
-    #define ENEMY_SPEED 0.05f
+    #define ENEMY_SPEED 0.02f
 
     #define PI 3.141592741f
 
