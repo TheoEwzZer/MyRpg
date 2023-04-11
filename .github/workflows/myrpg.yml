@@ -3,10 +3,10 @@ name: Myrpg
 on:
   push:
     branches-ignore:
-      - 'ga-ignore-*'
+      - 'dev*'
   pull_request:
     branches-ignore:
-      - 'ga-ignore-*'
+      - 'dev*'
 
 env:
   EXECUTABLES: my_rpg
