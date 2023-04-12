@@ -64,9 +64,9 @@ void init_struct(var_t *var)
 void init_rpg(var_t *var)
 {
     init_game(var);
-    init_life(var);
     init_orc(var);
     init_skeleton(var);
     init_sound(var);
     init_struct(var);
+    init_life(var);
 }
