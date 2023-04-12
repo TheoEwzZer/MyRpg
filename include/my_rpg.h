@@ -90,12 +90,20 @@ typedef struct character {
     bool attack;
     direction_t direction;
     float second;
+    int life;
     sfClock *walk;
     sfIntRect rect;
     sfSprite *sprite;
     sfTexture *clothes;
     sfTime times;
 } char_t ;
+
+typedef struct life_s {
+    sfIntRect rect;
+    sfSprite *sprite;
+    sfTexture *hp;
+    sfVector2f pos;
+} life_t ;
 
 typedef struct particle_s {
     float direction_x;
@@ -143,6 +151,7 @@ typedef struct var {
     char_t *skeleton;
     dialog_t *dialog;
     direction_t direction;
+    life_t *life;
     particle_t particles_leaves[MAX_LEAVES];
     particle_t particles_pnj[MAX_PARTICLES];
     quest_t quest_progress;
@@ -183,6 +192,7 @@ void change_quest_text(var_t *var);
 void change_quest_to_enemies(var_t *var);
 void check_enemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
+void check_life(var_t *var);
 void check_move(var_t *var, sfEvent event);
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
@@ -199,6 +209,7 @@ void create_tree_collider(var_t *var);
 void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
 void dialog(var_t *var);
+void display_life(var_t *var);
 void display_orc(var_t *var);
 void display_skeleton(var_t *var);
 void display_ui(var_t *var);
@@ -209,6 +220,7 @@ void generate_particle_pnj(var_t *var, sfVector2f position);
 void girl_move(var_t *var);
 void init_char(var_t *var);
 void init_game(var_t *var);
+void init_life(var_t *var);
 void init_orc(var_t *var);
 void init_player(var_t *var);
 void init_rpg(var_t *var);
