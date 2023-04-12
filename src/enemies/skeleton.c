@@ -62,7 +62,9 @@ void display_skeleton(var_t *var)
         change_direction_skeleton(var, direction);
         animate_skeleton(var);
     }
+    sfRectangleShape_move(SKELETON->hitbox, direction);
     sfSprite_move(SKELETON->sprite, direction);
+    DRAW_RECTANGLE(SKELETON->hitbox);
     DRAW_SPRITE(SKELETON->sprite);
 }
 
@@ -70,9 +72,15 @@ void init_skeleton(var_t *var)
 {
     SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
     SKELETON->direction = DOWN;
+    SKELETON->hitbox = sfRectangleShape_create();
     SKELETON->rect = (sfIntRect){0, 0, 77, 77};
     SKELETON->sprite = sfSprite_create();
     SKELETON->walk = sfClock_create();
+    sfRectangleShape_setFillColor(SKELETON->hitbox, sfTransparent);
+    sfRectangleShape_setOutlineColor(SKELETON->hitbox, sfRed);
+    sfRectangleShape_setOutlineThickness(SKELETON->hitbox, 2.0f);
+    sfRectangleShape_setPosition(SKELETON->hitbox, (sfVector2f){575.0f, 585.0f});
+    sfRectangleShape_setSize(SKELETON->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(SKELETON->sprite, (sfVector2f){560.0f, 574.0f});
     sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
     sfSprite_setTexture(SKELETON->sprite, SKELETON->clothes, sfTrue);
