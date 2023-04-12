@@ -93,6 +93,7 @@ typedef struct character {
     int life;
     sfClock *walk;
     sfIntRect rect;
+    sfRectangleShape *hitbox;
     sfSprite *sprite;
     sfTexture *clothes;
     sfTime times;
