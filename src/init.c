@@ -21,6 +21,7 @@ void init_game(var_t *var)
     var->girl->rect.left = 0;
     var->pnj->rect.left = 0;
     var->is_particle_active = true;
+    var->life = malloc(sizeof(life_t));
     init_char(var);
 }
 
@@ -63,8 +64,9 @@ void init_struct(var_t *var)
 void init_rpg(var_t *var)
 {
     init_game(var);
-    init_struct(var);
+    init_life(var);
     init_orc(var);
     init_skeleton(var);
     init_sound(var);
+    init_struct(var);
 }
