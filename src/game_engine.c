@@ -27,5 +27,6 @@ void game_engine(var_t *var)
     move_particle_pnj(var);
     dialog(var);
     display_ui(var);
+    display_life(var);
     sfRenderWindow_display(var->window);
 }
