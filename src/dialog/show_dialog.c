@@ -22,6 +22,10 @@ void zoom_out(var_t *var, bool *has_zoom)
         var->quest_text->scale.y = scale_text.y * 1.5f;
         sfSprite_setScale(var->quest_text->box, scale_box);
         sfText_setScale(var->quest_text->text, var->quest_text->scale);
+        var->quest_text->position.x += 2.0f;
+        var->quest_text->position.y += 3.0f;
+        sfText_setPosition(var->quest_text->text, var->quest_text->position);
+        sfSprite_setScale(var->life->sprite, (sfVector2f){0.5f, 0.5f});
     }
 }
 
@@ -29,7 +33,7 @@ void zoom_in(var_t *var, bool *has_zoom)
 {
     sfVector2f scale_box = sfSprite_getScale(var->quest_text->box);
     sfVector2f scale_text = sfText_getScale(var->quest_text->text);
-
+    sfVector2f scale_life = sfSprite_getScale(var->life->sprite);
     if (!*has_zoom) {
         sfView_zoom(var->view, 2.0f / 3.0f);
         *has_zoom = true;
@@ -40,6 +44,12 @@ void zoom_in(var_t *var, bool *has_zoom)
         var->quest_text->scale.y = scale_text.y / 1.5f;
         sfSprite_setScale(var->quest_text->box, scale_box);
         sfText_setScale(var->quest_text->text, var->quest_text->scale);
+        var->quest_text->position.x -= 2.0f;
+        var->quest_text->position.y -= 3.0f;
+        sfText_setPosition(var->quest_text->text, var->quest_text->position);
+        scale_life.x /= 1.5f;
+        scale_life.y /= 1.5f;
+        sfSprite_setScale(var->life->sprite, scale_life);
     }
 }
 
