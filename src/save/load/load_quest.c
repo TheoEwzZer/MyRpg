@@ -32,9 +32,9 @@ bool load_quest(var_t *var, char *line)
     if (!my_strncmp(line, "quest_progress: ", 16)) {
         var->quest_progress = my_getnbr(line + 16);
         if (var->quest_progress > ARMOR) {
-            sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
-            var->mc->rect = (sfIntRect){0, 0, 77, 77};
-            sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+            sfSprite_setTexture(PLAYER->sprite, var->armor, sfTrue);
+            PLAYER->rect = (sfIntRect){0, 0, 77, 77};
+            sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
         }
         if (var->quest_progress == ARMOR || var->quest_progress == ENEMIES)
             move_particle_position_pnj(var, (sfVector2f){555.0f, 1110.0f});
