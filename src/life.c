@@ -9,17 +9,17 @@
 
 void check_life(var_t *var)
 {
-    if (var->mc->life == 100)
+    if (PLAYER->life == 100)
         var->life->rect.top = 23;
-    if (var->mc->life == 80)
+    if (PLAYER->life == 80)
         var->life->rect.top = 118;
-    if (var->mc->life == 60)
+    if (PLAYER->life == 60)
         var->life->rect.top = 216;
-    if (var->mc->life == 40)
+    if (PLAYER->life == 40)
         var->life->rect.top = 316;
-    if (var->mc->life == 20)
+    if (PLAYER->life == 20)
         var->life->rect.top = 410;
-    if (var->mc->life == 0)
+    if (PLAYER->life == 0)
         var->life->rect.top = 495;
     sfSprite_setTextureRect(var->life->sprite, var->life->rect);
 }
@@ -43,5 +43,5 @@ void init_life(var_t *var)
     sfSprite_setTexture(var->life->sprite, var->life->hp, sfTrue);
     sfSprite_setTextureRect(var->life->sprite, var->life->rect);
     sfSprite_setScale(var->life->sprite, (sfVector2f){0.5f, 0.5f});
-    var->mc->life = 100;
+    PLAYER->life = 100;
 }

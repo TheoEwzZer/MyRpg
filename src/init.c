@@ -9,41 +9,41 @@
 
 void init_game(var_t *var)
 {
-    var->mc = malloc(sizeof(char_t));
     BLACKSMITH = malloc(sizeof(char_t));
-    var->girl = malloc(sizeof(char_t));
-    var->pnj = malloc(sizeof(char_t));
+    BLACKSMITH->rect.left = 0;
     ORC = malloc(sizeof(char_t));
+    PLAYER = malloc(sizeof(char_t));
     SKELETON = malloc(sizeof(char_t));
     SOUND = malloc(sizeof(sound_t));
-    var->quest_text = malloc(sizeof(quest_text_t));
-    BLACKSMITH->rect.left = 0;
+    var->girl = malloc(sizeof(char_t));
     var->girl->rect.left = 0;
-    var->pnj->rect.left = 0;
     var->is_particle_active = true;
     var->life = malloc(sizeof(life_t));
+    var->pnj = malloc(sizeof(char_t));
+    var->pnj->rect.left = 0;
+    var->quest_text = malloc(sizeof(quest_text_t));
     init_char(var);
 }
 
 void init_player(var_t *var)
 {
-    var->mc->clothes = CREATE_FROM_FILE("assets/player/mc.png");
-    var->mc->sprite = sfSprite_create();
+    PLAYER->clothes = CREATE_FROM_FILE("assets/player/player.png");
+    PLAYER->sprite = sfSprite_create();
     var->armor = CREATE_FROM_FILE("assets/player/armor.png");
-    sfSprite_setTexture(var->mc->sprite, var->mc->clothes, sfTrue);
-    var->mc->walk = sfClock_create();
-    var->mc->rect = (sfIntRect){0, 0, 77, 77};
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
-    sfSprite_setPosition(var->mc->sprite, (sfVector2f){1685.0f, 1300.0f});
-    sfSprite_setScale(var->mc->sprite, (sfVector2f){0.75f, 0.75f});
-    var->mc->attack = false;
+    sfSprite_setTexture(PLAYER->sprite, PLAYER->clothes, sfTrue);
+    PLAYER->walk = sfClock_create();
+    PLAYER->rect = (sfIntRect){0, 0, 77, 77};
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
+    sfSprite_setPosition(PLAYER->sprite, (sfVector2f){1685.0f, 1300.0f});
+    sfSprite_setScale(PLAYER->sprite, (sfVector2f){0.75f, 0.75f});
+    PLAYER->attack = false;
+    PLAYER->direction = DOWN;
 }
 
 void init_struct(var_t *var)
 {
     sfImage *image = sfImage_createFromFile("assets/map/map.png");
     sfTexture *texture = sfTexture_createFromImage(image, NULL);
-    var->mc = malloc(sizeof(char_t));
     init_player(var);
     var->background_sprite = sfSprite_create();
     sfSprite_setTexture(var->background_sprite, texture, sfTrue);

@@ -30,7 +30,7 @@ void create_dialog_box(var_t *var)
 
 void blacksmith_dialog(var_t *var)
 {
-    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
     static bool has_zoom = false;
 
     if (sprite_position.x >= 480.0f && sprite_position.x <= 580.0f
@@ -49,7 +49,7 @@ void blacksmith_dialog(var_t *var)
 
 void priscilla_dialog(var_t *var)
 {
-    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
     static bool has_zoom = false;
 
     if (sprite_position.x >= 1000.0f && sprite_position.x <= 1150.0f
@@ -72,7 +72,7 @@ void priscilla_dialog(var_t *var)
 
 void bob_dialog(var_t *var)
 {
-    sfVector2f sprite_position = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
     static bool has_zoom = false;
 
     if (sprite_position.x >= 950.0f && sprite_position.x <= 1100.0f

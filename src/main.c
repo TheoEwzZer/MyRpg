@@ -19,9 +19,9 @@ sfRenderWindow *create_window(void)
 
 void change_quest_to_enemies(var_t *var)
 {
-    sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
-    var->mc->rect = (sfIntRect){0, 0, 77, 77};
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+    sfSprite_setTexture(PLAYER->sprite, var->armor, sfTrue);
+    PLAYER->rect = (sfIntRect){0, 0, 77, 77};
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
     var->quest_progress = ENEMIES;
     sfText_setString(var->quest_text->text, "Kill the enemies");
     sfText_setScale(var->quest_text->text, (sfVector2f){0.5f, 0.5f});
@@ -30,16 +30,16 @@ void change_quest_to_enemies(var_t *var)
 
 void check_event(var_t *var, sfEvent event)
 {
-    sfVector2f sprite_pos = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f sprite_pos = sfSprite_getPosition(PLAYER->sprite);
     if (event.type == sfEvtClosed)
         sfRenderWindow_close(var->window);
-    if (event.type == sfEvtKeyPressed && !var->mc->attack)
+    if (event.type == sfEvtKeyPressed && !PLAYER->attack)
         check_move(var, event);
     if (var->quest_progress > ARMOR && event.type == sfEvtMouseButtonPressed) {
-        var->mc->rect.left = 616 - 77;
-        var->mc->rect.width = 77;
-        var->mc->rect.height = 77;
-        var->mc->attack = true;
+        PLAYER->rect.left = 616 - 77;
+        PLAYER->rect.width = 77;
+        PLAYER->rect.height = 77;
+        PLAYER->attack = true;
     } if (sprite_pos.x >= 480.0f && sprite_pos.x <= 580.0f
     && sprite_pos.y >= 1070.0f && sprite_pos.y <= 1170.0f
     && var->quest_progress == ARMOR) {
