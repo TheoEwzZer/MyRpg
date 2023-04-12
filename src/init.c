@@ -32,16 +32,11 @@ void init_player(var_t *var)
     var->armor = CREATE_FROM_FILE("assets/player/armor.png");
     sfSprite_setTexture(var->mc->sprite, var->mc->clothes, sfTrue);
     var->mc->walk = sfClock_create();
-    var->mc->rect.top = 0;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    var->mc->rect.left = 0;
+    var->mc->rect = (sfIntRect){0, 0, 77, 77};
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
     sfSprite_setPosition(var->mc->sprite, (sfVector2f){1685.0f, 1300.0f});
     sfSprite_setScale(var->mc->sprite, (sfVector2f){0.75f, 0.75f});
-    var->hitbox = sfRectangleShape_create();
     var->mc->attack = false;
-    sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700.0f, 1340.0f});
 }
 
 void init_struct(var_t *var)
