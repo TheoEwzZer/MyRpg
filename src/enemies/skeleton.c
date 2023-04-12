@@ -44,10 +44,10 @@ void change_direction_skeleton(var_t *var, sfVector2f direction)
 
 void display_skeleton(var_t *var)
 {
-    const sfFloatRect player_rect = sfSprite_getGlobalBounds(var->mc->sprite);
+    const sfFloatRect player_rect = sfSprite_getGlobalBounds(PLAYER->sprite);
     const sfFloatRect zone_rect = {560.0f, 574.0f, 259.0f, 302.0f};
     const sfVector2f skeleton_pos = sfSprite_getPosition(SKELETON->sprite);
-    const sfVector2f player_pos = sfSprite_getPosition(var->mc->sprite);
+    const sfVector2f player_pos = sfSprite_getPosition(PLAYER->sprite);
     sfVector2f skeleton_dir = {0.0f, 0.0f}; sfVector2f direction = {0.0f, 0.0f};
     float distance = 0.0f;
     if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
@@ -71,6 +71,7 @@ void init_skeleton(var_t *var)
     SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
     SKELETON->direction = DOWN;
     SKELETON->hitbox = sfRectangleShape_create();
+    SKELETON->life = 60;
     SKELETON->rect = (sfIntRect){0, 0, 77, 77};
     SKELETON->sprite = sfSprite_create();
     SKELETON->walk = sfClock_create();
@@ -85,8 +86,26 @@ void init_skeleton(var_t *var)
     sfSprite_setTextureRect(SKELETON->sprite, SKELETON->rect);
 }
 
-void check_enemies(var_t *var)
+void fight_skeleton(var_t *var)
 {
-    display_skeleton(var);
-    display_orc(var);
+    sfFloatRect player_bounds = GET_BOUNDS(PLAYER->hitbox);
+    sfFloatRect player_spear_zone = GET_BOUNDS(PLAYER->spear_zone);
+    sfFloatRect skeleton_bounds = GET_BOUNDS(SKELETON->hitbox);
+    static sfClock *clock_player = NULL;
+    static sfClock *clock_skeleton = NULL;
+
+    if (!clock_player)
+        clock_player = sfClock_create();
+    if (!clock_skeleton)
+        clock_skeleton = sfClock_create();
+    if (sfFloatRect_intersects(&player_bounds, &skeleton_bounds, NULL)) {
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock_player)) >= 1.0f) {
+            PLAYER->life -= 20;
+            sfClock_restart(clock_player);
+        }
+    }
+    if (sfFloatRect_intersects(&player_spear_zone, &skeleton_bounds, NULL)) {
+        if (PLAYER->attack)
+            knockback(var, clock_skeleton, SKELETON);
+    }
 }

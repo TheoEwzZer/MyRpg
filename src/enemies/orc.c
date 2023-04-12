@@ -44,10 +44,10 @@ void change_direction_orc(var_t *var, sfVector2f direction)
 
 void display_orc(var_t *var)
 {
-    const sfFloatRect player_rect = sfSprite_getGlobalBounds(var->mc->sprite);
+    const sfFloatRect player_rect = sfSprite_getGlobalBounds(PLAYER->sprite);
     const sfFloatRect zone_rect = {560.0f, 574.0f, 259.0f, 302.0f};
     const sfVector2f orc_pos = sfSprite_getPosition(ORC->sprite);
-    const sfVector2f player_pos = sfSprite_getPosition(var->mc->sprite);
+    const sfVector2f player_pos = sfSprite_getPosition(PLAYER->sprite);
     sfVector2f orc_dir = {0.0f, 0.0f}; sfVector2f direction = {0.0f, 0.0f};
     float distance = 0.0f;
     if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
@@ -71,6 +71,7 @@ void init_orc(var_t *var)
     ORC->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
     ORC->direction = DOWN;
     ORC->hitbox = sfRectangleShape_create();
+    ORC->life = 60;
     ORC->rect = (sfIntRect){0, 0, 77, 77};
     ORC->sprite = sfSprite_create();
     ORC->walk = sfClock_create();
@@ -83,4 +84,28 @@ void init_orc(var_t *var)
     sfSprite_setScale(ORC->sprite, (sfVector2f){0.75f, 0.75f});
     sfSprite_setTexture(ORC->sprite, ORC->clothes, sfTrue);
     sfSprite_setTextureRect(ORC->sprite, ORC->rect);
+}
+
+void fight_orc(var_t *var)
+{
+    sfFloatRect player_bounds = GET_BOUNDS(PLAYER->hitbox);
+    sfFloatRect player_spear_zone = GET_BOUNDS(PLAYER->spear_zone);
+    sfFloatRect orc_bounds = GET_BOUNDS(ORC->hitbox);
+    static sfClock *clock_player = NULL;
+    static sfClock *clock_orc = NULL;
+
+    if (!clock_player)
+        clock_player = sfClock_create();
+    if (!clock_orc)
+        clock_orc = sfClock_create();
+    if (sfFloatRect_intersects(&player_bounds, &orc_bounds, NULL)) {
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock_player)) >= 1.0f) {
+            PLAYER->life -= 20;
+            sfClock_restart(clock_player);
+        }
+    }
+    if (sfFloatRect_intersects(&player_spear_zone, &orc_bounds, NULL)) {
+        if (PLAYER->attack)
+            knockback(var, clock_orc, ORC);
+    }
 }
