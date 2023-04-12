@@ -39,10 +39,7 @@ void init_life(var_t *var)
 {
     var->life->hp = CREATE_FROM_FILE("assets/player/vie.png");
     var->life->sprite = sfSprite_create();
-    var->life->rect.left = 0;
-    var->life->rect.top = 23;
-    var->life->rect.height = 108;
-    var->life->rect.width = 600;
+    var->life->rect = (sfIntRect){0, 23, 600, 108};
     sfSprite_setTexture(var->life->sprite, var->life->hp, sfTrue);
     sfSprite_setTextureRect(var->life->sprite, var->life->rect);
     sfSprite_setScale(var->life->sprite, (sfVector2f){0.5f, 0.5f});

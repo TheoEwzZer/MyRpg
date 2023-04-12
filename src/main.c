@@ -20,10 +20,7 @@ sfRenderWindow *create_window(void)
 void change_quest_to_enemies(var_t *var)
 {
     sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
-    var->mc->rect.top = 0;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    var->mc->rect.left = 0;
+    var->mc->rect = (sfIntRect){0, 0, 77, 77};
     sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
     var->quest_progress = ENEMIES;
     sfText_setString(var->quest_text->text, "Kill the enemies");

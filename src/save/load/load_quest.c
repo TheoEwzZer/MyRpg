@@ -33,10 +33,7 @@ bool load_quest(var_t *var, char *line)
         var->quest_progress = my_getnbr(line + 16);
         if (var->quest_progress > ARMOR) {
             sfSprite_setTexture(var->mc->sprite, var->armor, sfTrue);
-            var->mc->rect.top = 0;
-            var->mc->rect.width = 77;
-            var->mc->rect.height = 77;
-            var->mc->rect.left = 0;
+            var->mc->rect = (sfIntRect){0, 0, 77, 77};
             sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
         }
         if (var->quest_progress == ARMOR || var->quest_progress == ENEMIES)
