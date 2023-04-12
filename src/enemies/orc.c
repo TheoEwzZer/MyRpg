@@ -48,17 +48,15 @@ void display_orc(var_t *var)
     const sfFloatRect zone_rect = {560.0f, 574.0f, 259.0f, 302.0f};
     const sfVector2f orc_pos = sfSprite_getPosition(ORC->sprite);
     const sfVector2f player_pos = sfSprite_getPosition(var->mc->sprite);
-    sfVector2f orc_dir = {0.0f, 0.0f};
+    sfVector2f orc_dir = {0.0f, 0.0f}; sfVector2f direction = {0.0f, 0.0f};
     float distance = 0.0f;
-    sfVector2f direction = {0.0f, 0.0f};
     if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
         orc_dir.x = player_pos.x - orc_pos.x;
         orc_dir.y = player_pos.y - orc_pos.y;
         distance = sqrtf(powf(orc_dir.x, 2.0f) + powf(orc_dir.y, 2.0f));
         direction.x = orc_dir.x / distance;
         direction.y = orc_dir.y / distance;
-        direction.x *= ENEMY_SPEED;
-        direction.y *= ENEMY_SPEED;
+        direction.x *= ENEMY_SPEED; direction.y *= ENEMY_SPEED;
         change_direction_orc(var, direction);
         animate_orc(var);
     }

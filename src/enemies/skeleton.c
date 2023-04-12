@@ -48,17 +48,15 @@ void display_skeleton(var_t *var)
     const sfFloatRect zone_rect = {560.0f, 574.0f, 259.0f, 302.0f};
     const sfVector2f skeleton_pos = sfSprite_getPosition(SKELETON->sprite);
     const sfVector2f player_pos = sfSprite_getPosition(var->mc->sprite);
-    sfVector2f skeleton_dir = {0.0f, 0.0f};
+    sfVector2f skeleton_dir = {0.0f, 0.0f}; sfVector2f direction = {0.0f, 0.0f};
     float distance = 0.0f;
-    sfVector2f direction = {0.0f, 0.0f};
     if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
         skeleton_dir.x = player_pos.x - skeleton_pos.x;
         skeleton_dir.y = player_pos.y - skeleton_pos.y;
         distance = sqrtf(powf(skeleton_dir.x, 2.f) + powf(skeleton_dir.y, 2.f));
         direction.x = skeleton_dir.x / distance;
         direction.y = skeleton_dir.y / distance;
-        direction.x *= ENEMY_SPEED * 1.5f;
-        direction.y *= ENEMY_SPEED * 1.5f;
+        direction.x *= ENEMY_SPEED * 1.5f; direction.y *= ENEMY_SPEED * 1.5f;
         change_direction_skeleton(var, direction);
         animate_skeleton(var);
     }
@@ -79,7 +77,7 @@ void init_skeleton(var_t *var)
     sfRectangleShape_setFillColor(SKELETON->hitbox, sfTransparent);
     sfRectangleShape_setOutlineColor(SKELETON->hitbox, sfRed);
     sfRectangleShape_setOutlineThickness(SKELETON->hitbox, 2.0f);
-    sfRectangleShape_setPosition(SKELETON->hitbox, (sfVector2f){575.0f, 585.0f});
+    sfRectangleShape_setPosition(SKELETON->hitbox, (sfVector2f){575.f, 585.f});
     sfRectangleShape_setSize(SKELETON->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(SKELETON->sprite, (sfVector2f){560.0f, 574.0f});
     sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
