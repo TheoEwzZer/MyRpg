@@ -11,6 +11,9 @@ void create_collider(var_t *var)
 {
     var->hitbox = sfRectangleShape_create();
     sfRectangleShape_setPosition(var->hitbox, (sfVector2f){1700.0f, 1340.0f});
+    sfRectangleShape_setOutlineColor(var->hitbox, sfRed);
+    sfRectangleShape_setOutlineThickness(var->hitbox, 2.0f);
+    sfRectangleShape_setFillColor(var->hitbox, sfTransparent);
     COLLIDER = malloc(sizeof(sfRectangleShape *) * 65);
     var->collider_bounds = malloc(sizeof(sfFloatRect) * 65);
     for (unsigned int i = 0; i < 65; i++)
