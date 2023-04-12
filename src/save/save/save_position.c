@@ -9,7 +9,7 @@
 
 void save_position_player(var_t *var, FILE *file)
 {
-    sfVector2f position = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f position = sfSprite_getPosition(PLAYER->sprite);
     size_t n = 0;
     char *str = NULL;
 

@@ -10,18 +10,18 @@
 bool load_position_player(var_t *var, char *line)
 {
     int pos_int = 0;
-    sfVector2f position = sfSprite_getPosition(var->mc->sprite);
+    sfVector2f position = sfSprite_getPosition(PLAYER->sprite);
 
     if (!my_strncmp(line, "player_position_x: ", 19)) {
         pos_int = my_getnbr(line + 19);
         position.x = (float)pos_int;
-        sfSprite_setPosition(var->mc->sprite, position);
+        sfSprite_setPosition(PLAYER->sprite, position);
         return true;
     }
     if (!my_strncmp(line, "player_position_y: ", 19)) {
         pos_int = my_getnbr(line + 19);
         position.y = (float)pos_int;
-        sfSprite_setPosition(var->mc->sprite, position);
+        sfSprite_setPosition(PLAYER->sprite, position);
         return true;
     }
     return false;
