@@ -26,8 +26,9 @@
     #define BLACKSMITH var->blacksmith
     #define ORC var->orc
     #define SKELETON var->skeleton
+    #define PLAYER var->player
 
-    #define ENEMY_SPEED 0.02f
+    #define ENEMY_SPEED 0.03f
 
     #define PI 3.141592741f
 
@@ -94,6 +95,7 @@ typedef struct character {
     sfClock *walk;
     sfIntRect rect;
     sfRectangleShape *hitbox;
+    sfRectangleShape *spear_zone;
     sfSprite *sprite;
     sfTexture *clothes;
     sfTime times;
@@ -146,12 +148,11 @@ typedef struct var {
     bool is_talking_to_blacksmith;
     char_t *blacksmith;
     char_t *girl;
-    char_t *mc;
     char_t *orc;
+    char_t *player;
     char_t *pnj;
     char_t *skeleton;
     dialog_t *dialog;
-    direction_t direction;
     life_t *life;
     particle_t particles_leaves[MAX_LEAVES];
     particle_t particles_pnj[MAX_PARTICLES];
@@ -159,7 +160,6 @@ typedef struct var {
     quest_text_t *quest_text;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
-    sfRectangleShape *hitbox;
     sfRectangleShape *rect;
     sfRenderWindow *window;
     sfSprite **foreground;
@@ -215,6 +215,8 @@ void display_orc(var_t *var);
 void display_skeleton(var_t *var);
 void display_ui(var_t *var);
 void down_move(var_t *var);
+void fight_orc(var_t *var);
+void fight_skeleton(var_t *var);
 void game_engine(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
@@ -229,6 +231,7 @@ void init_skeleton(var_t *var);
 void init_sound(var_t *var);
 void init_struct(var_t *var);
 void init_ui(var_t *var);
+void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
 void load_game(const char *file_name, var_t *var);
 void move_leaves(var_t *var);
