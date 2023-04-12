@@ -9,76 +9,96 @@
 
 void right_move(var_t *var)
 {
-    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
-    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
-    var->mc->rect.top = 154;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
-            var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
-        }
-        sfClock_restart(var->mc->walk);
+    if (PLAYER->direction == LEFT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){60.0f, 0.0f});
+    if (PLAYER->direction == UP)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, -15.0f});
+    if (PLAYER->direction == DOWN)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, 15.0f});
+    PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
+    PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
+    PLAYER->rect.top = 154;
+    PLAYER->rect.width = 77;
+    PLAYER->rect.height = 77;
+    if (PLAYER->second > 0.05f) {
+        if (PLAYER->rect.left == 539)
+            PLAYER->rect.left = 0;
+        else
+            PLAYER->rect.left += 77;
+        sfClock_restart(PLAYER->walk);
     }
-    var->direction = RIGHT;
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+    PLAYER->direction = RIGHT;
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
 }
 
 void left_move(var_t *var)
 {
-    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
-    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
-    var->mc->rect.top = 77;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
-            var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
-        }
-        sfClock_restart(var->mc->walk);
+    if (PLAYER->direction == RIGHT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-60.0f, 0.0f});
+    if (PLAYER->direction == UP)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, -15.0f});
+    if (PLAYER->direction == DOWN)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, 15.0f});
+    PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
+    PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
+    PLAYER->rect.top = 77;
+    PLAYER->rect.width = 77;
+    PLAYER->rect.height = 77;
+    if (PLAYER->second > 0.05f) {
+        if (PLAYER->rect.left == 539)
+            PLAYER->rect.left = 0;
+        else
+            PLAYER->rect.left += 77;
+        sfClock_restart(PLAYER->walk);
     }
-    var->direction = LEFT;
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+    PLAYER->direction = LEFT;
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
 }
 
 void down_move(var_t *var)
 {
-    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
-    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
-    var->mc->rect.top = 231;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
-            var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
-        }
-        sfClock_restart(var->mc->walk);
+    if (PLAYER->direction == LEFT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, 15.0f});
+    if (PLAYER->direction == DOWN)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, 30.0f});
+    if (PLAYER->direction == RIGHT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, 15.0f});
+    PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
+    PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
+    PLAYER->rect.top = 0;
+    PLAYER->rect.width = 77;
+    PLAYER->rect.height = 77;
+    if (PLAYER->second > 0.05f) {
+        if (PLAYER->rect.left == 539)
+            PLAYER->rect.left = 0;
+        else
+            PLAYER->rect.left += 77;
+        sfClock_restart(PLAYER->walk);
     }
-    var->direction = DOWN;
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+    PLAYER->direction = UP;
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
 }
 
 void up_move(var_t *var)
 {
-    var->mc->times = sfClock_getElapsedTime(var->mc->walk);
-    var->mc->second = (float)var->mc->times.microseconds / 1000000.0f;
-    var->mc->rect.top = 0;
-    var->mc->rect.width = 77;
-    var->mc->rect.height = 77;
-    if (var->mc->second > 0.05f) {
-        if (var->mc->rect.left == 539) {
-            var->mc->rect.left = 0;
-        } else {
-            var->mc->rect.left = var->mc->rect.left + 77;
-        }
-        sfClock_restart(var->mc->walk);
+    if (PLAYER->direction == LEFT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, -15.0f});
+    if (PLAYER->direction == UP)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, -30.0f});
+    if (PLAYER->direction == RIGHT)
+        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, -15.0f});
+    PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
+    PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
+    PLAYER->rect.top = 231;
+    PLAYER->rect.width = 77;
+    PLAYER->rect.height = 77;
+    if (PLAYER->second > 0.05f) {
+        if (PLAYER->rect.left == 539)
+            PLAYER->rect.left = 0;
+        else
+            PLAYER->rect.left += 77;
+        sfClock_restart(PLAYER->walk);
     }
-    var->direction = UP;
-    sfSprite_setTextureRect(var->mc->sprite, var->mc->rect);
+    PLAYER->direction = DOWN;
+    sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
 }
