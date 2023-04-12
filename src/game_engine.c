@@ -20,6 +20,7 @@ void game_engine(var_t *var)
     if (var->quest_progress == ENEMIES)
         check_enemies(var);
     DRAW_SPRITE(var->mc->sprite);
+    DRAW_RECTANGLE(var->hitbox);
     for (unsigned int i = 0; i < 9; i++)
         DRAW_SPRITE(var->foreground[i]);
     var->frame_count++;
