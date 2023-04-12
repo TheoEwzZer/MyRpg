@@ -18,7 +18,7 @@ void display_ui(var_t *var)
     position_text.y = offset.y + var->quest_text->position.y;
     sfSprite_setPosition(var->quest_text->box, offset);
     sfText_setPosition(var->quest_text->text, position_text);
-    sfRenderWindow_drawSprite(var->window, var->quest_text->box, NULL);
+    DRAW_SPRITE(var->quest_text->box);
     sfRenderWindow_drawText(var->window, var->quest_text->text, NULL);
 }
 
