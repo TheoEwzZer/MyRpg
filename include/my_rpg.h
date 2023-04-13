@@ -95,7 +95,7 @@ typedef struct character {
     sfClock *walk;
     sfIntRect rect;
     sfRectangleShape *hitbox;
-    sfRectangleShape *spear_zone;
+    sfRectangleShape *spear;
     sfSprite *sprite;
     sfTexture *clothes;
     sfTime times;
@@ -172,7 +172,11 @@ typedef struct var {
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
 bool load_position_map(var_t *var, char *line);
+bool load_position_orc(var_t *var, char *line);
 bool load_position_player(var_t *var, char *line);
+bool load_position_player_x(var_t *var, char *line);
+bool load_position_player_y(var_t *var, char *line);
+bool load_position_skeleton(var_t *var, char *line);
 bool load_quest(var_t *var, char *line);
 char *int_to_str(int nb, size_t *n);
 int get_digits(int nb);
@@ -235,6 +239,7 @@ void init_struct(var_t *var);
 void init_ui(var_t *var);
 void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
+void load_all(var_t *var, char *line);
 void load_game(const char *file_name, var_t *var);
 void move_leaves(var_t *var);
 void move_particle_pnj(var_t *var);
@@ -244,7 +249,9 @@ void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
 void save_game(const char *file_name, var_t *var);
 void save_position_map(var_t *var, FILE *file);
+void save_position_orc(var_t *var, FILE *file);
 void save_position_player(var_t *var, FILE *file);
+void save_position_skeleton(var_t *var, FILE *file);
 void save_quest(var_t *var, FILE *file);
 void set_foreground_position(var_t *var);
 void show_blacksmith_dialog(var_t *var);

@@ -23,15 +23,15 @@ void create_collider2(var_t *var)
 
 void create_collider(var_t *var)
 {
-    sfVector2f spear_zone_position = {1700.0f, 1300.0f};
-    sfVector2f spear_zone_size = {30.0f, 40.0f};
+    sfVector2f spear_position = {1700.0f, 1300.0f};
+    sfVector2f spear_size = {30.0f, 40.0f};
     sfVector2f hitbox_position = {1700.0f, 1340.0f};
 
     PLAYER->hitbox = sfRectangleShape_create();
-    PLAYER->spear_zone = sfRectangleShape_create();
+    PLAYER->spear = sfRectangleShape_create();
     sfRectangleShape_setPosition(PLAYER->hitbox, hitbox_position);
-    sfRectangleShape_setPosition(PLAYER->spear_zone, spear_zone_position);
-    sfRectangleShape_setSize(PLAYER->spear_zone, spear_zone_size);
+    sfRectangleShape_setPosition(PLAYER->spear, spear_position);
+    sfRectangleShape_setSize(PLAYER->spear, spear_size);
     COLLIDER = malloc(sizeof(sfRectangleShape *) * 65);
     var->collider_bounds = malloc(sizeof(sfFloatRect) * 65);
     for (unsigned int i = 0; i < 65; i++)

@@ -89,7 +89,7 @@ void init_orc(var_t *var)
 void fight_orc(var_t *var)
 {
     sfFloatRect player_bounds = GET_BOUNDS(PLAYER->hitbox);
-    sfFloatRect player_spear_zone = GET_BOUNDS(PLAYER->spear_zone);
+    sfFloatRect player_spear = GET_BOUNDS(PLAYER->spear);
     sfFloatRect orc_bounds = GET_BOUNDS(ORC->hitbox);
     static sfClock *clock_player = NULL;
     static sfClock *clock_orc = NULL;
@@ -104,7 +104,7 @@ void fight_orc(var_t *var)
             sfClock_restart(clock_player);
         }
     }
-    if (sfFloatRect_intersects(&player_spear_zone, &orc_bounds, NULL)) {
+    if (sfFloatRect_intersects(&player_spear, &orc_bounds, NULL)) {
         if (PLAYER->attack)
             knockback(var, clock_orc, ORC);
     }

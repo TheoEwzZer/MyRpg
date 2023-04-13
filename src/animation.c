@@ -10,11 +10,11 @@
 void right_move(var_t *var)
 {
     if (PLAYER->direction == LEFT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){60.0f, 0.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){60.0f, 0.0f});
     if (PLAYER->direction == UP)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, -15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){30.0f, -15.0f});
     if (PLAYER->direction == DOWN)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, 15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){30.0f, 15.0f});
     PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
     PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
     PLAYER->rect.top = 154;
@@ -34,11 +34,11 @@ void right_move(var_t *var)
 void left_move(var_t *var)
 {
     if (PLAYER->direction == RIGHT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-60.0f, 0.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-60.0f, 0.0f});
     if (PLAYER->direction == UP)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, -15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-30.0f, -15.0f});
     if (PLAYER->direction == DOWN)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, 15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-30.0f, 15.0f});
     PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
     PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
     PLAYER->rect.top = 77;
@@ -58,11 +58,11 @@ void left_move(var_t *var)
 void down_move(var_t *var)
 {
     if (PLAYER->direction == LEFT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, 15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){30.0f, 15.0f});
     if (PLAYER->direction == DOWN)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, 30.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){0.0f, 30.0f});
     if (PLAYER->direction == RIGHT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, 15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-30.0f, 15.0f});
     PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
     PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
     PLAYER->rect.top = 0;
@@ -82,11 +82,11 @@ void down_move(var_t *var)
 void up_move(var_t *var)
 {
     if (PLAYER->direction == LEFT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){30.0f, -15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){30.0f, -15.0f});
     if (PLAYER->direction == UP)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, -30.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){0.0f, -30.0f});
     if (PLAYER->direction == RIGHT)
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-30.0f, -15.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-30.0f, -15.0f});
     PLAYER->times = sfClock_getElapsedTime(PLAYER->walk);
     PLAYER->second = (float)PLAYER->times.microseconds / 1000000.0f;
     PLAYER->rect.top = 231;

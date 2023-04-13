@@ -25,7 +25,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){0.0f, -10.0f});
         sfSprite_move(PLAYER->sprite, (sfVector2f){0.0f, -10.0f});
         sfRectangleShape_move(PLAYER->hitbox, (sfVector2f){0.0f, -10.0f});
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, -10.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){0.0f, -10.0f});
         up_move(var);
     }
     if (event.key.code == sfKeyDown) {
@@ -35,7 +35,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){0.0f, 10.0f});
         sfSprite_move(PLAYER->sprite, (sfVector2f){0.0f, 10.0f});
         sfRectangleShape_move(PLAYER->hitbox, (sfVector2f){0.0f, 10.0f});
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){0.0f, 10.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){0.0f, 10.0f});
         down_move(var);
     }
 }
@@ -49,7 +49,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){-10.0f, 0.0f});
         sfSprite_move(PLAYER->sprite, (sfVector2f){-10.0f, 0.0f});
         sfRectangleShape_move(PLAYER->hitbox, (sfVector2f){-10.0f, 0.0f});
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){-10.0f, 0.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){-10.0f, 0.0f});
         left_move(var);
     } if (event.key.code == sfKeyRight) {
         p_bounds.width += 10.0f;
@@ -58,7 +58,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfView_move(var->view, (sfVector2f){10.0f, 0.0f});
         sfSprite_move(PLAYER->sprite, (sfVector2f){10.0f, 0.0f});
         sfRectangleShape_move(PLAYER->hitbox, (sfVector2f){10.0f, 0.0f});
-        sfRectangleShape_move(PLAYER->spear_zone, (sfVector2f){10.0f, 0.0f});
+        sfRectangleShape_move(PLAYER->spear, (sfVector2f){10.0f, 0.0f});
         right_move(var);
     }
     check_move2(var, event, p_bounds);
