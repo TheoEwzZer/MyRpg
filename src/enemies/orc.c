@@ -44,24 +44,24 @@ void change_direction_orc(var_t *var, sfVector2f direction)
 
 void display_orc(var_t *var)
 {
-    const sfFloatRect player_rect = sfSprite_getGlobalBounds(PLAYER->sprite);
-    const sfFloatRect zone_rect = {560.0f, 574.0f, 259.0f, 302.0f};
-    const sfVector2f orc_pos = sfSprite_getPosition(ORC->sprite);
     const sfVector2f player_pos = sfSprite_getPosition(PLAYER->sprite);
-    sfVector2f orc_dir = {0.0f, 0.0f}; sfVector2f direction = {0.0f, 0.0f};
-    float distance = 0.0f;
-    if (sfFloatRect_intersects(&player_rect, &zone_rect, NULL)) {
-        orc_dir.x = player_pos.x - orc_pos.x;
-        orc_dir.y = player_pos.y - orc_pos.y;
-        distance = sqrtf(powf(orc_dir.x, 2.0f) + powf(orc_dir.y, 2.0f));
-        direction.x = orc_dir.x / distance;
-        direction.y = orc_dir.y / distance;
-        direction.x *= ENEMY_SPEED; direction.y *= ENEMY_SPEED;
+    const sfVector2f orc_pos = sfSprite_getPosition(ORC->sprite);
+    float dist = 0.0f;
+    sfFloatRect orc_rect = {0.0f, 0.0f, 0.0f, 0.0f};
+    sfVector2f direction, orc_dir = {0.0f, 0.0f};
+    orc_dir.x = player_pos.x - orc_pos.x;
+    orc_dir.y = player_pos.y - orc_pos.y;
+    dist = sqrtf(powf(orc_dir.x, 2.f) + powf(orc_dir.y, 2.f));
+    direction = (sfVector2f){orc_dir.x / dist, orc_dir.y / dist};
+    orc_rect = create_enemy_rect(direction, ORC);
+    if (!check_intersects(orc_rect, var)) {
+        direction.x *= ENEMY_SPEED;
+        direction.y *= ENEMY_SPEED;
         change_direction_orc(var, direction);
         animate_orc(var);
+        sfRectangleShape_move(ORC->hitbox, direction);
+        sfSprite_move(ORC->sprite, direction);
     }
-    sfRectangleShape_move(ORC->hitbox, direction);
-    sfSprite_move(ORC->sprite, direction);
     DRAW_RECTANGLE(ORC->hitbox);
     DRAW_SPRITE(ORC->sprite);
 }
