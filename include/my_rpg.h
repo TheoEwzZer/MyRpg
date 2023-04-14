@@ -28,6 +28,8 @@
     #define SKELETON var->skeleton
     #define PLAYER var->player
 
+    #define INVENTORY var->inventory
+
     #define ENEMY_SPEED 0.03f
 
     #define PI 3.141592741f
@@ -142,6 +144,12 @@ typedef struct sound_s {
     sfSoundBuffer *spear_buf;
 } sound_t;
 
+typedef struct inventory_s {
+    bool is_open;
+    sfSprite *sprite;
+    sfTexture *texture;
+} inventory_t;
+
 typedef struct var {
     bool has_talk_to_blacksmith;
     bool is_particle_active;
@@ -168,6 +176,7 @@ typedef struct var {
     sfView *view;
     size_t frame_count;
     sound_t *sound;
+    inventory_t *inventory;
 } var_t;
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var);
@@ -202,6 +211,7 @@ void check_life(var_t *var);
 void check_move(var_t *var, sfEvent event);
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
+void check_quest(var_t *var);
 void create_barrier_collider(var_t *var);
 void create_collider(var_t *var);
 void create_collider2(var_t *var);
