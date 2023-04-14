@@ -15,7 +15,8 @@ void zoom_out(var_t *var, bool *has_zoom)
     if (*has_zoom) {
         sfView_zoom(var->view, 1.5f);
         *has_zoom = false;
-        var->is_particle_active = true;
+        if (var->quest_progress != BOSS)
+            var->is_particle_active = true;
         scale_box.x *= 1.5f;
         scale_box.y *= 1.5f;
         var->quest_text->scale.x = scale_text.x * 1.5f;
