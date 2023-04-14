@@ -9,7 +9,9 @@
 
 bool check_intersects(sfFloatRect p_bounds, var_t *var)
 {
-    for (unsigned int i = 0; i < 65; i++) {
+    for (unsigned int i = 0; i < 67; i++) {
+        if (!COLLIDER[i])
+            continue;
         if (sfFloatRect_intersects(&p_bounds, &var->collider_bounds[i], NULL))
             return true;
     }
