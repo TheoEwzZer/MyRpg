@@ -28,6 +28,14 @@ void change_quest_to_enemies(var_t *var)
     var->quest_text->position = (sfVector2f){7.0f, 8.0f};
 }
 
+void check_inventory(var_t *var, sfEvent event)
+{
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyE)
+        INVENTORY->is_open = !INVENTORY->is_open;
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
+        INVENTORY->is_open = false;
+}
+
 void check_event(var_t *var, sfEvent event)
 {
     sfVector2f sprite_pos = sfSprite_getPosition(PLAYER->sprite);
@@ -35,8 +43,7 @@ void check_event(var_t *var, sfEvent event)
         sfRenderWindow_close(var->window);
     if (event.type == sfEvtKeyPressed && !PLAYER->attack)
         check_move(var, event);
-    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyE)
-        INVENTORY->is_open = !INVENTORY->is_open;
+    check_inventory(var, event);
     if (var->quest_progress > ARMOR && event.type == sfEvtMouseButtonPressed) {
         PLAYER->rect.left = 616 - 77;
         PLAYER->rect.width = 77;

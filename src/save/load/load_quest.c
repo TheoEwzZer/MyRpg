@@ -7,6 +7,14 @@
 
 #include "my_rpg.h"
 
+void load_inventory(var_t *var)
+{
+    if (var->quest_progress >= ENEMIES) {
+        INVENTORY->texture = CREATE_FROM_FILE("assets/player/inventory_2.png");
+        sfSprite_setTexture(INVENTORY->sprite, INVENTORY->texture, sfTrue);
+    }
+}
+
 void change_quest_text(var_t *var)
 {
     if (var->quest_progress == PRISCILLA) {
@@ -28,6 +36,7 @@ void change_quest_text(var_t *var)
         var->is_particle_active = false;
         COLLIDER[9] = NULL;
     }
+    load_inventory(var);
 }
 
 bool load_quest(var_t *var, char *line)
