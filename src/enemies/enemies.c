@@ -17,6 +17,11 @@ void check_enemies(var_t *var)
         display_orc(var);
         fight_orc(var);
     }
+    if (SKELETON->life <= 0 && ORC->life <= 0) {
+        var->quest_progress = BOB;
+        move_particle_position_pnj(var, (sfVector2f){1026.0f, 790.0f});
+        change_quest_text(var);
+    }
 }
 
 void knockback(var_t *var, sfClock *clock, char_t *enemy)
