@@ -22,6 +22,8 @@ void init_game(var_t *var)
     var->pnj = malloc(sizeof(char_t));
     var->pnj->rect.left = 0;
     var->quest_text = malloc(sizeof(quest_text_t));
+    INVENTORY = malloc(sizeof(inventory_t));
+    INVENTORY->is_open = false;
     init_char(var);
 }
 
