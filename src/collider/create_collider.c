@@ -32,11 +32,11 @@ void create_collider(var_t *var)
     sfRectangleShape_setPosition(PLAYER->hitbox, hitbox_position);
     sfRectangleShape_setPosition(PLAYER->spear, spear_position);
     sfRectangleShape_setSize(PLAYER->spear, spear_size);
-    COLLIDER = malloc(sizeof(sfRectangleShape *) * 65);
-    var->collider_bounds = malloc(sizeof(sfFloatRect) * 65);
-    for (unsigned int i = 0; i < 65; i++)
+    COLLIDER = malloc(sizeof(sfRectangleShape *) * 67);
+    var->collider_bounds = malloc(sizeof(sfFloatRect) * 67);
+    for (unsigned int i = 0; i < 67; i++)
         COLLIDER[i] = sfRectangleShape_create();
     create_collider2(var);
-    for (unsigned int i = 0; i < 65; i++)
+    for (unsigned int i = 0; i < 67; i++)
         var->collider_bounds[i] = GET_BOUNDS(COLLIDER[i]);
 }
