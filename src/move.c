@@ -70,8 +70,10 @@ void check_move(var_t *var, sfEvent event)
 {
     sfFloatRect p_bounds = sfSprite_getGlobalBounds(PLAYER->sprite);
     sfVector2f size = {0.0f, 0.0f};
-
     float tmp = p_bounds.height;
+
+    if (INVENTORY->is_open)
+        return;
     p_bounds.height = p_bounds.height / 5.0f;
     p_bounds.top += tmp - p_bounds.height;
     p_bounds.width = 25.0f;
