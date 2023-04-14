@@ -35,6 +35,8 @@ void check_event(var_t *var, sfEvent event)
         sfRenderWindow_close(var->window);
     if (event.type == sfEvtKeyPressed && !PLAYER->attack)
         check_move(var, event);
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyE)
+        INVENTORY->is_open = !INVENTORY->is_open;
     if (var->quest_progress > ARMOR && event.type == sfEvtMouseButtonPressed) {
         PLAYER->rect.left = 616 - 77;
         PLAYER->rect.width = 77;
