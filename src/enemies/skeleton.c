@@ -62,7 +62,6 @@ void display_skeleton(var_t *var)
         sfRectangleShape_move(SKELETON->hitbox, direction);
         sfSprite_move(SKELETON->sprite, direction);
     }
-    DRAW_RECTANGLE(SKELETON->hitbox);
     DRAW_SPRITE(SKELETON->sprite);
 }
 
@@ -75,9 +74,6 @@ void init_skeleton(var_t *var)
     SKELETON->rect = (sfIntRect){0, 0, 77, 77};
     SKELETON->sprite = sfSprite_create();
     SKELETON->walk = sfClock_create();
-    sfRectangleShape_setFillColor(SKELETON->hitbox, sfTransparent);
-    sfRectangleShape_setOutlineColor(SKELETON->hitbox, sfRed);
-    sfRectangleShape_setOutlineThickness(SKELETON->hitbox, 2.0f);
     sfRectangleShape_setPosition(SKELETON->hitbox, (sfVector2f){575.f, 595.f});
     sfRectangleShape_setSize(SKELETON->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(SKELETON->sprite, (sfVector2f){560.0f, 584.0f});
