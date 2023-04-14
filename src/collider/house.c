@@ -33,8 +33,8 @@ void create_house_collider(var_t *var)
 
 void set_foreground_position(var_t *var)
 {
-    var->foreground = malloc(sizeof(sfSprite *) * 9);
-    for (unsigned int i = 0; i < 9; i++)
+    var->foreground = malloc(sizeof(sfSprite *) * 10);
+    for (unsigned int i = 0; i < 10; i++)
         var->foreground[i] = sfSprite_create();
     sfSprite_setPosition(var->foreground[0], (sfVector2f){1656.0f, 1114.0f});
     sfSprite_setPosition(var->foreground[1], (sfVector2f){252.0f, 1402.0f});
@@ -45,6 +45,7 @@ void set_foreground_position(var_t *var)
     sfSprite_setPosition(var->foreground[6], (sfVector2f){864.0f, 970.0f});
     sfSprite_setPosition(var->foreground[7], (sfVector2f){1058.0f, 790.0f});
     sfSprite_setPosition(var->foreground[8], (sfVector2f){1440.0f, 718.0f});
+    sfSprite_setPosition(var->foreground[9], (sfVector2f){460.0f, 1783.0f});
 }
 
 void create_foreground(var_t *var)
@@ -56,6 +57,7 @@ void create_foreground(var_t *var)
     sfTexture *big_house2 = CREATE_FROM_FILE("assets/map/big_house2.png");
     sfTexture *barrier = CREATE_FROM_FILE("assets/map/barrier.png");
     sfTexture *medium_house2 = CREATE_FROM_FILE("assets/map/medium_house2.png");
+    sfTexture *path = CREATE_FROM_FILE("assets/map/path.png");
 
     set_foreground_position(var);
     sfSprite_setTexture(var->foreground[0], little_house, sfTrue);
@@ -67,4 +69,5 @@ void create_foreground(var_t *var)
     sfSprite_setTexture(var->foreground[6], big_house2, sfTrue);
     sfSprite_setTexture(var->foreground[7], barrier, sfTrue);
     sfSprite_setTexture(var->foreground[8], medium_house2, sfTrue);
+    sfSprite_setTexture(var->foreground[9], path, sfTrue);
 }
