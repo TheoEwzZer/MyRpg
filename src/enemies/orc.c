@@ -62,7 +62,6 @@ void display_orc(var_t *var)
         sfRectangleShape_move(ORC->hitbox, direction);
         sfSprite_move(ORC->sprite, direction);
     }
-    DRAW_RECTANGLE(ORC->hitbox);
     DRAW_SPRITE(ORC->sprite);
 }
 
@@ -75,9 +74,6 @@ void init_orc(var_t *var)
     ORC->rect = (sfIntRect){0, 0, 77, 77};
     ORC->sprite = sfSprite_create();
     ORC->walk = sfClock_create();
-    sfRectangleShape_setFillColor(ORC->hitbox, sfTransparent);
-    sfRectangleShape_setOutlineColor(ORC->hitbox, sfRed);
-    sfRectangleShape_setOutlineThickness(ORC->hitbox, 2.0f);
     sfRectangleShape_setPosition(ORC->hitbox, (sfVector2f){735.0f, 710.0f});
     sfRectangleShape_setSize(ORC->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(ORC->sprite, (sfVector2f){720.0f, 700.0f});
