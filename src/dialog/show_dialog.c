@@ -64,10 +64,12 @@ void show_blacksmith_dialog(var_t *var)
         sfText_setString(var->dialog->text, BLACKSMITH_DIALOG1);
         sfText_setScale(var->dialog->text, (sfVector2f){0.4f, 0.4f});
         sfText_setPosition(var->dialog->text, (sfVector2f){515.0f, 1110.0f});
+        INVENTORY->texture = CREATE_FROM_FILE("assets/player/inventory_2.png");
+        sfSprite_setTexture(INVENTORY->sprite, INVENTORY->texture, sfTrue);
     } else {
         sfText_setString(var->dialog->text, BLACKSMITH_DIALOG2);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
-    sfText_setPosition(var->dialog->text, (sfVector2f){525.0f, 1110.0f});
+        sfText_setPosition(var->dialog->text, (sfVector2f){525.0f, 1110.0f});
     }
     sfText_setString(var->dialog->name, "Blacksmith");
     sfRenderWindow_drawText(var->window, var->dialog->text, NULL);
