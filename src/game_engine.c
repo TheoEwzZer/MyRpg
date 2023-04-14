@@ -7,6 +7,14 @@
 
 #include "my_rpg.h"
 
+void check_quest(var_t *var)
+{
+    if (var->quest_progress == ENEMIES)
+        check_enemies(var);
+    if (var->quest_progress == BOSS)
+        DRAW_SPRITE(var->foreground[9]);
+}
+
 void game_engine(var_t *var)
 {
     sfRenderWindow_clear(var->window, sfBlack);
@@ -17,8 +25,7 @@ void game_engine(var_t *var)
     blacksmith_move(var);
     girl_move(var);
     pnj_move(var);
-    if (var->quest_progress == ENEMIES)
-        check_enemies(var);
+    check_quest(var);
     DRAW_SPRITE(PLAYER->sprite);
     for (unsigned int i = 0; i < 9; i++)
         DRAW_SPRITE(var->foreground[i]);
