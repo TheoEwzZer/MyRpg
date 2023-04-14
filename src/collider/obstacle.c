@@ -31,7 +31,7 @@ void create_tree_collider(var_t *var)
     sfRectangleShape_setPosition(COLLIDER[39], (sfVector2f){1116.0f, 430.0f});
     sfRectangleShape_setPosition(COLLIDER[40], (sfVector2f){900.0f, 362.0f});
     sfRectangleShape_setPosition(COLLIDER[41], (sfVector2f){36.0f, 826.0f});
-    sfRectangleShape_setPosition(COLLIDER[9], (sfVector2f){0.0f, 1799.0f});
+    sfRectangleShape_setPosition(COLLIDER[9], (sfVector2f){506.0f, 1799.0f});
     sfRectangleShape_setSize(COLLIDER[1], (sfVector2f){70.0f, 70.0f});
     sfRectangleShape_setSize(COLLIDER[33], (sfVector2f){36.0f, 70.0f});
     sfRectangleShape_setSize(COLLIDER[36], (sfVector2f){108.0f, 36.0f});
@@ -40,5 +40,5 @@ void create_tree_collider(var_t *var)
     sfRectangleShape_setSize(COLLIDER[39], (sfVector2f){36.0f, 108.0f});
     sfRectangleShape_setSize(COLLIDER[40], (sfVector2f){180.0f, 30.0f});
     sfRectangleShape_setSize(COLLIDER[41], (sfVector2f){34.0f, 34.0f});
-    sfRectangleShape_setSize(COLLIDER[9], (sfVector2f){WIDTH, 35.0f});
+    sfRectangleShape_setSize(COLLIDER[9], (sfVector2f){68.0f, 35.0f});
 }
