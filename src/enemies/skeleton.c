@@ -54,7 +54,7 @@ void display_skeleton(var_t *var)
     dist = sqrtf(powf(skeleton_dir.x, 2.f) + powf(skeleton_dir.y, 2.f));
     direction = (sfVector2f){skeleton_dir.x / dist, skeleton_dir.y / dist};
     skeleton_rect = create_enemy_rect(direction, SKELETON);
-    if (!check_intersects(skeleton_rect, var)) {
+    if (!check_intersects(skeleton_rect, var) && !INVENTORY->is_open) {
         direction.x *= ENEMY_SPEED * 1.5f;
         direction.y *= ENEMY_SPEED * 1.5f;
         change_direction_skeleton(var, direction);

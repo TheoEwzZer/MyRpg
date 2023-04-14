@@ -54,7 +54,7 @@ void display_orc(var_t *var)
     dist = sqrtf(powf(orc_dir.x, 2.f) + powf(orc_dir.y, 2.f));
     direction = (sfVector2f){orc_dir.x / dist, orc_dir.y / dist};
     orc_rect = create_enemy_rect(direction, ORC);
-    if (!check_intersects(orc_rect, var)) {
+    if (!check_intersects(orc_rect, var) && !INVENTORY->is_open) {
         direction.x *= ENEMY_SPEED;
         direction.y *= ENEMY_SPEED;
         change_direction_orc(var, direction);
