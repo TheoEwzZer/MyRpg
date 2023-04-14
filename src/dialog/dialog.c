@@ -35,7 +35,7 @@ void blacksmith_dialog(var_t *var)
 
     if (sprite_position.x >= 480.0f && sprite_position.x <= 580.0f
     && sprite_position.y >= 1100.0f && sprite_position.y <= 1170.0f
-    && var->quest_progress > PRISCILLA) {
+    && var->quest_progress > PRISCILLA && var->quest_progress < BOB) {
         if (var->quest_progress == ENEMIES)
             zoom_in(var, &has_zoom);
         var->is_talking_to_blacksmith = true;
@@ -77,8 +77,13 @@ void bob_dialog(var_t *var)
 
     if (sprite_position.x >= 950.0f && sprite_position.x <= 1100.0f
     && sprite_position.y >= 755.0f && sprite_position.y <= 860.0f) {
-        if (var->quest_progress == BOB)
+        if (var->quest_progress == BOB || var->quest_progress == BOSS) {
             zoom_in(var, &has_zoom);
+            var->quest_progress = BOSS;
+            change_quest_text(var);
+            var->is_particle_active = false;
+            COLLIDER[9] = NULL;
+        }
         show_bob_dialog(var);
     } else {
         zoom_out(var, &has_zoom);
