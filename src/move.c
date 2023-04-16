@@ -20,7 +20,7 @@ sfBool check_intersects(sfFloatRect p_bounds, var_t *var)
 
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
 {
-    if (event.key.code == sfKeyUp) {
+    if (event.key.code == sfKeyUp || event.key.code == sfKeyZ) {
         p_bounds.top -= 10.0f;
         if (check_intersects(p_bounds, var))
             return;
@@ -30,7 +30,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfRectangleShape_move(PLAYER->spear, (sfVector2f){0.0f, -10.0f});
         up_move(var);
     }
-    if (event.key.code == sfKeyDown) {
+    if (event.key.code == sfKeyDown || event.key.code == sfKeyS) {
         p_bounds.height += 10.0f;
         if (check_intersects(p_bounds, var))
             return;
@@ -44,7 +44,7 @@ void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds)
 
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
 {
-    if (event.key.code == sfKeyLeft) {
+    if (event.key.code == sfKeyLeft || event.key.code == sfKeyQ) {
         p_bounds.left -= 10.0f;
         if (check_intersects(p_bounds, var))
             return;
@@ -53,7 +53,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds)
         sfRectangleShape_move(PLAYER->hitbox, (sfVector2f){-10.0f, 0.0f});
         sfRectangleShape_move(PLAYER->spear, (sfVector2f){-10.0f, 0.0f});
         left_move(var);
-    } if (event.key.code == sfKeyRight) {
+    } if (event.key.code == sfKeyRight || event.key.code == sfKeyD) {
         p_bounds.width += 10.0f;
         if (check_intersects(p_bounds, var))
             return;
