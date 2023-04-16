@@ -10,7 +10,6 @@
 #include <SFML/Graphics.h>
 #include <fcntl.h>
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,6 +53,12 @@
     #define CREATE_FROM_FILE(filename) \
     sfTexture_createFromFile(filename, NULL)
 
+    #define RECT_CONTAINS(rectangle) \
+    sfIntRect_contains(rectangle, event.mouseButton.x, event.mouseButton.y)
+
+    #define INT_RECT(rect) \
+    (int)rect.left, (int)rect.top, (int)rect.width, (int)rect.height
+
     #define BLACKSMITH_DIALOG1 \
     "Take this armor !"
 
@@ -90,7 +95,7 @@ typedef enum direction_e {
 } direction_t;
 
 typedef struct character {
-    bool attack;
+    sfBool attack;
     direction_t direction;
     float second;
     int life;
@@ -145,15 +150,63 @@ typedef struct sound_s {
 } sound_t;
 
 typedef struct inventory_s {
-    bool is_open;
+    sfBool is_open;
     sfSprite *sprite;
     sfTexture *texture;
 } inventory_t;
 
+typedef struct menuvar {
+    sfSprite *exitsprite;
+    sfSprite *main_menusprite;
+    sfSprite *playsprite;
+    sfSprite *resumesprite;
+    sfSprite *settingsprite;
+} menu_t;
+
+typedef struct settingsvar {
+    int jaugem;
+    int jauges;
+    sfSprite *size2;
+    sfSprite *jaugem0;
+    sfSprite *jaugem1;
+    sfSprite *jaugem2;
+    sfSprite *jaugem3;
+    sfSprite *jaugem4;
+    sfSprite *jauges0;
+    sfSprite *jauges1;
+    sfSprite *jauges2;
+    sfSprite *jauges3;
+    sfSprite *jauges4;
+    sfSprite *menusprite;
+    sfSprite *musicsprite;
+    sfSprite *mutem;
+    sfSprite *mutes;
+    sfSprite *res1;
+    sfSprite *res2;
+    sfSprite *resolutionsprite;
+    sfSprite *size1;
+    sfSprite *sizesprite;
+    sfSprite *soundsprite;
+} settings_t;
+
+typedef struct mouse_event_s {
+    int x;
+    int y;
+    float scalx;
+    float scaly;
+} mouse_event_t;
+
+typedef struct window_settings_s {
+    sfVector2u size;
+    int width;
+    int height;
+    int style;
+} window_settings_t;
+
 typedef struct var {
-    bool has_talk_to_blacksmith;
-    bool is_particle_active;
-    bool is_talking_to_blacksmith;
+    sfBool has_talk_to_blacksmith;
+    sfBool is_particle_active;
+    sfBool is_talking_to_blacksmith;
     char_t *blacksmith;
     char_t *girl;
     char_t *orc;
@@ -177,18 +230,22 @@ typedef struct var {
     size_t frame_count;
     sound_t *sound;
     inventory_t *inventory;
+    sfView *defaultview;
+    window_settings_t *settings;
 } var_t;
 
-bool check_intersects(sfFloatRect p_bounds, var_t *var);
-bool load_position_map(var_t *var, char *line);
-bool load_position_orc(var_t *var, char *line);
-bool load_position_player(var_t *var, char *line);
-bool load_position_player_x(var_t *var, char *line);
-bool load_position_player_y(var_t *var, char *line);
-bool load_position_skeleton(var_t *var, char *line);
-bool load_quest(var_t *var, char *line);
 char *int_to_str(int nb, size_t *n);
 int get_digits(int nb);
+int main(void);
+settings_t *init_settings(void);
+sfBool check_intersects(sfFloatRect p_bounds, var_t *var);
+sfBool load_position_map(var_t *var, char *line);
+sfBool load_position_orc(var_t *var, char *line);
+sfBool load_position_player(var_t *var, char *line);
+sfBool load_position_player_x(var_t *var, char *line);
+sfBool load_position_player_y(var_t *var, char *line);
+sfBool load_position_skeleton(var_t *var, char *line);
+sfBool load_quest(var_t *var, char *line);
 sfFloatRect create_enemy_rect(sfVector2f direction, char_t *enemy);
 sfRenderWindow *create_window(void);
 void animate_orc(var_t *var);
@@ -213,6 +270,7 @@ void check_move(var_t *var, sfEvent event);
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_quest(var_t *var);
+void choose_resolution(var_t *var, float scalx, float scaly, sfEvent event);
 void create_barrier_collider(var_t *var);
 void create_collider(var_t *var);
 void create_collider2(var_t *var);
@@ -231,19 +289,33 @@ void display_life(var_t *var);
 void display_orc(var_t *var);
 void display_skeleton(var_t *var);
 void display_ui(var_t *var);
+void display_menu(sfRenderWindow *window, menu_t *menuv);
+void display_menu_settings(sfRenderWindow *window, settings_t *menuv);
 void down_move(var_t *var);
+void draw_settings(settings_t *menuv, sfRenderWindow *window);
+void event_menu(var_t *var, sfEvent event, menu_t *menuv);
+void event_menu_settings(var_t *var, sfEvent event, settings_t *menuv);
 void fight_orc(var_t *var);
 void fight_skeleton(var_t *var);
-void game_engine(var_t *var);
+void game_engine(var_t *var, sfEvent event);
+void game_engine2(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
 void girl_move(var_t *var);
+void handle_music(var_t *var, settings_t *menuv, mouse_event_t *mouse);
+void handle_res(var_t *var, sfUint32 width, sfUint32 height, sfUint32 style);
+void handle_sound(var_t *var, settings_t *menuv, mouse_event_t *mouse);
 void init_char(var_t *var);
 void init_game(var_t *var);
 void init_life(var_t *var);
+void init_menu(menu_t *menuv);
+void init_mute(settings_t *menuv);
 void init_orc(var_t *var);
 void init_player(var_t *var);
+void init_resolution(settings_t *menuv);
 void init_rpg(var_t *var);
+void init_settingsthree(settings_t *menuv);
+void init_settingstwo(settings_t *menuv);
 void init_skeleton(var_t *var);
 void init_sound(var_t *var);
 void init_struct(var_t *var);
@@ -252,7 +324,10 @@ void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
 void load_all(var_t *var, char *line);
 void load_game(const char *file_name, var_t *var);
+void load_game_and_engine(var_t *var, sfEvent event);
 void load_inventory(var_t *var);
+void main_menu(var_t *var);
+void menu_settings(var_t *var);
 void move_leaves(var_t *var);
 void move_particle_pnj(var_t *var);
 void move_particle_position_pnj(var_t *var, sfVector2f position);
@@ -270,7 +345,7 @@ void show_blacksmith_dialog(var_t *var);
 void show_bob_dialog(var_t *var);
 void show_priscilla_dialog(var_t *var);
 void up_move(var_t *var);
-void zoom_in(var_t *var, bool *has_zoom);
-void zoom_out(var_t *var, bool *has_zoom);
+void zoom_in(var_t *var, sfBool *has_zoom);
+void zoom_out(var_t *var, sfBool *has_zoom);
 
 #endif /* MY_RPG_H_ */
