@@ -33,7 +33,7 @@ void check_inventory(var_t *var, sfEvent event)
     if (event.type == sfEvtKeyPressed && event.key.code == sfKeyE)
         INVENTORY->is_open = !INVENTORY->is_open;
     if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
-        INVENTORY->is_open = false;
+        INVENTORY->is_open = sfFalse;
 }
 
 void check_event(var_t *var, sfEvent event)
@@ -48,7 +48,7 @@ void check_event(var_t *var, sfEvent event)
         PLAYER->rect.left = 616 - 77;
         PLAYER->rect.width = 77;
         PLAYER->rect.height = 77;
-        PLAYER->attack = true;
+        PLAYER->attack = sfTrue;
     } if (sprite_pos.x >= 480.0f && sprite_pos.x <= 580.0f
     && sprite_pos.y >= 1070.0f && sprite_pos.y <= 1170.0f
     && var->quest_progress == ARMOR) {
@@ -56,12 +56,10 @@ void check_event(var_t *var, sfEvent event)
     }
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
     var_t *var = malloc(sizeof(var_t));
-    sfEvent event;
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
-    (void)(argv);
     srand((unsigned)time(NULL));
     init_rpg(var);
     sfMusic_setLoop(SOUND->theme, sfTrue);
@@ -70,12 +68,6 @@ int main(int argc, char **argv)
     create_dialog_box(var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
     init_ui(var);
-    if (argc == 1)
-        load_game("save.txt", var);
-    while (sfRenderWindow_isOpen(var->window)) {
-        if (sfRenderWindow_pollEvent(var->window, &event))
-            check_event(var, event);
-        game_engine(var);
-    }
+    main_menu(var);
     save_game("save.txt", var);
 }

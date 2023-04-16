@@ -7,7 +7,7 @@
 
 #include "my_rpg.h"
 
-bool load_position_player_x(var_t *var, char *line)
+sfBool load_position_player_x(var_t *var, char *line)
 {
     int pos_int = 0;
     sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
@@ -22,12 +22,12 @@ bool load_position_player_x(var_t *var, char *line)
         sfRectangleShape_setPosition(PLAYER->hitbox, hitbox_position);
         spear_position.x = sprite_position.x + 13.0f;
         sfRectangleShape_setPosition(PLAYER->spear, spear_position);
-        return true;
+        return sfTrue;
     }
-    return false;
+    return sfFalse;
 }
 
-bool load_position_player_y(var_t *var, char *line)
+sfBool load_position_player_y(var_t *var, char *line)
 {
     int pos_int = 0;
     sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
@@ -42,16 +42,16 @@ bool load_position_player_y(var_t *var, char *line)
         sfRectangleShape_setPosition(PLAYER->hitbox, hitbox_position);
         spear_position.y = sprite_position.y;
         sfRectangleShape_setPosition(PLAYER->spear, spear_position);
-        return true;
+        return sfTrue;
     }
-    return false;
+    return sfFalse;
 }
 
-bool load_position_player(var_t *var, char *line)
+sfBool load_position_player(var_t *var, char *line)
 {
     if (load_position_player_x(var, line))
-        return true;
+        return sfTrue;
     if (load_position_player_y(var, line))
-        return true;
-    return false;
+        return sfTrue;
+    return sfFalse;
 }

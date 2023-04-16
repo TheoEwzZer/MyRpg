@@ -33,13 +33,13 @@ void change_quest_text(var_t *var)
         sfText_setString(var->quest_text->text, "Talk to Bob");
     if (var->quest_progress == BOSS) {
         sfText_setString(var->quest_text->text, "Kill the boss");
-        var->is_particle_active = false;
+        var->is_particle_active = sfFalse;
         COLLIDER[9] = NULL;
     }
     load_inventory(var);
 }
 
-bool load_quest(var_t *var, char *line)
+sfBool load_quest(var_t *var, char *line)
 {
     if (!my_strncmp(line, "quest_progress: ", 16)) {
         var->quest_progress = my_getnbr(line + 16);
@@ -51,14 +51,14 @@ bool load_quest(var_t *var, char *line)
         if (var->quest_progress == ARMOR || var->quest_progress == ENEMIES)
             move_particle_position_pnj(var, (sfVector2f){555.0f, 1110.0f});
         change_quest_text(var);
-        return true;
+        return sfTrue;
     }
     if (!my_strncmp(line, "skeleton_life: ", 15)) {
         var->skeleton->life = my_getnbr(line + 15);
-        return true;
+        return sfTrue;
     } if (!my_strncmp(line, "orc_life: ", 10)) {
         var->orc->life = my_getnbr(line + 10);
-        return true;
+        return sfTrue;
     }
-    return false;
+    return sfFalse;
 }

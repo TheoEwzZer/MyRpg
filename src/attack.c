@@ -16,7 +16,7 @@ void attack_right(var_t *var)
         PLAYER->rect.left += 77;
         if (PLAYER->rect.left >= 924) {
             PLAYER->rect.left = 0;
-            PLAYER->attack = false;
+            PLAYER->attack = sfFalse;
         }
         sfClock_restart(PLAYER->walk);
     }
@@ -32,7 +32,7 @@ void attack_down(var_t *var)
         PLAYER->rect.left += 77;
         if (PLAYER->rect.left >= 924) {
             PLAYER->rect.left = 0;
-            PLAYER->attack = false;
+            PLAYER->attack = sfFalse;
         }
         sfClock_restart(PLAYER->walk);
     }
@@ -48,7 +48,7 @@ void attack_up(var_t *var)
         PLAYER->rect.left += 77;
         if (PLAYER->rect.left >= 924) {
             PLAYER->rect.left = 0;
-            PLAYER->attack = false;
+            PLAYER->attack = sfFalse;
         }
         sfClock_restart(PLAYER->walk);
     }
@@ -64,7 +64,7 @@ void attack_left(var_t *var)
         PLAYER->rect.left += 77;
         if (PLAYER->rect.left >= 924) {
             PLAYER->rect.left = 0;
-            PLAYER->attack = false;
+            PLAYER->attack = sfFalse;
         }
         sfClock_restart(PLAYER->walk);
     }

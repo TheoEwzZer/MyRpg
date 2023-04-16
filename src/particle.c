@@ -11,7 +11,7 @@ void move_particle_position_pnj(var_t *var, sfVector2f position)
 {
     particle_t *particle = NULL;
 
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
+    for (sfUint32 i = 0; i < MAX_PARTICLES; i++) {
         particle = &var->particles_pnj[i];
         particle->base_pos.x = position.x;
         particle->base_pos.y = position.y;
@@ -25,7 +25,7 @@ void generate_particle_pnj(var_t *var, sfVector2f position)
     particle_t *p = NULL;
 
     sfTexture *texture = CREATE_FROM_FILE("assets/particle/pnj.png");
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
+    for (sfUint32 i = 0; i < MAX_PARTICLES; i++) {
         p = &var->particles_pnj[i];
         p->base_pos.x = position.x;
         p->base_pos.y = position.y;
@@ -47,7 +47,7 @@ void move_particle_pnj(var_t *var)
     sfVector2f position = {0.0f, 0.0f};
     if (!var->is_particle_active)
         return;
-    for (unsigned int i = 0; i < MAX_PARTICLES; i++) {
+    for (sfUint32 i = 0; i < MAX_PARTICLES; i++) {
         p = &var->particles_pnj[i];
         p->actual_pos.x += (float)(p->direction_x) * p->speed / 2.0f;
         p->actual_pos.y -= p->speed;
@@ -69,7 +69,7 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture)
 {
     particle_t *leaf = NULL;
 
-    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+    for (sfUint32 i = 0; i < MAX_LEAVES; i++) {
         leaf = &var->particles_leaves[i];
         leaf->actual_pos.x = (float)(rand() % WIDTH - 1000) + 1000.0f;
         leaf->actual_pos.y = 0.0f;
@@ -88,7 +88,7 @@ void move_leaves(var_t *var)
     particle_t *leaf = NULL;
     sfVector2f position = {0.0f, 0.0f};
 
-    for (unsigned int i = 0; i < MAX_LEAVES; i++) {
+    for (sfUint32 i = 0; i < MAX_LEAVES; i++) {
         x = (float)var->frame_count * (float)(i / 2 + 1) * 0.0005f;
         leaf = &var->particles_leaves[i];
         leaf->actual_pos.x += sinf(leaf->oscillation + x) / 10.0f;

@@ -17,13 +17,13 @@ void init_game(var_t *var)
     SOUND = malloc(sizeof(sound_t));
     var->girl = malloc(sizeof(char_t));
     var->girl->rect.left = 0;
-    var->is_particle_active = true;
+    var->is_particle_active = sfTrue;
     var->life = malloc(sizeof(life_t));
     var->pnj = malloc(sizeof(char_t));
     var->pnj->rect.left = 0;
     var->quest_text = malloc(sizeof(quest_text_t));
     INVENTORY = malloc(sizeof(inventory_t));
-    INVENTORY->is_open = false;
+    INVENTORY->is_open = sfFalse;
     init_char(var);
 }
 
@@ -38,7 +38,7 @@ void init_player(var_t *var)
     sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
     sfSprite_setPosition(PLAYER->sprite, (sfVector2f){1685.0f, 1300.0f});
     sfSprite_setScale(PLAYER->sprite, (sfVector2f){0.75f, 0.75f});
-    PLAYER->attack = false;
+    PLAYER->attack = sfFalse;
     PLAYER->direction = DOWN;
 }
 

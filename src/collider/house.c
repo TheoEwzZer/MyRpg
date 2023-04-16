@@ -34,7 +34,7 @@ void create_house_collider(var_t *var)
 void set_foreground_position(var_t *var)
 {
     var->foreground = malloc(sizeof(sfSprite *) * 10);
-    for (unsigned int i = 0; i < 10; i++)
+    for (sfUint32 i = 0; i < 10; i++)
         var->foreground[i] = sfSprite_create();
     sfSprite_setPosition(var->foreground[0], (sfVector2f){1656.0f, 1114.0f});
     sfSprite_setPosition(var->foreground[1], (sfVector2f){252.0f, 1402.0f});

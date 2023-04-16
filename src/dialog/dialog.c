@@ -24,33 +24,33 @@ void create_dialog_box(var_t *var)
     sfText_setFont(var->dialog->name, var->dialog->font);
     sfText_setColor(var->dialog->name, sfWhite);
     sfText_setScale(var->dialog->name, (sfVector2f){0.2f, 0.2f});
-    var->has_talk_to_blacksmith = false;
-    var->is_talking_to_blacksmith = false;
+    var->has_talk_to_blacksmith = sfFalse;
+    var->is_talking_to_blacksmith = sfFalse;
 }
 
 void blacksmith_dialog(var_t *var)
 {
     sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
-    static bool has_zoom = false;
+    static sfBool has_zoom = sfFalse;
 
     if (sprite_position.x >= 480.0f && sprite_position.x <= 580.0f
     && sprite_position.y >= 1100.0f && sprite_position.y <= 1170.0f
     && var->quest_progress > PRISCILLA && var->quest_progress < BOB) {
         if (var->quest_progress == ENEMIES)
             zoom_in(var, &has_zoom);
-        var->is_talking_to_blacksmith = true;
+        var->is_talking_to_blacksmith = sfTrue;
         show_blacksmith_dialog(var);
     } else {
         zoom_out(var, &has_zoom);
         if (var->is_talking_to_blacksmith)
-            var->has_talk_to_blacksmith = true;
+            var->has_talk_to_blacksmith = sfTrue;
     }
 }
 
 void priscilla_dialog(var_t *var)
 {
     sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
-    static bool has_zoom = false;
+    static sfBool has_zoom = sfFalse;
 
     if (sprite_position.x >= 1000.0f && sprite_position.x <= 1150.0f
     && sprite_position.y >= 1125.0f && sprite_position.y <= 1200.0f) {
@@ -73,7 +73,7 @@ void priscilla_dialog(var_t *var)
 void bob_dialog(var_t *var)
 {
     sfVector2f sprite_position = sfSprite_getPosition(PLAYER->sprite);
-    static bool has_zoom = false;
+    static sfBool has_zoom = sfFalse;
 
     if (sprite_position.x >= 950.0f && sprite_position.x <= 1100.0f
     && sprite_position.y >= 755.0f && sprite_position.y <= 860.0f) {
@@ -81,7 +81,7 @@ void bob_dialog(var_t *var)
             zoom_in(var, &has_zoom);
             var->quest_progress = BOSS;
             change_quest_text(var);
-            var->is_particle_active = false;
+            var->is_particle_active = sfFalse;
             COLLIDER[9] = NULL;
         }
         show_bob_dialog(var);

@@ -34,9 +34,9 @@ void create_collider(var_t *var)
     sfRectangleShape_setSize(PLAYER->spear, spear_size);
     COLLIDER = malloc(sizeof(sfRectangleShape *) * 67);
     var->collider_bounds = malloc(sizeof(sfFloatRect) * 67);
-    for (unsigned int i = 0; i < 67; i++)
+    for (sfUint32 i = 0; i < 67; i++)
         COLLIDER[i] = sfRectangleShape_create();
     create_collider2(var);
-    for (unsigned int i = 0; i < 67; i++)
+    for (sfUint32 i = 0; i < 67; i++)
         var->collider_bounds[i] = GET_BOUNDS(COLLIDER[i]);
 }

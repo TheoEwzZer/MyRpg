@@ -7,16 +7,16 @@
 
 #include "my_rpg.h"
 
-void zoom_out(var_t *var, bool *has_zoom)
+void zoom_out(var_t *var, sfBool *has_zoom)
 {
     sfVector2f scale_box = sfSprite_getScale(var->quest_text->box);
     sfVector2f scale_text = sfText_getScale(var->quest_text->text);
 
     if (*has_zoom) {
         sfView_zoom(var->view, 1.5f);
-        *has_zoom = false;
+        *has_zoom = sfFalse;
         if (var->quest_progress != BOSS)
-            var->is_particle_active = true;
+            var->is_particle_active = sfTrue;
         scale_box.x *= 1.5f;
         scale_box.y *= 1.5f;
         var->quest_text->scale.x = scale_text.x * 1.5f;
@@ -30,15 +30,15 @@ void zoom_out(var_t *var, bool *has_zoom)
     }
 }
 
-void zoom_in(var_t *var, bool *has_zoom)
+void zoom_in(var_t *var, sfBool *has_zoom)
 {
     sfVector2f scale_box = sfSprite_getScale(var->quest_text->box);
     sfVector2f scale_text = sfText_getScale(var->quest_text->text);
     sfVector2f scale_life = sfSprite_getScale(var->life->sprite);
     if (!*has_zoom) {
         sfView_zoom(var->view, 2.0f / 3.0f);
-        *has_zoom = true;
-        var->is_particle_active = false;
+        *has_zoom = sfTrue;
+        var->is_particle_active = sfFalse;
         scale_box.x /= 1.5f;
         scale_box.y /= 1.5f;
         var->quest_text->scale.x = scale_text.x / 1.5f;
