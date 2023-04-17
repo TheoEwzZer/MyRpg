@@ -11,10 +11,14 @@ void init_game(var_t *var)
 {
     BLACKSMITH = malloc(sizeof(char_t));
     BLACKSMITH->rect.left = 0;
+    INVENTORY = malloc(sizeof(inventory_t));
+    INVENTORY->is_open = sfFalse;
     ORC = malloc(sizeof(char_t));
     PLAYER = malloc(sizeof(char_t));
     SKELETON = malloc(sizeof(char_t));
     SOUND = malloc(sizeof(sound_t));
+    BOSSV = malloc(sizeof(boss_t));
+    BOSSV->boss = malloc(sizeof(char_t));
     var->girl = malloc(sizeof(char_t));
     var->girl->rect.left = 0;
     var->is_particle_active = sfTrue;
@@ -22,8 +26,6 @@ void init_game(var_t *var)
     var->pnj = malloc(sizeof(char_t));
     var->pnj->rect.left = 0;
     var->quest_text = malloc(sizeof(quest_text_t));
-    INVENTORY = malloc(sizeof(inventory_t));
-    INVENTORY->is_open = sfFalse;
     init_char(var);
 }
 
@@ -45,10 +47,15 @@ void init_player(var_t *var)
 void init_struct(var_t *var)
 {
     sfImage *image = sfImage_createFromFile("assets/map/map.png");
-    sfTexture *texture = sfTexture_createFromImage(image, NULL);
+
+    BOSSV->boss_room = CREATE_FROM_FILE("assets/map/boss_room.png");
+    BOSSV->map = sfTexture_createFromImage(image, NULL);
     init_player(var);
     var->background_sprite = sfSprite_create();
-    sfSprite_setTexture(var->background_sprite, texture, sfTrue);
+    BOSSV->room = sfSprite_create();
+    sfSprite_setTexture(BOSSV->room, BOSSV->boss_room, sfTrue);
+    sfSprite_setTexture(var->background_sprite, BOSSV->map, sfTrue);
+    sfSprite_setPosition(BOSSV->room, (sfVector2f){400.0f, 2500.0f});
     var->window = create_window();
     var->view = sfView_createFromRect((sfFloatRect){0, 0, 640, 360});
     sfView_setCenter(var->view, (sfVector2f){1685.0f, 1275.0f});
@@ -66,4 +73,5 @@ void init_rpg(var_t *var)
     init_sound(var);
     init_struct(var);
     init_life(var);
+    init_boss(var);
 }
