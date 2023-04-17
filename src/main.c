@@ -62,8 +62,8 @@ int main(void)
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
     srand((unsigned)time(NULL));
     init_rpg(var);
-    sfMusic_setLoop(SOUND->theme, sfTrue);
-    sfMusic_play(SOUND->theme);
+    sfMusic_setLoop(SOUND->music, sfTrue);
+    sfMusic_play(SOUND->music);
     generate_leaves(var, leaf_texture);
     create_dialog_box(var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
