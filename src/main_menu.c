@@ -7,12 +7,12 @@
 
 #include "my_rpg.h"
 
-void event_menu(var_t *var, sfEvent event, menu_t *menuv)
+void event_menu(var_t *var, sfEvent event, menu_t *menu)
 {
-    sfFloatRect game_rect = sfSprite_getGlobalBounds(menuv->playsprite);
-    sfFloatRect load_rect = sfSprite_getGlobalBounds(menuv->resumesprite);
-    sfFloatRect settings_rect = sfSprite_getGlobalBounds(menuv->settingsprite);
-    sfFloatRect exit_rect = sfSprite_getGlobalBounds(menuv->exitsprite);
+    sfFloatRect game_rect = sfSprite_getGlobalBounds(menu->play_sprite);
+    sfFloatRect load_rect = sfSprite_getGlobalBounds(menu->resume_sprite);
+    sfFloatRect settings_rect = sfSprite_getGlobalBounds(menu->setting_sprite);
+    sfFloatRect exit_rect = sfSprite_getGlobalBounds(menu->exit_sprite);
     sfIntRect game_button = {INT_RECT(game_rect)};
     sfIntRect load_button = {INT_RECT(load_rect)};
     sfIntRect settings_button = {INT_RECT(settings_rect)};
@@ -31,49 +31,49 @@ void event_menu(var_t *var, sfEvent event, menu_t *menuv)
     }
 }
 
-void init_menu(menu_t *menuv)
+void init_menu(menu_t *menu)
 {
     sfTexture *play_texture = CREATE_FROM_FILE("assets/menu/play.png");
     sfTexture *quit_texture = CREATE_FROM_FILE("assets/menu/exit.png");
     sfTexture *resume_texture = CREATE_FROM_FILE("assets/menu/resume.png");
     sfTexture *settings_texture = CREATE_FROM_FILE("assets/menu/settings.png");
     sfTexture *texture = CREATE_FROM_FILE("assets/menu/background.jpg");
-    menuv->main_menusprite = sfSprite_create();
-    sfSprite_setTexture(menuv->main_menusprite, texture, sfTrue);
-    menuv->playsprite = sfSprite_create();
-    sfSprite_setTexture(menuv->playsprite, play_texture, sfTrue);
-    sfSprite_setPosition(menuv->playsprite, (sfVector2f){500, 300});
-    menuv->exitsprite = sfSprite_create();
-    menuv->resumesprite = sfSprite_create();
-    sfSprite_setTexture(menuv->resumesprite, resume_texture, sfTrue);
-    sfSprite_setPosition(menuv->resumesprite, (sfVector2f){500, 450});
-    menuv->settingsprite = sfSprite_create();
-    sfSprite_setTexture(menuv->settingsprite, settings_texture, sfTrue);
-    sfSprite_setPosition(menuv->settingsprite, (sfVector2f){500, 600});
-    sfSprite_setTexture(menuv->exitsprite, quit_texture, sfTrue);
-    sfSprite_setPosition(menuv->exitsprite, (sfVector2f){500, 750});
+    menu->main_menu_sprite = sfSprite_create();
+    sfSprite_setTexture(menu->main_menu_sprite, texture, sfTrue);
+    menu->play_sprite = sfSprite_create();
+    sfSprite_setTexture(menu->play_sprite, play_texture, sfTrue);
+    sfSprite_setPosition(menu->play_sprite, (sfVector2f){500, 300});
+    menu->exit_sprite = sfSprite_create();
+    menu->resume_sprite = sfSprite_create();
+    sfSprite_setTexture(menu->resume_sprite, resume_texture, sfTrue);
+    sfSprite_setPosition(menu->resume_sprite, (sfVector2f){500, 450});
+    menu->setting_sprite = sfSprite_create();
+    sfSprite_setTexture(menu->setting_sprite, settings_texture, sfTrue);
+    sfSprite_setPosition(menu->setting_sprite, (sfVector2f){500, 600});
+    sfSprite_setTexture(menu->exit_sprite, quit_texture, sfTrue);
+    sfSprite_setPosition(menu->exit_sprite, (sfVector2f){500, 750});
 }
 
-void display_menu(sfRenderWindow *window, menu_t *menuv)
+void display_menu(sfRenderWindow *window, menu_t *menu)
 {
     sfRenderWindow_clear(window, sfBlack);
-    sfRenderWindow_drawSprite(window, menuv->main_menusprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->playsprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->exitsprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->resumesprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->settingsprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->main_menu_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->play_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->exit_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->resume_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->setting_sprite, NULL);
     sfRenderWindow_display(window);
 }
 
 void main_menu(var_t *var)
 {
-    menu_t *menuv = malloc(sizeof(menu_t));
+    menu_t *menu = malloc(sizeof(menu_t));
     sfEvent event;
 
-    init_menu(menuv);
+    init_menu(menu);
     while (sfRenderWindow_isOpen(var->window)) {
         while (sfRenderWindow_pollEvent(var->window, &event))
-            event_menu(var, event, menuv);
-        display_menu(var->window, menuv);
+            event_menu(var, event, menu);
+        display_menu(var->window, menu);
     }
 }
