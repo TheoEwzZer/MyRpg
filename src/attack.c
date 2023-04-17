@@ -73,7 +73,7 @@ void attack_left(var_t *var)
 
 void attack_move(var_t *var)
 {
-    sfSound_play(SOUND->spear);
+    sfSound_play(SOUND->sound);
     if (PLAYER->direction == UP)
         attack_up(var);
     if (PLAYER->direction == LEFT)
