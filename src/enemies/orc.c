@@ -51,7 +51,7 @@ void display_orc(var_t *var)
     sfVector2f direction, orc_dir = {0.0f, 0.0f};
     orc_dir.x = player_pos.x - orc_pos.x;
     orc_dir.y = player_pos.y - orc_pos.y;
-    dist = sqrtf(powf(orc_dir.x, 2.f) + powf(orc_dir.y, 2.f));
+    dist = sqrtf(powf(orc_dir.x, 2.0f) + powf(orc_dir.y, 2.0f));
     direction = (sfVector2f){orc_dir.x / dist, orc_dir.y / dist};
     orc_rect = create_enemy_rect(direction, ORC);
     if (!check_intersects(orc_rect, var) && !INVENTORY->is_open) {
@@ -67,7 +67,7 @@ void display_orc(var_t *var)
 
 void init_orc(var_t *var)
 {
-    ORC->clothes = CREATE_FROM_FILE("assets/pnj/orc.png");
+    ORC->texture = CREATE_FROM_FILE("assets/pnj/orc.png");
     ORC->direction = DOWN;
     ORC->hitbox = sfRectangleShape_create();
     ORC->life = 60;
@@ -78,7 +78,7 @@ void init_orc(var_t *var)
     sfRectangleShape_setSize(ORC->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(ORC->sprite, (sfVector2f){720.0f, 700.0f});
     sfSprite_setScale(ORC->sprite, (sfVector2f){0.75f, 0.75f});
-    sfSprite_setTexture(ORC->sprite, ORC->clothes, sfTrue);
+    sfSprite_setTexture(ORC->sprite, ORC->texture, sfTrue);
     sfSprite_setTextureRect(ORC->sprite, ORC->rect);
 }
 

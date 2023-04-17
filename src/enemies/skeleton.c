@@ -51,7 +51,7 @@ void display_skeleton(var_t *var)
     sfVector2f direction, skeleton_dir = {0.0f, 0.0f};
     skeleton_dir.x = player_pos.x - skeleton_pos.x;
     skeleton_dir.y = player_pos.y - skeleton_pos.y;
-    dist = sqrtf(powf(skeleton_dir.x, 2.f) + powf(skeleton_dir.y, 2.f));
+    dist = sqrtf(powf(skeleton_dir.x, 2.0f) + powf(skeleton_dir.y, 2.0f));
     direction = (sfVector2f){skeleton_dir.x / dist, skeleton_dir.y / dist};
     skeleton_rect = create_enemy_rect(direction, SKELETON);
     if (!check_intersects(skeleton_rect, var) && !INVENTORY->is_open) {
@@ -67,7 +67,7 @@ void display_skeleton(var_t *var)
 
 void init_skeleton(var_t *var)
 {
-    SKELETON->clothes = CREATE_FROM_FILE("assets/pnj/skeleton.png");
+    SKELETON->texture = CREATE_FROM_FILE("assets/pnj/skeleton.png");
     SKELETON->direction = DOWN;
     SKELETON->hitbox = sfRectangleShape_create();
     SKELETON->life = 60;
@@ -78,7 +78,7 @@ void init_skeleton(var_t *var)
     sfRectangleShape_setSize(SKELETON->hitbox, (sfVector2f){25.0f, 45.0f});
     sfSprite_setPosition(SKELETON->sprite, (sfVector2f){560.0f, 584.0f});
     sfSprite_setScale(SKELETON->sprite, (sfVector2f){0.75f, 0.75f});
-    sfSprite_setTexture(SKELETON->sprite, SKELETON->clothes, sfTrue);
+    sfSprite_setTexture(SKELETON->sprite, SKELETON->texture, sfTrue);
     sfSprite_setTextureRect(SKELETON->sprite, SKELETON->rect);
 }
 
