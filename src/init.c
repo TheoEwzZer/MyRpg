@@ -18,7 +18,7 @@ void init_game(var_t *var)
     SKELETON = malloc(sizeof(char_t));
     SOUND = malloc(sizeof(sound_t));
     BOSSV = malloc(sizeof(boss_t));
-    BOSSV->boss = malloc(sizeof(char_t));
+    BOSSC = malloc(sizeof(char_t));
     var->girl = malloc(sizeof(char_t));
     var->girl->rect.left = 0;
     var->is_particle_active = sfTrue;
@@ -31,10 +31,10 @@ void init_game(var_t *var)
 
 void init_player(var_t *var)
 {
-    PLAYER->clothes = CREATE_FROM_FILE("assets/player/player.png");
+    PLAYER->texture = CREATE_FROM_FILE("assets/player/player.png");
     PLAYER->sprite = sfSprite_create();
     var->armor = CREATE_FROM_FILE("assets/player/armor.png");
-    sfSprite_setTexture(PLAYER->sprite, PLAYER->clothes, sfTrue);
+    sfSprite_setTexture(PLAYER->sprite, PLAYER->texture, sfTrue);
     PLAYER->walk = sfClock_create();
     PLAYER->rect = (sfIntRect){0, 0, 77, 77};
     sfSprite_setTextureRect(PLAYER->sprite, PLAYER->rect);
