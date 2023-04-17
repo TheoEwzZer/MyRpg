@@ -9,25 +9,34 @@
 
 void init_sound(var_t *var)
 {
-    SOUND->theme = sfMusic_createFromFile("assets/music/main_theme.ogg");
-    sfMusic_setVolume(SOUND->theme, 50.0f);
-    SOUND->spear = sfSound_create();
-    SOUND->spear_buf = sfSoundBuffer_createFromFile("assets/music/spear.ogg");
-    sfSound_setBuffer(SOUND->spear, SOUND->spear_buf);
-    sfSound_setVolume(SOUND->spear, 50.0f);
+    SOUND->music = sfMusic_createFromFile("assets/music/main_theme.ogg");
+    sfMusic_setVolume(SOUND->music, 50.0f);
+    SOUND->sound = sfSound_create();
+    SOUND->buffer = sfSoundBuffer_createFromFile("assets/music/spear.ogg");
+    sfSound_setBuffer(SOUND->sound, SOUND->buffer);
+    sfSound_setVolume(SOUND->sound, 50.0f);
 }
 
 void init_boss(var_t *var)
 {
-    BOSSV->boss->clothes = CREATE_FROM_FILE("assets/pnj/Boss.png");
-    BOSSV->boss->sprite = sfSprite_create();
-    sfSprite_setTexture(BOSSV->boss->sprite, BOSSV->boss->clothes, sfTrue);
-    BOSSV->boss->walk = sfClock_create();
-    sfSprite_setPosition(BOSSV->boss->sprite, (sfVector2f){750.0f, 2800.0f});
-    sfSprite_setScale(BOSSV->boss->sprite, (sfVector2f){0.75f, 0.75f});
-    BOSSV->boss->life = 200;
+    BOSSC->texture = CREATE_FROM_FILE("assets/pnj/Boss.png");
+    BOSSC->sprite = sfSprite_create();
+    sfSprite_setTexture(BOSSC->sprite, BOSSC->texture, sfTrue);
+    BOSSC->walk = sfClock_create();
+    BOSSC->fireball = sfClock_create();
+    sfSprite_setPosition(BOSSC->sprite, (sfVector2f){750.0f, 2800.0f});
+    sfSprite_setScale(BOSSC->sprite, (sfVector2f){0.75f, 0.75f});
+    BOSSC->life = 200;
     BOSSV->fire = CREATE_FROM_FILE("assets/particle/fireball.png");
-    BOSSV->fireball = sfSprite_create();
-    sfSprite_setTexture(BOSSV->fireball, BOSSV->fire, sfTrue);
+
+    FIREBALL = malloc(sizeof(fireball_t *) * MAX_FIREBALL);
+    for (sfUint32 i = 0; i < MAX_FIREBALL; i++) {
+        FIREBALL[i] = malloc(sizeof(fireball_t));
+        FIREBALL[i]->is_active = sfFalse;
+        FIREBALL[i]->sprite = sfSprite_create();
+        sfSprite_setTexture(FIREBALL[i]->sprite, BOSSV->fire, sfTrue);
+        sfSprite_setScale(FIREBALL[i]->sprite, (sfVector2f){0.10f, 0.10f});
+    }
+
     BOSSV->clock = sfClock_create();
 }
