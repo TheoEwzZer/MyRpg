@@ -26,6 +26,7 @@
     #define ORC var->orc
     #define SKELETON var->skeleton
     #define PLAYER var->player
+    #define BOSSV var->boss
 
     #define INVENTORY var->inventory
 
@@ -203,10 +204,24 @@ typedef struct window_settings_s {
     int style;
 } window_settings_t;
 
+typedef struct boss_s {
+    char_t *boss;
+    sfVector2f p_pos;
+    sfVector2f b_pos;
+    int boss_left;
+    int boss_top;
+    int boss_height;
+    int boss_width;
+    sfTexture *boss_room;
+    sfTexture *map;
+    sfSprite *room;
+    sfSprite *fireball;
+    sfTexture *fire;
+    sfClock *clock;
+} boss_t;
+
 typedef struct var {
-    sfBool has_talk_to_blacksmith;
-    sfBool is_particle_active;
-    sfBool is_talking_to_blacksmith;
+    boss_t *boss;
     char_t *blacksmith;
     char_t *girl;
     char_t *orc;
@@ -214,11 +229,15 @@ typedef struct var {
     char_t *pnj;
     char_t *skeleton;
     dialog_t *dialog;
+    inventory_t *inventory;
     life_t *life;
     particle_t particles_leaves[MAX_LEAVES];
     particle_t particles_pnj[MAX_PARTICLES];
     quest_t quest_progress;
     quest_text_t *quest_text;
+    sfBool has_talk_to_blacksmith;
+    sfBool is_particle_active;
+    sfBool is_talking_to_blacksmith;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *rect;
@@ -226,11 +245,10 @@ typedef struct var {
     sfSprite **foreground;
     sfSprite *background_sprite;
     sfTexture *armor;
+    sfView *defaultview;
     sfView *view;
     size_t frame_count;
     sound_t *sound;
-    inventory_t *inventory;
-    sfView *defaultview;
     window_settings_t *settings;
 } var_t;
 
@@ -258,6 +276,7 @@ void attack_up(var_t *var);
 void blacksmith_dialog(var_t *var);
 void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
+void boss_fight(var_t *var);
 void change_direction_orc(var_t *var, sfVector2f direction);
 void change_direction_skeleton(var_t *var, sfVector2f direction);
 void change_quest_text(var_t *var);
@@ -285,12 +304,13 @@ void create_tree_collider(var_t *var);
 void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
 void dialog(var_t *var);
+void display_boss(var_t *var);
 void display_life(var_t *var);
+void display_menu(sfRenderWindow *window, menu_t *menuv);
+void display_menu_settings(sfRenderWindow *window, settings_t *menuv);
 void display_orc(var_t *var);
 void display_skeleton(var_t *var);
 void display_ui(var_t *var);
-void display_menu(sfRenderWindow *window, menu_t *menuv);
-void display_menu_settings(sfRenderWindow *window, settings_t *menuv);
 void down_move(var_t *var);
 void draw_settings(settings_t *menuv, sfRenderWindow *window);
 void event_menu(var_t *var, sfEvent event, menu_t *menuv);
@@ -305,6 +325,7 @@ void girl_move(var_t *var);
 void handle_music(var_t *var, settings_t *menuv, mouse_event_t *mouse);
 void handle_res(var_t *var, sfUint32 width, sfUint32 height, sfUint32 style);
 void handle_sound(var_t *var, settings_t *menuv, mouse_event_t *mouse);
+void init_boss(var_t *var);
 void init_char(var_t *var);
 void init_game(var_t *var);
 void init_life(var_t *var);
@@ -327,6 +348,7 @@ void load_game(const char *file_name, var_t *var);
 void load_game_and_engine(var_t *var, sfEvent event);
 void load_inventory(var_t *var);
 void main_menu(var_t *var);
+void map(var_t *var);
 void menu_settings(var_t *var);
 void move_leaves(var_t *var);
 void move_particle_pnj(var_t *var);
