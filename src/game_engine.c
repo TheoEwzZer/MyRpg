@@ -7,6 +7,25 @@
 
 #include "my_rpg.h"
 
+void map(var_t *var)
+{
+    sfVector2f position = {750.0f, 2700.0f};
+
+    BOSSV->p_pos = sfSprite_getPosition(var->player->sprite);
+    if (BOSSV->p_pos.x >= 470 && BOSSV->p_pos.x <= 1180
+    && BOSSV->p_pos.y >= 2650 && BOSSV->p_pos.y <= 3070) {
+        DRAW_SPRITE(BOSSV->room);
+        boss_fight(var);
+    } else {
+        DRAW_SPRITE(var->background_sprite);
+    }
+    if (BOSSV->p_pos.x >= 490 && BOSSV->p_pos.x <= 550
+    && BOSSV->p_pos.y >= 1750 && BOSSV->p_pos.y <= 1800) {
+        sfSprite_setPosition(var->player->sprite, position);
+        sfView_setCenter(var->view, position);
+    }
+}
+
 void check_quest(var_t *var)
 {
     if (var->quest_progress == ENEMIES)
@@ -25,7 +44,7 @@ void game_engine2(var_t *var)
 {
     sfRenderWindow_clear(var->window, sfBlack);
     sfRenderWindow_setView(var->window, var->view);
-    DRAW_SPRITE(var->background_sprite);
+    map(var);
     if (PLAYER->attack)
         attack_move(var);
     blacksmith_move(var);
