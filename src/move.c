@@ -7,12 +7,12 @@
 
 #include "my_rpg.h"
 
-sfBool check_intersects(sfFloatRect p_bounds, var_t *var)
+sfBool check_intersects(sfFloatRect rect1, var_t *var)
 {
     for (sfUint32 i = 0; i < 67; i++) {
         if (!COLLIDER[i])
             continue;
-        if (sfFloatRect_intersects(&p_bounds, &var->collider_bounds[i], NULL))
+        if (sfFloatRect_intersects(&rect1, &var->collider_bounds[i], NULL))
             return sfTrue;
     }
     return sfFalse;
