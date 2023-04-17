@@ -7,68 +7,68 @@
 
 #include "my_rpg.h"
 
-void event_menu_settings(var_t *var, sfEvent event, settings_t *menuv)
+void event_menu_settings(var_t *var, sfEvent event, settings_t *menu)
 {
     sfVector2u size = sfRenderWindow_getSize(var->window);
-    float scalx = (float)size.x / 1920;
-    float scaly = (float)size.y / 1080;
+    float scalex = (float)size.x / 1920;
+    float scaley = (float)size.y / 1080;
     mouse_event_t *mouse = malloc(sizeof(mouse_event_t));
 
     mouse->x = event.mouseButton.x;
     mouse->y = event.mouseButton.y;
-    mouse->scalx = scalx;
-    mouse->scaly = scaly;
+    mouse->scale_x = scalex;
+    mouse->scale_y = scaley;
     if (event.type == 0 || (event.type == 5 && sfKeyboard_isKeyPressed(36)))
         sfRenderWindow_close(var->window);
     if (event.type == 9 && event.mouseButton.button == sfMouseLeft) {
-        if (event.mouseButton.x > 0 && event.mouseButton.x < 150 * scalx
-        && event.mouseButton.y > 0 * scaly && event.mouseButton.y < 150 * scaly)
+        if (event.mouseButton.x > 0 && event.mouseButton.x < 150 * scalex &&
+        event.mouseButton.y > 0 * scaley && event.mouseButton.y < 150 * scaley)
             main_menu(var);
-        handle_music(var, menuv, mouse);
-        handle_sound(var, menuv, mouse);
-        choose_resolution(var, scalx, scaly, event);
+        handle_music(var, menu, mouse);
+        handle_sound(var, menu, mouse);
+        choose_resolution(var, scalex, scaley, event);
     }
 }
 
-void draw_settings(settings_t *menuv, sfRenderWindow *window)
+void draw_settings(settings_t *menu, sfRenderWindow *window)
 {
-    if (menuv->jaugem == 0)
-        sfRenderWindow_drawSprite(window, menuv->jaugem0, NULL);
-    if (menuv->jaugem == 1)
-        sfRenderWindow_drawSprite(window, menuv->jaugem1, NULL);
-    if (menuv->jaugem == 2)
-        sfRenderWindow_drawSprite(window, menuv->jaugem2, NULL);
-    if (menuv->jaugem == 3)
-        sfRenderWindow_drawSprite(window, menuv->jaugem3, NULL);
-    if (menuv->jaugem == 4)
-        sfRenderWindow_drawSprite(window, menuv->jaugem4, NULL);
-    if (menuv->jauges == 0)
-        sfRenderWindow_drawSprite(window, menuv->jauges0, NULL);
-    if (menuv->jauges == 1)
-        sfRenderWindow_drawSprite(window, menuv->jauges1, NULL);
-    if (menuv->jauges == 2)
-        sfRenderWindow_drawSprite(window, menuv->jauges2, NULL);
-    if (menuv->jauges == 3)
-        sfRenderWindow_drawSprite(window, menuv->jauges3, NULL);
-    if (menuv->jauges == 4)
-        sfRenderWindow_drawSprite(window, menuv->jauges4, NULL);
+    if (menu->gauge_m == 0)
+        sfRenderWindow_drawSprite(window, menu->gauge_m0, NULL);
+    if (menu->gauge_m == 1)
+        sfRenderWindow_drawSprite(window, menu->gauge_m1, NULL);
+    if (menu->gauge_m == 2)
+        sfRenderWindow_drawSprite(window, menu->gauge_m2, NULL);
+    if (menu->gauge_m == 3)
+        sfRenderWindow_drawSprite(window, menu->gauge_m3, NULL);
+    if (menu->gauge_m == 4)
+        sfRenderWindow_drawSprite(window, menu->gauge_m4, NULL);
+    if (menu->gauge_s == 0)
+        sfRenderWindow_drawSprite(window, menu->gauge_s0, NULL);
+    if (menu->gauge_s == 1)
+        sfRenderWindow_drawSprite(window, menu->gauge_s1, NULL);
+    if (menu->gauge_s == 2)
+        sfRenderWindow_drawSprite(window, menu->gauge_s2, NULL);
+    if (menu->gauge_s == 3)
+        sfRenderWindow_drawSprite(window, menu->gauge_s3, NULL);
+    if (menu->gauge_s == 4)
+        sfRenderWindow_drawSprite(window, menu->gauge_s4, NULL);
 }
 
-void display_menu_settings(sfRenderWindow *window, settings_t *menuv)
+void display_menu_settings(sfRenderWindow *window, settings_t *menu)
 {
     sfRenderWindow_clear(window, sfBlack);
-    sfRenderWindow_drawSprite(window, menuv->menusprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->musicsprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->sizesprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->soundsprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->resolutionsprite, NULL);
-    sfRenderWindow_drawSprite(window, menuv->mutem, NULL);
-    sfRenderWindow_drawSprite(window, menuv->mutes, NULL);
-    sfRenderWindow_drawSprite(window, menuv->res1, NULL);
-    sfRenderWindow_drawSprite(window, menuv->res2, NULL);
-    sfRenderWindow_drawSprite(window, menuv->size1, NULL);
-    sfRenderWindow_drawSprite(window, menuv->size2, NULL);
-    draw_settings(menuv, window);
+    sfRenderWindow_drawSprite(window, menu->menu_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->music_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->size_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->sound_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->resolution_sprite, NULL);
+    sfRenderWindow_drawSprite(window, menu->mute_music, NULL);
+    sfRenderWindow_drawSprite(window, menu->mute_sound, NULL);
+    sfRenderWindow_drawSprite(window, menu->res1, NULL);
+    sfRenderWindow_drawSprite(window, menu->res2, NULL);
+    sfRenderWindow_drawSprite(window, menu->size1, NULL);
+    sfRenderWindow_drawSprite(window, menu->size2, NULL);
+    draw_settings(menu, window);
     sfRenderWindow_display(window);
 }
 
