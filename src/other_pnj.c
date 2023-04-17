@@ -9,21 +9,21 @@
 
 void init_char(var_t *var)
 {
-    BLACKSMITH->clothes = CREATE_FROM_FILE("assets/pnj/blacksmith.png");
+    BLACKSMITH->texture = CREATE_FROM_FILE("assets/pnj/blacksmith.png");
     BLACKSMITH->sprite = sfSprite_create();
-    sfSprite_setTexture(BLACKSMITH->sprite, BLACKSMITH->clothes, sfTrue);
+    sfSprite_setTexture(BLACKSMITH->sprite, BLACKSMITH->texture, sfTrue);
     BLACKSMITH->walk = sfClock_create();
     sfSprite_setPosition(BLACKSMITH->sprite, (sfVector2f){530.0f, 1120.0f});
     sfSprite_setScale(BLACKSMITH->sprite, (sfVector2f){0.75f, 0.75f});
-    var->girl->clothes = CREATE_FROM_FILE("assets/pnj/Woman.png");
+    var->girl->texture = CREATE_FROM_FILE("assets/pnj/Woman.png");
     var->girl->sprite = sfSprite_create();
-    sfSprite_setTexture(var->girl->sprite, var->girl->clothes, sfTrue);
+    sfSprite_setTexture(var->girl->sprite, var->girl->texture, sfTrue);
     var->girl->walk = sfClock_create();
     sfSprite_setPosition(var->girl->sprite, (sfVector2f){1100.0f, 1150.0f});
     sfSprite_setScale(var->girl->sprite, (sfVector2f){0.75f, 0.75f});
-    var->pnj->clothes = CREATE_FROM_FILE("assets/pnj/pnj.png");
+    var->pnj->texture = CREATE_FROM_FILE("assets/pnj/pnj.png");
     var->pnj->sprite = sfSprite_create();
-    sfSprite_setTexture(var->pnj->sprite, var->pnj->clothes, sfTrue);
+    sfSprite_setTexture(var->pnj->sprite, var->pnj->texture, sfTrue);
     var->pnj->walk = sfClock_create();
     sfSprite_setPosition(var->pnj->sprite, (sfVector2f){1000.0f, 800.0f});
     sfSprite_setScale(var->pnj->sprite, (sfVector2f){0.75f, 0.75f});
