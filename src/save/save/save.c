@@ -18,6 +18,7 @@ void save_game(const char *file_name, var_t *var)
     save_quest(var, file);
     save_position_skeleton(var, file);
     save_position_orc(var, file);
+    save_player_life(var, file);
     fclose(file);
 }
 

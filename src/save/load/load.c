@@ -19,6 +19,8 @@ void load_all(var_t *var, char *line)
         return;
     if (load_position_orc(var, line))
         return;
+    if (load_player_life(var, line))
+        return;
 }
 
 void load_game(const char *file_name, var_t *var)

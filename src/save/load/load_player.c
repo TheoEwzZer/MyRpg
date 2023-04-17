@@ -55,3 +55,12 @@ sfBool load_position_player(var_t *var, char *line)
         return sfTrue;
     return sfFalse;
 }
+
+sfBool load_player_life(var_t *var, char *line)
+{
+    if (!my_strncmp(line, "player_life: ", 13)) {
+        PLAYER->life = my_getnbr(line + 13);
+        return sfTrue;
+    }
+    return sfFalse;
+}
