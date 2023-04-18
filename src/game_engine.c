@@ -11,7 +11,7 @@ void map(var_t *var)
 {
     sfVector2f position = {750.0f, 2700.0f};
 
-    BOSSV->p_pos = sfSprite_getPosition(var->player->sprite);
+    BOSSV->p_pos = sfSprite_getPosition(PLAYER->sprite);
     if (BOSSV->p_pos.x >= 470 && BOSSV->p_pos.x <= 1180
     && BOSSV->p_pos.y >= 2650 && BOSSV->p_pos.y <= 3070) {
         DRAW_SPRITE(BOSSV->room);
@@ -21,7 +21,12 @@ void map(var_t *var)
     }
     if (BOSSV->p_pos.x >= 490 && BOSSV->p_pos.x <= 550
     && BOSSV->p_pos.y >= 1750 && BOSSV->p_pos.y <= 1800) {
-        sfSprite_setPosition(var->player->sprite, position);
+        sfSprite_setPosition(PLAYER->sprite, position);
+        position.y += 40.0f;
+        position.x += 15.0f;
+        sfRectangleShape_setPosition(PLAYER->hitbox, position);
+        position.y -= 10.0f;
+        sfRectangleShape_setPosition(PLAYER->spear, position);
         sfView_setCenter(var->view, position);
     }
 }
