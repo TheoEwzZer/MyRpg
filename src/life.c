@@ -12,15 +12,15 @@ void check_life(var_t *var)
     if (PLAYER->life >= 100)
         var->life->rect.top = 23;
     if (PLAYER->life == 80)
-        var->life->rect.top = 118;
+        var->life->rect.top = 95;
     if (PLAYER->life == 60)
-        var->life->rect.top = 216;
+        var->life->rect.top = 180;
     if (PLAYER->life == 40)
-        var->life->rect.top = 316;
+        var->life->rect.top = 260;
     if (PLAYER->life == 20)
-        var->life->rect.top = 410;
+        var->life->rect.top = 340;
     if (PLAYER->life <= 0)
-        var->life->rect.top = 495;
+        var->life->rect.top = 410;
     sfSprite_setTextureRect(var->life->sprite, var->life->rect);
 }
 
@@ -39,9 +39,23 @@ void init_life(var_t *var)
 {
     var->life->hp = CREATE_FROM_FILE("assets/player/vie.png");
     var->life->sprite = sfSprite_create();
-    var->life->rect = (sfIntRect){0, 23, 600, 108};
+    var->life->rect = (sfIntRect){0, 23, 600, 70};
     sfSprite_setTexture(var->life->sprite, var->life->hp, sfTrue);
     sfSprite_setTextureRect(var->life->sprite, var->life->rect);
     sfSprite_setScale(var->life->sprite, (sfVector2f){0.5f, 0.5f});
     PLAYER->life = 100;
+}
+
+void get_exp(var_t *var)
+{
+    if (var->quest_progress == ARMOR)
+        var->player->exp = 1;
+    if (var->quest_progress == ENEMIES)
+        var->player->exp = 2;
+    if (var->quest_progress == BOB) {
+        var->player->exp = 5;
+        sfText_setString(INVENTORY->atk, "30");
+    }
+    if (var->quest_progress == BOSS)
+        var->player->exp = 7;
 }
