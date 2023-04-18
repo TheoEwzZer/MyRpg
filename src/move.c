@@ -9,7 +9,7 @@
 
 sfBool check_intersects(sfFloatRect rect1, var_t *var)
 {
-    for (sfUint32 i = 0; i < 67; i++) {
+    for (sfUint32 i = 0; i < 71; i++) {
         if (!COLLIDER[i])
             continue;
         if (sfFloatRect_intersects(&rect1, &var->collider_bounds[i], NULL))
