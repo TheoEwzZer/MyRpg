@@ -28,6 +28,7 @@ void map(var_t *var)
         position.y -= 10.0f;
         sfRectangleShape_setPosition(PLAYER->spear, position);
         sfView_setCenter(var->view, position);
+        sfView_zoom(var->view, 1.2f);
     }
 }
 
