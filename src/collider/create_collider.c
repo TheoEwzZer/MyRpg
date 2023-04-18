@@ -18,6 +18,7 @@ void create_collider2(var_t *var)
     create_tree_collider(var);
     create_water_collider(var);
     create_west_collider(var);
+    create_boss_room_collider(var);
     create_foreground(var);
 }
 
@@ -32,11 +33,11 @@ void create_collider(var_t *var)
     sfRectangleShape_setPosition(PLAYER->hitbox, hitbox_position);
     sfRectangleShape_setPosition(PLAYER->spear, spear_position);
     sfRectangleShape_setSize(PLAYER->spear, spear_size);
-    COLLIDER = malloc(sizeof(sfRectangleShape *) * 67);
-    var->collider_bounds = malloc(sizeof(sfFloatRect) * 67);
-    for (sfUint32 i = 0; i < 67; i++)
+    COLLIDER = malloc(sizeof(sfRectangleShape *) * 71);
+    var->collider_bounds = malloc(sizeof(sfFloatRect) * 71);
+    for (sfUint32 i = 0; i < 71; i++)
         COLLIDER[i] = sfRectangleShape_create();
     create_collider2(var);
-    for (sfUint32 i = 0; i < 67; i++)
+    for (sfUint32 i = 0; i < 71; i++)
         var->collider_bounds[i] = GET_BOUNDS(COLLIDER[i]);
 }
