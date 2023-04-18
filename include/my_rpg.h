@@ -100,19 +100,20 @@ typedef enum direction_e {
 
 typedef struct character {
     direction_t direction;
-    float second;
     float fireball_second;
+    float second;
+    int exp;
     int life;
     sfBool attack;
-    sfClock *walk;
     sfClock *fireball;
+    sfClock *walk;
     sfIntRect rect;
     sfRectangleShape *hitbox;
     sfRectangleShape *spear;
     sfSprite *sprite;
     sfTexture *texture;
-    sfTime times;
     sfTime fireball_t;
+    sfTime times;
 } char_t ;
 
 typedef struct life_s {
@@ -158,7 +159,19 @@ typedef struct sound_s {
 
 typedef struct inventory_s {
     sfBool is_open;
+    sfSprite *bar;
+    sfSprite *lance;
     sfSprite *sprite;
+    sfText *atk;
+    sfTexture *exp0;
+    sfTexture *exp1;
+    sfTexture *exp2;
+    sfTexture *exp3;
+    sfTexture *exp4;
+    sfTexture *exp5;
+    sfTexture *exp6;
+    sfTexture *exp7;
+    sfTexture *spear;
     sfTexture *texture;
 } inventory_t;
 
@@ -391,5 +404,11 @@ void show_priscilla_dialog(var_t *var);
 void up_move(var_t *var);
 void zoom_in(var_t *var, sfBool *has_zoom);
 void zoom_out(var_t *var, sfBool *has_zoom);
+void get_exp(var_t *var);
+void init_inventory(var_t *var);
+void init_exp(var_t *var);
+void display_inventory(var_t *var);
+void stat_set_pos(var_t *var, float x, float y);
+void check_exp(var_t *var);
 
 #endif /* MY_RPG_H_ */
