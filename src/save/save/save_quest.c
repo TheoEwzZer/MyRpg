@@ -23,9 +23,5 @@ void save_quest(var_t *var, FILE *file)
     str = int_to_str(var->orc->life, &n);
     fwrite(str, sizeof(char), n, file);
     fwrite("\n", sizeof(char), 1, file);
-    fwrite("player_life: ", sizeof(char), 13, file);
-    str = int_to_str(PLAYER->life, &n);
-    fwrite(str, sizeof(char), n, file);
-    fwrite("\n", sizeof(char), 1, file);
     free(str);
 }
