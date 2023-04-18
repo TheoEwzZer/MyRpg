@@ -42,6 +42,7 @@ void init_player(var_t *var)
     sfSprite_setScale(PLAYER->sprite, (sfVector2f){0.75f, 0.75f});
     PLAYER->attack = sfFalse;
     PLAYER->direction = DOWN;
+    var->player->exp = 0;
 }
 
 void init_struct(var_t *var)
@@ -74,4 +75,5 @@ void init_rpg(var_t *var)
     init_struct(var);
     init_life(var);
     init_boss(var);
+    init_inventory(var);
 }
