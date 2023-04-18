@@ -42,8 +42,38 @@ void init_boss(var_t *var)
     BOSSC->walk = sfClock_create();
     sfSprite_setPosition(BOSSC->sprite, (sfVector2f){750.0f, 2800.0f});
     sfSprite_setScale(BOSSC->sprite, (sfVector2f){0.75f, 0.75f});
-    BOSSC->life = 200;
+    BOSSC->life = 300;
     BOSSV->fire = CREATE_FROM_FILE("assets/particle/fireball.png");
     init_fireball(var);
     BOSSV->clock = sfClock_create();
+}
+
+void init_inventory(var_t *var)
+{
+    sfFont *font = sfFont_createFromFile("assets/font/arial.ttf");
+    INVENTORY->spear = CREATE_FROM_FILE("assets/player/lance.png");
+    INVENTORY->lance = sfSprite_create();
+    sfSprite_setTexture(INVENTORY->lance, INVENTORY->spear, sfTrue);
+    sfSprite_setScale(INVENTORY->lance, (sfVector2f){0.15f, 0.15f});
+    INVENTORY->atk = sfText_create();
+    sfText_setFont(INVENTORY->atk, font);
+    sfText_setString(INVENTORY->atk, "20");
+    sfText_setCharacterSize(INVENTORY->atk, 30);
+    sfText_setColor(INVENTORY->atk, sfBlack);
+    sfText_setScale(INVENTORY->atk, (sfVector2f){1.0f, 1.0f});
+}
+
+void init_exp(var_t *var)
+{
+    INVENTORY->exp0 = CREATE_FROM_FILE("assets/exp/empty_xp_bare.png");
+    INVENTORY->exp1 = CREATE_FROM_FILE("assets/exp/xp_lvl1_1-3.png");
+    INVENTORY->exp2 = CREATE_FROM_FILE("assets/exp/xp_lvl1_2-3.png");
+    INVENTORY->exp3 = CREATE_FROM_FILE("assets/exp/empty_xp_bare_lvl2.png");
+    INVENTORY->exp4 = CREATE_FROM_FILE("assets/exp/xp_lvl2_1-5.png");
+    INVENTORY->exp5 = CREATE_FROM_FILE("assets/exp/xp_lvl2_2-5.png");
+    INVENTORY->exp6 = CREATE_FROM_FILE("assets/exp/xp_lvl2_3-5.png");
+    INVENTORY->exp7 = CREATE_FROM_FILE("assets/exp/xp_lvl2_4-5.png");
+    INVENTORY->bar = sfSprite_create();
+    sfSprite_setTexture(INVENTORY->bar, INVENTORY->exp0, sfTrue);
+    sfSprite_setScale(INVENTORY->bar, (sfVector2f){0.2f, 0.2f});
 }
