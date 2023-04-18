@@ -212,6 +212,7 @@ typedef struct window_settings_s {
 
 typedef struct fireball_s {
     sfBool is_active;
+    sfRectangleShape *hitbox;
     sfSprite *sprite;
     sfVector2f direction;
 } fireball_t;
@@ -297,6 +298,7 @@ void change_quest_text(var_t *var);
 void change_quest_to_enemies(var_t *var);
 void check_enemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
+void check_fireball_collision(var_t *var);
 void check_inventory(var_t *var, sfEvent event);
 void check_life(var_t *var);
 void check_move(var_t *var, sfEvent event);
@@ -329,6 +331,7 @@ void down_move(var_t *var);
 void draw_settings(settings_t *menu, sfRenderWindow *window);
 void event_menu(var_t *var, sfEvent event, menu_t *menu);
 void event_menu_settings(var_t *var, sfEvent event, settings_t *menu);
+void fight_boss(var_t *var);
 void fight_orc(var_t *var);
 void fight_skeleton(var_t *var);
 void game_engine(var_t *var, sfEvent event);
