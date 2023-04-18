@@ -63,6 +63,7 @@ void game_engine2(var_t *var)
     move_leaves(var);
     move_particle_pnj(var);
     dialog(var);
+    get_exp(var);
     display_ui(var);
     display_life(var);
     sfRenderWindow_display(var->window);
