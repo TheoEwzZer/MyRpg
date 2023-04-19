@@ -62,3 +62,20 @@ sfBool load_quest(var_t *var, char *line)
     }
     return sfFalse;
 }
+
+sfBool load_boss(var_t *var, char *line)
+{
+    if (!my_strncmp(line, "boss_life: ", 11)) {
+        BOSSC->life = my_getnbr(line + 11);
+        return sfTrue;
+    }
+    if (!my_strncmp(line, "boss_position_x: ", 17)) {
+        BOSSV->b_pos.x = my_getnbr(line + 17);
+        return sfTrue;
+    }
+    if (!my_strncmp(line, "boss_position_y: ", 17)) {
+        BOSSV->b_pos.y = my_getnbr(line + 17);
+        return sfTrue;
+    }
+    return sfFalse;
+}
