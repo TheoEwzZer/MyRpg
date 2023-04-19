@@ -29,13 +29,18 @@ void check_exp(var_t *var)
 
 void stat_set_pos(var_t *var, float x, float y)
 {
-    sfVector2f spear_pos = {0.0f, 0.0f};
     sfVector2f atk_pos = {0.0f, 0.0f};
-    spear_pos.x = x + 125.0f;
-    spear_pos.y = y + 75.0f;
+    sfVector2f potion_pos = {0.0f, 0.0f};
+    sfVector2f spear_pos = {0.0f, 0.0f};
+
     atk_pos.x = x + 200.0f;
     atk_pos.y = y + 73.0f;
+    potion_pos.x = x + 35.0f;
+    potion_pos.y = y + 212.0f;
+    spear_pos.x = x + 125.0f;
+    spear_pos.y = y + 75.0f;
     sfSprite_setPosition(INVENTORY->lance, spear_pos);
+    sfSprite_setPosition(INVENTORY->potion, potion_pos);
     sfText_setPosition(INVENTORY->atk, atk_pos);
 }
 
@@ -47,6 +52,9 @@ void display_inventory(var_t *var)
         DRAW_SPRITE(INVENTORY->bar);
         DRAW_SPRITE(INVENTORY->lance);
         sfRenderWindow_drawText(var->window, INVENTORY->atk, NULL);
+        if (INVENTORY->drink == sfTrue && (var->quest_progress == BOB 
+        || var->quest_progress == BOSS || var->quest_progress == ENEMIES))
+            DRAW_SPRITE(INVENTORY->potion);
     }
 }
 
