@@ -158,11 +158,14 @@ typedef struct sound_s {
 } sound_t;
 
 typedef struct inventory_s {
+    sfBool drink;
     sfBool is_open;
     sfSprite *bar;
     sfSprite *lance;
+    sfSprite *potion;
     sfSprite *sprite;
     sfText *atk;
+    sfTexture *bottle;
     sfTexture *exp0;
     sfTexture *exp1;
     sfTexture *exp2;
