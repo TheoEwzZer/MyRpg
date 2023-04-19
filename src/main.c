@@ -28,28 +28,41 @@ void change_quest_to_enemies(var_t *var)
     var->quest_text->position = (sfVector2f){7.0f, 8.0f};
 }
 
-void check_inventory(var_t *var, sfEvent event)
+void check_inventory(var_t *var, sfEvent evt)
 {
-    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyE)
+    sfVector2i pos = sfMouse_getPosition((const sfWindow*)var->window);
+
+    if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyE)
         INVENTORY->is_open = !INVENTORY->is_open;
-    if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
+    if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyEscape)
         INVENTORY->is_open = sfFalse;
+    if (INVENTORY->is_open && INVENTORY->drink
+    && evt.type == sfEvtMouseButtonPressed
+    && pos.x >= 715 && pos.x <= 775
+    && pos.y >= 685 && pos.y <= 750
+    && evt.type == sfEvtMouseButtonPressed
+    && var->player->life < 100) {
+        var->player->life += 20;
+        INVENTORY->drink = sfFalse;
+    }
 }
 
-void check_event(var_t *var, sfEvent event)
+void check_event(var_t *var, sfEvent evt)
 {
     sfVector2f sprite_pos = sfSprite_getPosition(PLAYER->sprite);
-    if (event.type == sfEvtClosed)
+
+    if (evt.type == sfEvtClosed)
         sfRenderWindow_close(var->window);
-    if (event.type == sfEvtKeyPressed && !PLAYER->attack)
-        check_move(var, event);
-    check_inventory(var, event);
-    if (var->quest_progress > ARMOR && event.type == sfEvtMouseButtonPressed) {
+    if (evt.type == sfEvtKeyPressed && !PLAYER->attack)
+        check_move(var, evt);
+    check_inventory(var, evt);
+    if (var->quest_progress > ARMOR && evt.type == sfEvtMouseButtonPressed) {
+        PLAYER->attack = sfTrue;
+        PLAYER->rect.height = 77;
         PLAYER->rect.left = 616 - 77;
         PLAYER->rect.width = 77;
-        PLAYER->rect.height = 77;
-        PLAYER->attack = sfTrue;
-    } if (sprite_pos.x >= 480.0f && sprite_pos.x <= 580.0f
+    }
+    if (sprite_pos.x >= 480.0f && sprite_pos.x <= 580.0f
     && sprite_pos.y >= 1070.0f && sprite_pos.y <= 1170.0f
     && var->quest_progress == ARMOR) {
         change_quest_to_enemies(var);
