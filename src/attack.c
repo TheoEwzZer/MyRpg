@@ -82,4 +82,6 @@ void attack_move(var_t *var)
         attack_right(var);
     if (PLAYER->direction == DOWN)
         attack_down(var);
+    if (var->tutorial->is_active)
+        var->tutorial->is_active = sfFalse;
 }
