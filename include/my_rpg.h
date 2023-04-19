@@ -69,6 +69,11 @@
     #define BLACKSMITH_DIALOG2 \
     "Attack enemies who\nare higher up !"
 
+    #define TUTORIAL_BLACKSMITH \
+    "\t\tUse left click to attack !\n \
+    Use E to open your inventory !\n \
+    Use right click on the potion to use it !"
+
     #define PRISCILLA_DIALOG1 \
     "Our village need you !\nTalk to the blacksmith !"
 
@@ -212,6 +217,11 @@ typedef struct settings_s {
     sfSprite *sound_sprite;
 } settings_t;
 
+typedef struct tutorial_s {
+    sfBool is_active;
+    sfText *text;
+} tutorial_t;
+
 typedef struct mouse_event_s {
     float scale_x;
     float scale_y;
@@ -278,6 +288,7 @@ typedef struct var {
     sfView *view;
     size_t frame_count;
     sound_t *sound;
+    tutorial_t *tutorial;
     window_settings_t *settings;
 } var_t;
 
@@ -314,6 +325,7 @@ void change_quest_text(var_t *var);
 void change_quest_to_enemies(var_t *var);
 void check_enemies(var_t *var);
 void check_event(var_t *var, sfEvent event);
+void check_exp(var_t *var);
 void check_fireball_collision(var_t *var);
 void check_inventory(var_t *var, sfEvent event);
 void check_life(var_t *var);
@@ -338,11 +350,13 @@ void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
 void dialog(var_t *var);
 void display_boss(var_t *var);
+void display_inventory(var_t *var);
 void display_life(var_t *var);
 void display_menu(sfRenderWindow *window, menu_t *menu);
 void display_menu_settings(sfRenderWindow *window, settings_t *menu);
 void display_orc(var_t *var);
 void display_skeleton(var_t *var);
+void display_tutorial(var_t *var);
 void display_ui(var_t *var);
 void down_move(var_t *var);
 void draw_settings(settings_t *menu, sfRenderWindow *window);
@@ -355,14 +369,17 @@ void game_engine(var_t *var, sfEvent event);
 void game_engine2(var_t *var);
 void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
+void get_exp(var_t *var);
 void girl_move(var_t *var);
 void handle_music(var_t *var, settings_t *menu, mouse_event_t *mouse);
 void handle_res(var_t *var, sfUint32 width, sfUint32 height, sfUint32 style);
 void handle_sound(var_t *var, settings_t *menu, mouse_event_t *mouse);
 void init_boss(var_t *var);
 void init_char(var_t *var);
+void init_exp(var_t *var);
 void init_fireball(var_t *var);
 void init_game(var_t *var);
+void init_inventory(var_t *var);
 void init_life(var_t *var);
 void init_menu(menu_t *menu);
 void init_mute(settings_t *menu);
@@ -375,6 +392,7 @@ void init_settings_two(settings_t *menu);
 void init_skeleton(var_t *var);
 void init_sound(var_t *var);
 void init_struct(var_t *var);
+void init_tutorial(var_t *var);
 void init_ui(var_t *var);
 void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
@@ -404,14 +422,9 @@ void set_foreground_position(var_t *var);
 void show_blacksmith_dialog(var_t *var);
 void show_bob_dialog(var_t *var);
 void show_priscilla_dialog(var_t *var);
+void stat_set_pos(var_t *var, float x, float y);
 void up_move(var_t *var);
 void zoom_in(var_t *var, sfBool *has_zoom);
 void zoom_out(var_t *var, sfBool *has_zoom);
-void get_exp(var_t *var);
-void init_inventory(var_t *var);
-void init_exp(var_t *var);
-void display_inventory(var_t *var);
-void stat_set_pos(var_t *var, float x, float y);
-void check_exp(var_t *var);
 
 #endif /* MY_RPG_H_ */
