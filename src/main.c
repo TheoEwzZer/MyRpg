@@ -32,8 +32,11 @@ void check_inventory(var_t *var, sfEvent evt)
 {
     sfVector2i pos = sfMouse_getPosition((const sfWindow*)var->window);
 
-    if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyE)
+    if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyE) {
         INVENTORY->is_open = !INVENTORY->is_open;
+        if (var->tutorial->is_active && var->quest_progress >= ENEMIES)
+            var->tutorial->is_active = sfFalse;
+    }
     if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyEscape)
         INVENTORY->is_open = sfFalse;
     if (INVENTORY->is_open && INVENTORY->drink
