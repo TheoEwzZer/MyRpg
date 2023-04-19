@@ -51,16 +51,22 @@ void init_boss(var_t *var)
 void init_inventory(var_t *var)
 {
     sfFont *font = sfFont_createFromFile("assets/font/arial.ttf");
-    INVENTORY->spear = CREATE_FROM_FILE("assets/player/lance.png");
-    INVENTORY->lance = sfSprite_create();
-    sfSprite_setTexture(INVENTORY->lance, INVENTORY->spear, sfTrue);
-    sfSprite_setScale(INVENTORY->lance, (sfVector2f){0.15f, 0.15f});
+
     INVENTORY->atk = sfText_create();
-    sfText_setFont(INVENTORY->atk, font);
-    sfText_setString(INVENTORY->atk, "20");
+    INVENTORY->bottle = CREATE_FROM_FILE("assets/player/potion.png");
+    INVENTORY->drink = sfTrue;
+    INVENTORY->lance = sfSprite_create();
+    INVENTORY->potion = sfSprite_create();
+    INVENTORY->spear = CREATE_FROM_FILE("assets/player/lance.png");
+    sfSprite_setScale(INVENTORY->lance, (sfVector2f){0.15f, 0.15f});
+    sfSprite_setScale(INVENTORY->potion, (sfVector2f){0.04f, 0.04f});
+    sfSprite_setTexture(INVENTORY->lance, INVENTORY->spear, sfTrue);
+    sfSprite_setTexture(INVENTORY->potion, INVENTORY->bottle, sfTrue);
     sfText_setCharacterSize(INVENTORY->atk, 30);
     sfText_setColor(INVENTORY->atk, sfBlack);
+    sfText_setFont(INVENTORY->atk, font);
     sfText_setScale(INVENTORY->atk, (sfVector2f){1.0f, 1.0f});
+    sfText_setString(INVENTORY->atk, "20");
 }
 
 void init_exp(var_t *var)
