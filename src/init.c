@@ -66,6 +66,23 @@ void init_struct(var_t *var)
     var->quest_progress = PRISCILLA;
 }
 
+void init_tutorial(var_t *var)
+{
+    sfFont *font = sfFont_createFromFile("assets/font/arial.ttf");
+
+    var->tutorial = malloc(sizeof(tutorial_t));
+    var->tutorial->is_active = sfTrue;
+    var->tutorial->text = sfText_create();
+    sfText_setFont(var->tutorial->text, font);
+    sfText_setCharacterSize(var->tutorial->text, 30);
+    sfText_setPosition(var->tutorial->text, (sfVector2f){100.0f, 100.0f});
+    sfText_setString(var->tutorial->text, "Use the arrow keys or ZQSD to move");
+    sfText_setColor(var->tutorial->text, sfWhite);
+    sfText_setOutlineColor(var->tutorial->text, sfBlack);
+    sfText_setOutlineThickness(var->tutorial->text, 2.0f);
+    sfText_setScale(var->tutorial->text, (sfVector2f){0.5f, 0.5f});
+}
+
 void init_rpg(var_t *var)
 {
     init_game(var);
@@ -76,4 +93,5 @@ void init_rpg(var_t *var)
     init_life(var);
     init_boss(var);
     init_inventory(var);
+    init_tutorial(var);
 }
