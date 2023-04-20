@@ -87,4 +87,5 @@ int main(void)
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
     init_ui(var);
     splash_screen(var);
+    free_all(var);
 }
