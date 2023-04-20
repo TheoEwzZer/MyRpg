@@ -59,6 +59,7 @@ void check_event(var_t *var, sfEvent evt)
     if (evt.type == sfEvtKeyPressed && !PLAYER->attack)
         check_move(var, evt);
     check_inventory(var, evt);
+    check_pause(var, evt);
     if (var->quest_progress > ARMOR && evt.type == sfEvtMouseButtonPressed) {
         PLAYER->attack = sfTrue;
         PLAYER->rect.height = 77;
@@ -78,12 +79,12 @@ int main(void)
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
     srand((unsigned)time(NULL));
     init_rpg(var);
+    init_pause_menu(var);
     sfMusic_setLoop(SOUND->music, sfTrue);
     sfMusic_play(SOUND->music);
     generate_leaves(var, leaf_texture);
     create_dialog_box(var);
     generate_particle_pnj(var, (sfVector2f){1125.0f, 1140.0f});
     init_ui(var);
-    main_menu(var);
-    save_game("save.txt", var);
+    splash_screen(var);
 }
