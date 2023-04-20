@@ -60,6 +60,9 @@
     #define RECT_CONTAINS(rectangle) \
     sfIntRect_contains(rectangle, event.mouseButton.x, event.mouseButton.y)
 
+    #define SET_POSITION(sprite, x, y) \
+    sfSprite_setPosition(sprite, (sfVector2f){x, y})
+
     #define INT_RECT(rect) \
     (int)rect.left, (int)rect.top, (int)rect.width, (int)rect.height
 
@@ -259,7 +262,21 @@ typedef struct boss_s {
     sfVector2f p_pos;
 } boss_t;
 
-typedef struct var {
+typedef struct splash_s {
+    sfClock *clock;
+    sfSprite *splash;
+    sfView *view;
+} splash_t;
+
+typedef struct pause {
+    sfSprite *pause_bg;
+    sfSprite *load;
+    sfSprite *player_opt;
+    sfSprite *save;
+    sfSprite *settings;
+} pause_t;
+
+typedef struct var_s {
     boss_t *boss;
     char_t *blacksmith;
     char_t *girl;
@@ -268,10 +285,12 @@ typedef struct var {
     char_t *pnj;
     char_t *skeleton;
     dialog_t *dialog;
+    sfBool is_paused;
     inventory_t *inventory;
     life_t *life;
     particle_t particles_leaves[MAX_LEAVES];
     particle_t particles_pnj[MAX_PARTICLES];
+    pause_t *pause;
     quest_t quest_progress;
     quest_text_t *quest_text;
     sfBool has_talk_to_blacksmith;
@@ -296,7 +315,8 @@ char *int_to_str(int nb, size_t *n);
 int get_digits(int nb);
 int main(void);
 settings_t *init_settings(void);
-sfBool check_intersects(sfFloatRect rect, var_t *var);
+sfBool check_intersects(sfFloatRect rect1, var_t *var);
+sfBool load_boss(var_t *var, char *line);
 sfBool load_player_life(var_t *var, char *line);
 sfBool load_position_map(var_t *var, char *line);
 sfBool load_position_orc(var_t *var, char *line);
@@ -305,9 +325,12 @@ sfBool load_position_player_x(var_t *var, char *line);
 sfBool load_position_player_y(var_t *var, char *line);
 sfBool load_position_skeleton(var_t *var, char *line);
 sfBool load_quest(var_t *var, char *line);
+sfBool load_tutorial(var_t *var, char *line);
 sfFloatRect create_enemy_rect(sfVector2f direction, char_t *enemy);
 sfRenderWindow *create_window(void);
+sfVector2f find_mouse_pos(var_t *var);
 sfVector2f get_fireball_direction(var_t *var);
+splash_t *init_splash(var_t *var);
 void animate_orc(var_t *var);
 void animate_skeleton(var_t *var);
 void attack_down(var_t *var);
@@ -323,17 +346,19 @@ void change_direction_orc(var_t *var, sfVector2f direction);
 void change_direction_skeleton(var_t *var, sfVector2f direction);
 void change_quest_text(var_t *var);
 void change_quest_to_enemies(var_t *var);
+void check_buttons(var_t *var, sfVector2f mouse);
 void check_enemies(var_t *var);
-void check_event(var_t *var, sfEvent event);
+void check_event(var_t *var, sfEvent evt);
 void check_exp(var_t *var);
 void check_fireball_collision(var_t *var);
-void check_inventory(var_t *var, sfEvent event);
+void check_inventory(var_t *var, sfEvent evt);
 void check_life(var_t *var);
 void check_move(var_t *var, sfEvent event);
 void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
+void check_pause(var_t *var, sfEvent event);
 void check_quest(var_t *var);
-void choose_resolution(var_t *var, float scale_x, float scale_y, sfEvent event);
+void choose_resolution(var_t *var, float scalex, float scaley, sfEvent event);
 void create_barrier_collider(var_t *var);
 void create_boss_room_collider(var_t *var);
 void create_collider(var_t *var);
@@ -355,13 +380,18 @@ void display_life(var_t *var);
 void display_menu(sfRenderWindow *window, menu_t *menu);
 void display_menu_settings(sfRenderWindow *window, settings_t *menu);
 void display_orc(var_t *var);
+void display_pause_menu(var_t *var);
 void display_skeleton(var_t *var);
+void display_splash(sfRenderWindow *window, splash_t *splash);
 void display_tutorial(var_t *var);
 void display_ui(var_t *var);
 void down_move(var_t *var);
 void draw_settings(settings_t *menu, sfRenderWindow *window);
 void event_menu(var_t *var, sfEvent event, menu_t *menu);
-void event_menu_settings(var_t *var, sfEvent event, settings_t *menu);
+void event_menu_settings(var_t *var, sfEvent event, settings_t *menu,
+sfBool is_in_game);
+void event_splash(var_t *var, sfEvent event, splash_t *splash,
+sfBool *is_enter);
 void fight_boss(var_t *var);
 void fight_orc(var_t *var);
 void fight_skeleton(var_t *var);
@@ -371,6 +401,7 @@ void generate_leaves(var_t *var, sfTexture *leaf_texture);
 void generate_particle_pnj(var_t *var, sfVector2f position);
 void get_exp(var_t *var);
 void girl_move(var_t *var);
+void handle_back(sfEvent event, var_t *var, sfBool is_in_game);
 void handle_music(var_t *var, settings_t *menu, mouse_event_t *mouse);
 void handle_res(var_t *var, sfUint32 width, sfUint32 height, sfUint32 style);
 void handle_sound(var_t *var, settings_t *menu, mouse_event_t *mouse);
@@ -384,6 +415,7 @@ void init_life(var_t *var);
 void init_menu(menu_t *menu);
 void init_mute(settings_t *menu);
 void init_orc(var_t *var);
+void init_pause_menu(var_t *var);
 void init_player(var_t *var);
 void init_resolution(settings_t *menu);
 void init_rpg(var_t *var);
@@ -402,14 +434,18 @@ void load_game_and_engine(var_t *var, sfEvent event);
 void load_inventory(var_t *var);
 void main_menu(var_t *var);
 void map(var_t *var);
-void menu_settings(var_t *var);
+void menu_pressed(menu_t *menu, sfVector2f mouse);
+void menu_settings(var_t *var, sfBool is_in_game);
 void move_fireball(var_t *var, sfUint32 i);
 void move_leaves(var_t *var);
 void move_particle_pnj(var_t *var);
 void move_particle_position_pnj(var_t *var, sfVector2f position);
+void pause_hover(var_t *var, sfVector2f mouse);
+void pause_pressed(var_t *var, sfVector2f mouse);
 void pnj_move(var_t *var);
 void priscilla_dialog(var_t *var);
 void right_move(var_t *var);
+void save_boss(var_t *var, FILE *file);
 void save_game(const char *file_name, var_t *var);
 void save_player_life(var_t *var, FILE *file);
 void save_position_map(var_t *var, FILE *file);
@@ -417,11 +453,15 @@ void save_position_orc(var_t *var, FILE *file);
 void save_position_player(var_t *var, FILE *file);
 void save_position_skeleton(var_t *var, FILE *file);
 void save_quest(var_t *var, FILE *file);
+void save_tutorial(var_t *var, FILE *file);
 void set_fireball_position(var_t *var);
 void set_foreground_position(var_t *var);
+void settings_hover(settings_t *menu, sfVector2f mouse);
+void settings_pressed(settings_t *menu, sfVector2f mouse);
 void show_blacksmith_dialog(var_t *var);
 void show_bob_dialog(var_t *var);
 void show_priscilla_dialog(var_t *var);
+void splash_screen(var_t *var);
 void stat_set_pos(var_t *var, float x, float y);
 void up_move(var_t *var);
 void zoom_in(var_t *var, sfBool *has_zoom);
