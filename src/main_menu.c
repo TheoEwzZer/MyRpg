@@ -25,7 +25,7 @@ void event_menu(var_t *var, sfEvent event, menu_t *menu)
         if (RECT_CONTAINS(&load_button))
             load_game_and_engine(var, event);
         if (RECT_CONTAINS(&settings_button))
-            menu_settings(var);
+            menu_settings(var, sfFalse);
         if (RECT_CONTAINS(&exit_button))
             sfRenderWindow_close(var->window);
     }
