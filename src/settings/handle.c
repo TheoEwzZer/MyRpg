@@ -66,3 +66,23 @@ void choose_resolution(var_t *var, float scalex, float scaley, sfEvent event)
     && event.mouseButton.y > 880 * scaley && event.mouseButton.y < 973 * scaley)
         handle_res(var, 1920, 1080, sfDefaultStyle);
 }
+
+void handle_back(sfEvent event, var_t *var, int is_in_game)
+{
+    sfVector2u size = sfRenderWindow_getSize(var->window);
+    float scalex = (float)size.x / 1920;
+    float scaley = (float)size.y / 1080;
+    mouse_event_t *mouse = malloc(sizeof(mouse_event_t));
+
+    mouse->x = event.mouseButton.x;
+    mouse->y = event.mouseButton.y;
+    mouse->scale_x = scalex;
+    mouse->scale_y = scaley;
+    if (event.mouseButton.x > 0 && event.mouseButton.x < 150 * scalex
+    && event.mouseButton.y > 0 * scaley && event.mouseButton.y < 150 * scaley) {
+        if (!is_in_game)
+            main_menu(var);
+        else
+            game_engine(var, event);
+    }
+}
