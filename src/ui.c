@@ -62,8 +62,7 @@ void display_ui(var_t *var)
 {
     sfVector2f offset = sfView_getCenter(var->view);
     sfVector2f position_text = {0.0f, 0.0f};
-    sfVector2f inventory = {0.0f, 0.0f};
-    sfVector2f exp_pos = {0.0f, 0.0f};
+    sfVector2f inventory = {0.0f, 0.0f}; sfVector2f exp_pos = {0.0f, 0.0f};
     offset.x -= sfView_getSize(var->view).x / 2.0f;
     offset.y -= sfView_getSize(var->view).y / 2.0f;
     position_text.x = offset.x + var->quest_text->position.x;
@@ -72,14 +71,14 @@ void display_ui(var_t *var)
     sfText_setPosition(var->quest_text->text, position_text);
     DRAW_SPRITE(var->quest_text->box);
     sfRenderWindow_drawText(var->window, var->quest_text->text, NULL);
-    inventory.x = offset.x + 235.0f;
-    inventory.y = offset.y + 75.0f;
-    exp_pos.x = inventory.x + 80.0f;
-    exp_pos.y = inventory.y - 20.0f;
+    inventory.x = offset.x + 235.0f; inventory.y = offset.y + 75.0f;
+    exp_pos.x = inventory.x + 80.0f; exp_pos.y = inventory.y - 20.0f;
     sfSprite_setPosition(INVENTORY->sprite, inventory);
     sfSprite_setPosition(INVENTORY->bar, exp_pos);
     stat_set_pos(var, inventory.x, inventory.y);
     display_inventory(var);
+    display_tutorial(var);
+    display_pause_menu(var);
 }
 
 void init_ui(var_t *var)
