@@ -46,10 +46,8 @@ void event_splash(var_t *var, sfEvent event, splash_t *splash, sfBool *is_enter)
 void splash_screen(var_t *var)
 {
     sfBool is_enter = sfFalse;
-    sfEvent event;
-    sfView *default_view = NULL;
+    sfEvent event; sfView *default_view = NULL;
     splash_t *splash = init_splash(var);
-
     while (sfRenderWindow_isOpen(var->window)) {
         while (sfRenderWindow_pollEvent(var->window, &event))
             event_splash(var, event, splash, &is_enter);
@@ -60,7 +58,8 @@ void splash_screen(var_t *var)
         }
         if (sfClock_getElapsedTime(splash->clock).microseconds > 4000000
         && is_enter) {
-            default_view = sfView_createFromRect((sfFloatRect){0, 0, 1920, 1080});
+            default_view = sfView_createFromRect(
+                (sfFloatRect){0.0f, 0.0f, 1920.0f, 1080.0f});
             sfRenderWindow_setView(var->window, default_view);
             main_menu(var);
         }
