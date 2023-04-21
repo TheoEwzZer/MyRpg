@@ -9,25 +9,25 @@
 
 void map(var_t *var)
 {
+    static sfBool in_boss_room = sfFalse;
     sfVector2f position = {750.0f, 2700.0f};
     BOSSV->p_pos = sfSprite_getPosition(PLAYER->sprite);
     if (BOSSV->p_pos.x >= 470 && BOSSV->p_pos.x <= 1180
     && BOSSV->p_pos.y >= 2650 && BOSSV->p_pos.y <= 3070) {
-        DRAW_SPRITE(BOSSV->room);
-        boss_fight(var);
-    } else {
+        DRAW_SPRITE(BOSSV->room); boss_fight(var);
+    } else
         DRAW_SPRITE(var->background_sprite);
-    }
     if (BOSSV->p_pos.x >= 490 && BOSSV->p_pos.x <= 550
-    && BOSSV->p_pos.y >= 1750 && BOSSV->p_pos.y <= 1800) {
+    && BOSSV->p_pos.y >= 1750 && BOSSV->p_pos.y <= 1800 && !in_boss_room) {
         sfSprite_setPosition(PLAYER->sprite, position);
-        position.y += 40.0f;
-        position.x += 15.0f;
+        position.y += 40.0f; position.x += 15.0f;
         sfRectangleShape_setPosition(PLAYER->hitbox, position);
         position.y -= 10.0f;
         sfRectangleShape_setPosition(PLAYER->spear, position);
         sfView_setCenter(var->view, position);
         sfView_zoom(var->view, 1.2f);
+        sfMusic_stop(SOUND->music); sfMusic_play(SOUND->boss_music);
+        in_boss_room = sfTrue;
     }
 }
 
