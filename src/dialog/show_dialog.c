@@ -62,15 +62,15 @@ void show_blacksmith_dialog(var_t *var)
     sfText_setPosition(var->dialog->name, (sfVector2f){522.0f, 1102.0f});
     DRAW_SPRITE(var->dialog->sprite);
     if (!var->has_talk_to_blacksmith) {
-        sfText_setString(var->dialog->text, BLACKSMITH_DIALOG1);
+        sfText_setString(var->dialog->text, CONFIG->blacksmith_dialog);
         sfText_setScale(var->dialog->text, (sfVector2f){0.4f, 0.4f});
         sfText_setPosition(var->dialog->text, (sfVector2f){515.0f, 1110.0f});
         INVENTORY->texture = CREATE_FROM_FILE("assets/player/inventory_2.png");
         sfSprite_setTexture(INVENTORY->sprite, INVENTORY->texture, sfTrue);
-        sfText_setString(var->tutorial->text, TUTORIAL_BLACKSMITH);
+        sfText_setString(var->tutorial->text, CONFIG->tutorial_dialog);
         var->tutorial->is_active = sfTrue;
     } else {
-        sfText_setString(var->dialog->text, BLACKSMITH_DIALOG2);
+        sfText_setString(var->dialog->text, CONFIG->blacksmith_dialog2);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){525.0f, 1110.0f});
     }
@@ -86,11 +86,11 @@ void show_priscilla_dialog(var_t *var)
     sfText_setPosition(var->dialog->name, (sfVector2f){1100.0f, 1127.0f});
     DRAW_SPRITE(var->dialog->sprite);
     if (var->quest_progress < ENEMIES) {
-        sfText_setString(var->dialog->text, PRISCILLA_DIALOG1);
+        sfText_setString(var->dialog->text, CONFIG->priscilla_dialog);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){1090.0f, 1135.0f});
     } else {
-        sfText_setString(var->dialog->text, PRISCILLA_DIALOG2);
+        sfText_setString(var->dialog->text, CONFIG->priscilla_dialog2);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){1090.0f, 1135.0f});
     }
@@ -106,11 +106,11 @@ void show_bob_dialog(var_t *var)
     sfText_setPosition(var->dialog->name, (sfVector2f){1000.0f, 777.0f});
     DRAW_SPRITE(var->dialog->sprite);
     if (var->quest_progress <= ENEMIES) {
-        sfText_setString(var->dialog->text, BOB_DIALOG1);
+        sfText_setString(var->dialog->text, CONFIG->bob_dialog);
         sfText_setScale(var->dialog->text, (sfVector2f){0.4f, 0.4f});
         sfText_setPosition(var->dialog->text, (sfVector2f){985.0f, 785.0f});
     } else {
-        sfText_setString(var->dialog->text, BOB_DIALOG2);
+        sfText_setString(var->dialog->text, CONFIG->bob_dialog2);
         sfText_setScale(var->dialog->text, (sfVector2f){0.25f, 0.25f});
         sfText_setPosition(var->dialog->text, (sfVector2f){980.0f, 785.0f});
     }
