@@ -27,6 +27,7 @@ char *replace_backslash_n(char *line)
 
 sfBool load_dialog2(var_t *var, char *line)
 {
+    line = replace_backslash_n(line);
     if (!my_strncmp(line, "PRISCILLA_DIALOG2: ", 19)) {
         CONFIG->priscilla_dialog2 = my_strdup(line + 19);
         return sfTrue;
