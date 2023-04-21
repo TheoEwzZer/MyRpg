@@ -22,8 +22,8 @@ void init_fireball(var_t *var)
     sfVector2f size = {20.0f, 20.0f};
 
     BOSSC->fireball = sfClock_create();
-    FIREBALL = malloc(sizeof(fireball_t *) * MAX_FIREBALL);
-    for (sfUint32 i = 0; i < MAX_FIREBALL; i++) {
+    FIREBALL = malloc(sizeof(fireball_t *) * CONFIG->max_fireball);
+    for (sfUint32 i = 0; i < CONFIG->max_fireball; i++) {
         FIREBALL[i] = malloc(sizeof(fireball_t));
         FIREBALL[i]->is_active = sfFalse;
         FIREBALL[i]->sprite = sfSprite_create();

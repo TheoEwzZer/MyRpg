@@ -78,6 +78,8 @@ int main(void)
     var_t *var = malloc(sizeof(var_t));
     sfTexture *leaf_texture = CREATE_FROM_FILE("assets/particle/leaf.png");
     srand((unsigned)time(NULL));
+    create_config("config.txt");
+    load_config("config.txt", var);
     init_rpg(var);
     init_pause_menu(var);
     sfMusic_setLoop(SOUND->music, sfTrue);

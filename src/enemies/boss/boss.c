@@ -42,7 +42,7 @@ void display_boss(var_t *var)
         sfClock_restart(BOSSC->walk);
     }
     if (BOSSC->fireball_second > 0.01f) {
-        for (sfUint32 i = 0; i < MAX_FIREBALL; i++)
+        for (sfUint32 i = 0; i < CONFIG->max_fireball; i++)
             move_fireball(var, i);
         sfClock_restart(BOSSC->fireball);
     }
@@ -61,7 +61,7 @@ void boss_fight(var_t *var)
     fight_boss(var);
     DRAW_SPRITE(BOSSC->sprite);
     check_fireball_collision(var);
-    for (sfUint32 i = 0; i < MAX_FIREBALL; i++) {
+    for (sfUint32 i = 0; i < CONFIG->max_fireball; i++) {
         if (FIREBALL[i]->is_active) {
             DRAW_SPRITE(FIREBALL[i]->sprite);
         }

@@ -28,7 +28,7 @@ sfVector2f get_fireball_direction(var_t *var)
 
 void set_fireball_position(var_t *var)
 {
-    for (sfUint32 i = 0; i < MAX_FIREBALL; i++) {
+    for (sfUint32 i = 0; i < CONFIG->max_fireball; i++) {
         if (!FIREBALL[i]->is_active) {
             FIREBALL[i]->is_active = sfTrue;
             FIREBALL[i]->direction = get_fireball_direction(var);
@@ -57,7 +57,7 @@ void check_fireball_collision(var_t *var)
     sfFloatRect player_bounds = GET_BOUNDS(PLAYER->hitbox);
     sfFloatRect fireball_bounds = {0.0f, 0.0f, 0.0f, 0.0f};
 
-    for (sfUint32 i = 0; i < MAX_FIREBALL; i++) {
+    for (sfUint32 i = 0; i < CONFIG->max_fireball; i++) {
         fireball_bounds = GET_BOUNDS(FIREBALL[i]->hitbox);
         if (FIREBALL[i]->is_active
         && sfFloatRect_intersects(&player_bounds, &fireball_bounds, NULL)) {
