@@ -17,7 +17,7 @@ void handle_music(var_t *var, settings_t *menu, mouse_event_t *mouse)
         && mouse->y > 400.0f * mouse->scale_y
         && mouse->y < 440.0f * mouse->scale_y) {
             menu->gauge_m = i;
-            sfMusic_setVolume(var->sound->music, volume[i]);
+            sfMusic_setVolume(SOUND->music, volume[i]);
             break;
         }
     }
