@@ -16,9 +16,9 @@ void free_life_and_quest(var_t *var)
     sfText_destroy(var->quest_text->text);
     free(var->quest_text);
     sfText_destroy(var->tutorial->text);
-    sfMusic_destroy(var->sound->music);
-    sfSound_destroy(var->sound->sound);
-    sfSoundBuffer_destroy(var->sound->buffer);
+    sfMusic_destroy(SOUND->music);
+    sfSound_destroy(SOUND->sound);
+    sfSoundBuffer_destroy(SOUND->buffer);
     free(var->tutorial);
-    free(var->sound);
+    free(SOUND);
 }
