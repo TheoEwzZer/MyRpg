@@ -15,6 +15,9 @@ void init_sound(var_t *var)
     SOUND->buffer = sfSoundBuffer_createFromFile("assets/music/spear.ogg");
     sfSound_setBuffer(SOUND->sound, SOUND->buffer);
     sfSound_setVolume(SOUND->sound, 50.0f);
+    SOUND->boss_music = sfMusic_createFromFile("assets/music/boss.ogg");
+    sfMusic_setLoop(SOUND->boss_music, sfTrue);
+    sfMusic_setVolume(SOUND->boss_music, 50.0f);
 }
 
 void init_fireball(var_t *var)
