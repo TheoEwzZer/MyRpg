@@ -29,16 +29,13 @@
     #define BOSSV var->boss
     #define BOSSC var->boss->boss
     #define FIREBALL BOSSV->fireball
+    #define CONFIG var->config
 
     #define INVENTORY var->inventory
 
     #define ENEMY_SPEED 0.03f
 
     #define PI 3.141592741f
-
-    #define MAX_PARTICLES 10
-    #define MAX_LEAVES 50
-    #define MAX_FIREBALL 3
 
     #define WIDTH 1920
     #define HEIGHT 1080
@@ -65,29 +62,6 @@
 
     #define INT_RECT(rect) \
     (int)rect.left, (int)rect.top, (int)rect.width, (int)rect.height
-
-    #define BLACKSMITH_DIALOG1 \
-    "Take this armor !"
-
-    #define BLACKSMITH_DIALOG2 \
-    "Attack enemies who\nare higher up !"
-
-    #define TUTORIAL_BLACKSMITH \
-    "\t\tUse left click to attack !\n \
-    Use E to open your inventory !\n \
-    Use right click on the potion to use it !"
-
-    #define PRISCILLA_DIALOG1 \
-    "Our village need you !\nTalk to the blacksmith !"
-
-    #define PRISCILLA_DIALOG2 \
-    "Attack enemies who\nare higher up !"
-
-    #define BOB_DIALOG1 \
-    "Talk to me later !"
-
-    #define BOB_DIALOG2 \
-    "Now you need to defeat the boss\nGo at the bottom of the map !"
 
 typedef struct dialog_s {
     sfFont *font;
@@ -276,6 +250,19 @@ typedef struct pause {
     sfSprite *settings;
 } pause_t;
 
+typedef struct config_s {
+    char *blacksmith_dialog2;
+    char *blacksmith_dialog;
+    char *bob_dialog2;
+    char *bob_dialog;
+    char *priscilla_dialog2;
+    char *priscilla_dialog;
+    char *tutorial_dialog;
+    sfUint32 max_fireball;
+    sfUint32 max_leaves;
+    sfUint32 max_particles;
+} config_t;
+
 typedef struct var_s {
     boss_t *boss;
     char_t *blacksmith;
@@ -284,17 +271,18 @@ typedef struct var_s {
     char_t *player;
     char_t *pnj;
     char_t *skeleton;
+    config_t *config;
     dialog_t *dialog;
-    sfBool is_paused;
     inventory_t *inventory;
     life_t *life;
-    particle_t particles_leaves[MAX_LEAVES];
-    particle_t particles_pnj[MAX_PARTICLES];
+    particle_t *particles_leaves;
+    particle_t *particles_pnj;
     pause_t *pause;
     quest_t quest_progress;
     quest_text_t *quest_text;
     sfBool has_talk_to_blacksmith;
     sfBool is_particle_active;
+    sfBool is_paused;
     sfBool is_talking_to_blacksmith;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
@@ -312,11 +300,14 @@ typedef struct var_s {
 } var_t;
 
 char *int_to_str(int nb, size_t *n);
+char *replace_backslash_n(char *line);
 int get_digits(int nb);
 int main(void);
 settings_t *init_settings(void);
 sfBool check_intersects(sfFloatRect rect1, var_t *var);
 sfBool load_boss(var_t *var, char *line);
+sfBool load_dialog(var_t *var, char *line);
+sfBool load_dialog2(var_t *var, char *line);
 sfBool load_player_life(var_t *var, char *line);
 sfBool load_position_map(var_t *var, char *line);
 sfBool load_position_orc(var_t *var, char *line);
@@ -326,6 +317,7 @@ sfBool load_position_player_y(var_t *var, char *line);
 sfBool load_position_skeleton(var_t *var, char *line);
 sfBool load_quest(var_t *var, char *line);
 sfBool load_tutorial(var_t *var, char *line);
+sfBool load_value(var_t *var, char *line);
 sfFloatRect create_enemy_rect(sfVector2f direction, char_t *enemy);
 sfRenderWindow *create_window(void);
 sfVector2f find_mouse_pos(var_t *var);
@@ -363,6 +355,8 @@ void create_barrier_collider(var_t *var);
 void create_boss_room_collider(var_t *var);
 void create_collider(var_t *var);
 void create_collider2(var_t *var);
+void create_config(const char *file_name);
+void create_dialog(FILE *file);
 void create_dialog_box(var_t *var);
 void create_foreground(var_t *var);
 void create_house_collider(var_t *var);
@@ -371,6 +365,7 @@ void create_north_west_size(var_t *var);
 void create_png_collider(var_t *var);
 void create_sud_collider(var_t *var);
 void create_tree_collider(var_t *var);
+void create_value(FILE *file);
 void create_water_collider(var_t *var);
 void create_west_collider(var_t *var);
 void dialog(var_t *var);
@@ -435,6 +430,8 @@ void init_ui(var_t *var);
 void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
 void load_all(var_t *var, char *line);
+void load_all_config(var_t *var, char *line);
+void load_config(const char *file_name, var_t *var);
 void load_game(const char *file_name, var_t *var);
 void load_game_and_engine(var_t *var, sfEvent event);
 void load_inventory(var_t *var);
