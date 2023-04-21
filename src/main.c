@@ -31,7 +31,6 @@ void change_quest_to_enemies(var_t *var)
 void check_inventory(var_t *var, sfEvent evt)
 {
     sfVector2i pos = sfMouse_getPosition((const sfWindow*)var->window);
-
     if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyE) {
         INVENTORY->is_open = !INVENTORY->is_open;
         if (var->tutorial->is_active && var->quest_progress >= ENEMIES)
@@ -45,7 +44,10 @@ void check_inventory(var_t *var, sfEvent evt)
     && pos.y >= 685 && pos.y <= 750
     && evt.type == sfEvtMouseButtonPressed
     && var->player->life < 100) {
-        var->player->life += 20;
+        if (var->player <= 0)
+            var->player->life = 20;
+        else
+            var->player->life += 20;
         INVENTORY->drink = sfFalse;
     }
 }
