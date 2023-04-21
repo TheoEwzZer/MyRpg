@@ -14,7 +14,7 @@ sfBool load_tutorial(var_t *var, char *line)
     if (!my_strncmp(line, "tutorial: ", 10)) {
         var->tutorial->is_active = my_getnbr(line + 10);
         if (var->quest_progress >= ENEMIES)
-            sfText_setString(var->tutorial->text, TUTORIAL_BLACKSMITH);
+            sfText_setString(var->tutorial->text, CONFIG->tutorial_dialog);
         return sfTrue;
     }
     if (!my_strncmp(line, "tutorial_position_x: ", 21)) {
