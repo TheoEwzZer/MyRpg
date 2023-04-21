@@ -134,6 +134,7 @@ typedef enum quest_e {
 } quest_t;
 
 typedef struct sound_s {
+    sfMusic *boss_music;
     sfMusic *music;
     sfSound *sound;
     sfSoundBuffer *buffer;
