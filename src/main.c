@@ -62,6 +62,7 @@ void check_event(var_t *var, sfEvent evt)
         check_move(var, evt);
     check_inventory(var, evt);
     check_pause(var, evt);
+    buttons_win_lose(var, evt);
     if (var->quest_progress > ARMOR && evt.type == sfEvtMouseButtonPressed) {
         PLAYER->attack = sfTrue;
         PLAYER->rect.height = 77;
@@ -84,6 +85,7 @@ int main(void)
     load_config("config.txt", var);
     init_rpg(var);
     init_pause_menu(var);
+    init_win_lose(var);
     sfMusic_setLoop(SOUND->music, sfTrue);
     sfMusic_play(SOUND->music);
     generate_leaves(var, leaf_texture);
