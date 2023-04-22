@@ -43,10 +43,12 @@ void create_dialog(FILE *file)
 
 void create_config(const char *file_name)
 {
-    FILE *file = NULL;
+    FILE *file = fopen(file_name, "rb");
 
-    if (!access(file_name, F_OK))
+    if (file) {
+        fclose(file);
         return;
+    }
     file = fopen(file_name, "wb");
     if (!file)
         return;
