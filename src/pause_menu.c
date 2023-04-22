@@ -95,6 +95,8 @@ void check_pause(var_t *var, sfEvent event)
 {
     sfVector2f mouse = find_mouse_pos(var);
 
+    if (var->is_lose || var->is_win)
+        return;
     pause_hover(var, mouse);
     if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
         var->is_paused = !var->is_paused;
