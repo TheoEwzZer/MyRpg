@@ -264,6 +264,16 @@ typedef struct config_s {
     sfUint32 max_particles;
 } config_t;
 
+typedef struct win {
+    sfSprite *menu_sprite;
+    sfSprite *win_message;
+} win_t;
+
+typedef struct lose {
+    sfSprite *lose_message;
+    sfSprite *menu_sprite;
+} lose_t;
+
 typedef struct var_s {
     boss_t *boss;
     char_t *blacksmith;
@@ -276,15 +286,18 @@ typedef struct var_s {
     dialog_t *dialog;
     inventory_t *inventory;
     life_t *life;
+    lose_t *lose;
     particle_t *particles_leaves;
     particle_t *particles_pnj;
     pause_t *pause;
     quest_t quest_progress;
     quest_text_t *quest_text;
     sfBool has_talk_to_blacksmith;
+    sfBool is_lose;
     sfBool is_particle_active;
     sfBool is_paused;
     sfBool is_talking_to_blacksmith;
+    sfBool is_win;
     sfFloatRect *collider_bounds;
     sfRectangleShape **collider;
     sfRectangleShape *rect;
@@ -297,6 +310,7 @@ typedef struct var_s {
     size_t frame_count;
     sound_t *sound;
     tutorial_t *tutorial;
+    win_t *win;
     window_settings_t *settings;
 } var_t;
 
@@ -335,6 +349,7 @@ void blacksmith_dialog(var_t *var);
 void blacksmith_move(var_t *var);
 void bob_dialog(var_t *var);
 void boss_fight(var_t *var);
+void buttons_win_lose(var_t *var, sfEvent event);
 void change_direction_orc(var_t *var, sfVector2f direction);
 void change_direction_skeleton(var_t *var, sfVector2f direction);
 void change_quest_text(var_t *var);
@@ -351,6 +366,7 @@ void check_move1(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_move2(var_t *var, sfEvent event, sfFloatRect p_bounds);
 void check_pause(var_t *var, sfEvent event);
 void check_quest(var_t *var);
+void check_win_lose(var_t *var);
 void choose_resolution(var_t *var, float scalex, float scaley, sfEvent event);
 void create_barrier_collider(var_t *var);
 void create_boss_room_collider(var_t *var);
@@ -373,6 +389,7 @@ void dialog(var_t *var);
 void display_boss(var_t *var);
 void display_inventory(var_t *var);
 void display_life(var_t *var);
+void display_lose_menu(var_t *var);
 void display_menu(sfRenderWindow *window, menu_t *menu);
 void display_menu_settings(sfRenderWindow *window, settings_t *menu);
 void display_orc(var_t *var);
@@ -381,6 +398,7 @@ void display_skeleton(var_t *var);
 void display_splash(sfRenderWindow *window, splash_t *splash);
 void display_tutorial(var_t *var);
 void display_ui(var_t *var);
+void display_win_menu(var_t *var);
 void down_move(var_t *var);
 void draw_settings(settings_t *menu, sfRenderWindow *window);
 void event_menu(var_t *var, sfEvent event, menu_t *menu);
@@ -428,6 +446,7 @@ void init_sound(var_t *var);
 void init_struct(var_t *var);
 void init_tutorial(var_t *var);
 void init_ui(var_t *var);
+void init_win_lose(var_t *var);
 void knockback(var_t *var, sfClock *clock, char_t *enemy);
 void left_move(var_t *var);
 void load_all(var_t *var, char *line);
@@ -436,6 +455,7 @@ void load_config(const char *file_name, var_t *var);
 void load_game(const char *file_name, var_t *var);
 void load_game_and_engine(var_t *var, sfEvent event);
 void load_inventory(var_t *var);
+void lose_buttons(var_t *var);
 void main_menu(var_t *var);
 void map(var_t *var);
 void menu_pressed(menu_t *menu, sfVector2f mouse);
@@ -468,6 +488,7 @@ void show_priscilla_dialog(var_t *var);
 void splash_screen(var_t *var);
 void stat_set_pos(var_t *var, float x, float y);
 void up_move(var_t *var);
+void win_buttons(var_t *var);
 void zoom_in(var_t *var, sfBool *has_zoom);
 void zoom_out(var_t *var, sfBool *has_zoom);
 
