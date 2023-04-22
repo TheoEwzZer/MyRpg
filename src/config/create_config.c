@@ -25,8 +25,8 @@ void create_dialog(FILE *file)
     fwrite(str, sizeof(char), 37, file);
     str = "BLACKSMITH_DIALOG2: Attack enemies who\\nare higher up !\n";
     fwrite(str, sizeof(char), 56, file);
-    str = "TUTORIAL_BLACKSMITH: Left click to attack !\\n";
-    fwrite(str, sizeof(char), 45, file);
+    str = "TUTORIAL_BLACKSMITH: Left click or Space to attack !\\n";
+    fwrite(str, sizeof(char), 54, file);
     str = "E to open inventory !\\nRight click on the potion to use it !\n";
     fwrite(str, sizeof(char), 61, file);
     str = "PRISCILLA_DIALOG: We need you !\\nTalk to the blacksmith !\n";
