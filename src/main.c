@@ -55,7 +55,6 @@ void check_inventory(var_t *var, sfEvent evt)
 void check_event(var_t *var, sfEvent evt)
 {
     sfVector2f sprite_pos = sfSprite_getPosition(PLAYER->sprite);
-
     if (evt.type == sfEvtClosed)
         sfRenderWindow_close(var->window);
     if (evt.type == sfEvtKeyPressed && !PLAYER->attack)
@@ -63,7 +62,8 @@ void check_event(var_t *var, sfEvent evt)
     check_inventory(var, evt);
     check_pause(var, evt);
     buttons_win_lose(var, evt);
-    if (var->quest_progress > ARMOR && evt.type == sfEvtMouseButtonPressed) {
+    if (var->quest_progress > ARMOR && (evt.type == sfEvtMouseButtonPressed
+    || (evt.type == sfEvtKeyPressed && evt.key.code == sfKeySpace))) {
         PLAYER->attack = sfTrue;
         PLAYER->rect.height = 77;
         PLAYER->rect.left = 616 - 77;
