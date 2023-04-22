@@ -11,6 +11,8 @@ void display_tutorial(var_t *var)
 {
     sfVector2f offset = sfView_getCenter(var->view);
 
+    if (PLAYER->life <= 0)
+        return;
     offset.x -= 100.0f;
     if (var->quest_progress == ENEMIES)
         offset.y -= 25.0f;
