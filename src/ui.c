@@ -52,7 +52,7 @@ void display_inventory(var_t *var)
         DRAW_SPRITE(INVENTORY->bar);
         DRAW_SPRITE(INVENTORY->lance);
         sfRenderWindow_drawText(var->window, INVENTORY->atk, NULL);
-        if (INVENTORY->drink == sfTrue && (var->quest_progress == BOB
+        if (INVENTORY->drink && (var->quest_progress == BOB
         || var->quest_progress == BOSS || var->quest_progress == ENEMIES))
             DRAW_SPRITE(INVENTORY->potion);
     }
@@ -79,6 +79,7 @@ void display_ui(var_t *var)
     display_inventory(var);
     display_tutorial(var);
     display_pause_menu(var);
+    display_win_menu(var); display_lose_menu(var);
 }
 
 void init_ui(var_t *var)
