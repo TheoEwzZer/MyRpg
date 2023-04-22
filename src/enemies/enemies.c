@@ -30,10 +30,7 @@ void knockback(var_t *var, sfClock *clock, char_t *enemy)
     sfVector2f offset = {0.0f, 0.0f};
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= 1.0f) {
-        if (var->quest_progress == BOSS)
-            enemy->life -= 30;
-        else
-            enemy->life -= 20;
+        enemy->life -= (var->quest_progress == BOSS) ? 30 : 20;
         sfClock_restart(clock);
         if (PLAYER->direction == UP) {
             enemy_rect.top -= 30.0f; offset.y = 30.0f;
