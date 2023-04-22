@@ -72,7 +72,7 @@ void check_move(var_t *var, sfEvent event)
     sfVector2f size = {0.0f, 0.0f};
     float tmp = p_bounds.height;
 
-    if (INVENTORY->is_open)
+    if (INVENTORY->is_open || var->is_lose || var->is_win || var->is_paused)
         return;
     p_bounds.height = p_bounds.height / 5.0f;
     p_bounds.top += tmp - p_bounds.height;

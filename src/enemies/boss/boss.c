@@ -34,14 +34,14 @@ void display_boss(var_t *var)
     BOSSC->fireball_t = sfClock_getElapsedTime(BOSSC->fireball);
     BOSSC->second = (float)BOSSC->times.microseconds / 1000000.0f;
     BOSSC->fireball_second = (float)BOSSC->fireball_t.microseconds / 1000000.0f;
-    if (BOSSC->second > 5.0f) {
+    if (BOSSC->second > 5.0f && !var->is_paused) {
         sfSprite_setPosition(BOSSC->sprite, BOSSV->b_pos);
         BOSSV->b_pos.x += 20.0f;
         BOSSV->b_pos.y += 30.0f;
         set_fireball_position(var);
         sfClock_restart(BOSSC->walk);
     }
-    if (BOSSC->fireball_second > 0.01f) {
+    if (BOSSC->fireball_second > 0.01f && !var->is_paused) {
         for (sfUint32 i = 0; i < CONFIG->max_fireball; i++)
             move_fireball(var, i);
         sfClock_restart(BOSSC->fireball);
