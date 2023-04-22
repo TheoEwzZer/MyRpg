@@ -15,11 +15,9 @@ void fight_boss(var_t *var)
 
     if (!clock)
         clock = sfClock_create();
-    if (PLAYER->attack
-    && sfFloatRect_intersects(&player_spear, &boss_bounds, NULL)) {
-        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= 1.0f) {
-            BOSSC->life -= 30;
-            sfClock_restart(clock);
+    if (sfFloatRect_intersects(&player_spear, &boss_bounds, NULL)) {
+        if (PLAYER->attack) {
+            knockback(var, clock, BOSSC);
         }
     }
 }
