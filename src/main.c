@@ -43,11 +43,11 @@ void check_inventory(var_t *var, sfEvent evt)
     && pos.x >= 715 && pos.x <= 775
     && pos.y >= 685 && pos.y <= 750
     && evt.type == sfEvtMouseButtonPressed
-    && var->player->life < 100) {
-        if (var->player <= 0)
-            var->player->life = 20;
+    && PLAYER->life < 100) {
+        if (PLAYER->life <= 0)
+            PLAYER->life = 20;
         else
-            var->player->life += 20;
+            PLAYER->life += 20;
         INVENTORY->drink = sfFalse;
     }
 }

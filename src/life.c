@@ -49,13 +49,13 @@ void init_life(var_t *var)
 void get_exp(var_t *var)
 {
     if (var->quest_progress == ARMOR)
-        var->player->exp = 1;
+        PLAYER->exp = 1;
     if (var->quest_progress == ENEMIES)
-        var->player->exp = 2;
+        PLAYER->exp = 2;
     if (var->quest_progress == BOB) {
-        var->player->exp = 5;
+        PLAYER->exp = 5;
         sfText_setString(INVENTORY->atk, "30");
     }
     if (var->quest_progress == BOSS)
-        var->player->exp = 7;
+        PLAYER->exp = 7;
 }

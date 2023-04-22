@@ -42,7 +42,7 @@ void init_player(var_t *var)
     sfSprite_setScale(PLAYER->sprite, (sfVector2f){0.75f, 0.75f});
     PLAYER->attack = sfFalse;
     PLAYER->direction = DOWN;
-    var->player->exp = 0;
+    PLAYER->exp = 0;
 }
 
 void init_struct(var_t *var)

@@ -33,7 +33,7 @@ void init_pause_menu(var_t *var)
 
 void display_pause_menu(var_t *var)
 {
-    sfVector2f pos = sfSprite_getPosition(var->player->sprite);
+    sfVector2f pos = sfSprite_getPosition(PLAYER->sprite);
 
     if (!var->is_paused)
         return;
