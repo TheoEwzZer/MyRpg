@@ -7,15 +7,17 @@
 
 #include "my_rpg.h"
 
-void handle_music(var_t *var, settings_t *menu, mouse_event_t *mouse)
+void handle_music(var_t *var, settings_t *menu, sfVector2i *mouse)
 {
     float volume[5] = {0.0f, 25.0f, 50.0f, 75.0f, 100.0f};
+    sfVector2u size = sfRenderWindow_getSize(var->window);
+    float scalex = (float)size.x / 1920; float scaley = (float)size.y / 1080;
 
     for (int i = 0; i < 5; i++) {
-        if (mouse->x > (float)(50 + 125 * i) * mouse->scale_x
-        && mouse->x < (float)(100 + 125 * i) * mouse->scale_x
-        && mouse->y > 400.0f * mouse->scale_y
-        && mouse->y < 440.0f * mouse->scale_y) {
+        if (mouse->x > (float)(50 + 100 * i) * scalex
+        && mouse->x < (float)(100 + 100 * i) * scalex
+        && mouse->y > 400.0f * scaley
+        && mouse->y < 440.0f * scaley) {
             menu->gauge_m = i;
             sfMusic_setVolume(SOUND->music, volume[i]);
             sfMusic_setVolume(SOUND->boss_music, volume[i]);
@@ -24,15 +26,17 @@ void handle_music(var_t *var, settings_t *menu, mouse_event_t *mouse)
     }
 }
 
-void handle_sound(var_t *var, settings_t *menu, mouse_event_t *mouse)
+void handle_sound(var_t *var, settings_t *menu, sfVector2i *mouse)
 {
     float volume[5] = {0.0f, 25.0f, 50.0f, 75.0f, 100.0f};
+    sfVector2u size = sfRenderWindow_getSize(var->window);
+    float scalex = (float)size.x / 1920; float scaley = (float)size.y / 1080;
 
     for (int i = 0; i < 5; i++) {
-        if (mouse->x > (float)(500 + 125 * i) * mouse->scale_x
-        && mouse->x < (float)(550 + 125 * i) * mouse->scale_x
-        && mouse->y > 400.0f * mouse->scale_y
-        && mouse->y < 440.0f * mouse->scale_y) {
+        if (mouse->x > (float)(600 + 100 * i) * scalex
+        && mouse->x < (float)(650 + 100 * i) * scalex
+        && mouse->y > 400.0f * scaley
+        && mouse->y < 440.0f * scaley) {
             menu->gauge_s = i;
             sfSound_setVolume(SOUND->sound, volume[i]);
             break;
