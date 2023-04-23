@@ -36,21 +36,22 @@ settings_t *menu, sfBool is_in_game)
 {
     sfVector2u size = sfRenderWindow_getSize(var->window);
     float scalex = (float)size.x / 1920; float scaley = (float)size.y / 1080;
-    mouse_event_t *mouse = malloc(sizeof(mouse_event_t));
     sfVector2i mouse2 = sfMouse_getPositionRenderWindow(var->window);
     sfVector2f mouse_float = (sfVector2f){(float)mouse2.x, (float)mouse2.y};
-
-    mouse->x = event.mouseButton.x; mouse->y = event.mouseButton.y;
-    mouse->scale_x = scalex; mouse->scale_y = scaley;
     settings_hover(menu, mouse_float);
-    if (event.type == 9 && event.mouseButton.button == sfMouseLeft)
+    settings_hover2(menu, mouse_float);
+    if (event.type == 9 && event.mouseButton.button == sfMouseLeft){
         settings_pressed(menu, mouse_float);
+        settings_pressed2(menu, mouse_float);
+    }
     if (event.type == 0 || (event.type == 5 && sfKeyboard_isKeyPressed(36)))
         sfRenderWindow_close(var->window);
     if (event.type == 10 && event.mouseButton.button == sfMouseLeft) {
+        if (is_in_game == sfTrue)
+            handle_commands(var, menu, mouse_float);
         handle_back(event, var, is_in_game);
-        handle_music(var, menu, mouse);
-        handle_sound(var, menu, mouse);
+        handle_music(var, menu, &mouse2);
+        handle_sound(var, menu, &mouse2);
         choose_resolution(var, scalex, scaley, event);
     }
 }
@@ -79,7 +80,8 @@ void draw_settings(settings_t *menu, sfRenderWindow *window)
         sfRenderWindow_drawSprite(window, menu->gauge_s4, NULL);
 }
 
-void display_menu_settings(sfRenderWindow *window, settings_t *menu)
+void display_menu_settings(sfRenderWindow *window, settings_t *menu,
+int is_ingame)
 {
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, menu->menu_sprite, NULL);
@@ -93,6 +95,9 @@ void display_menu_settings(sfRenderWindow *window, settings_t *menu)
     sfRenderWindow_drawSprite(window, menu->res2, NULL);
     sfRenderWindow_drawSprite(window, menu->size1, NULL);
     sfRenderWindow_drawSprite(window, menu->size2, NULL);
+    if (is_ingame == 1){
+        sfRenderWindow_drawSprite(window, menu->commands, NULL);
+    }
     draw_settings(menu, window);
     sfRenderWindow_display(window);
 }
@@ -104,6 +109,6 @@ void menu_settings(var_t *var, sfBool is_in_game)
     while (sfRenderWindow_isOpen(var->window)){
         while (sfRenderWindow_pollEvent(var->window, &event))
             event_menu_settings(var, event, menus, is_in_game);
-        display_menu_settings(var->window, menus);
+        display_menu_settings(var->window, menus, is_in_game);
     }
 }
