@@ -31,7 +31,7 @@ void change_quest_to_enemies(var_t *var)
 void check_inventory(var_t *var, sfEvent evt)
 {
     sfVector2i pos = sfMouse_getPosition((const sfWindow*)var->window);
-    if (evt.type == sfEvtKeyPressed && evt.key.code == sfKeyE) {
+    if (evt.type == sfEvtKeyPressed && evt.key.code == var->key_inv) {
         INVENTORY->is_open = !INVENTORY->is_open;
         if (var->tutorial->is_active && var->quest_progress >= ENEMIES)
             var->tutorial->is_active = sfFalse;
@@ -63,7 +63,7 @@ void check_event(var_t *var, sfEvent evt)
     check_pause(var, evt);
     buttons_win_lose(var, evt);
     if (var->quest_progress > ARMOR && (evt.type == sfEvtMouseButtonPressed
-    || (evt.type == sfEvtKeyPressed && evt.key.code == sfKeySpace))) {
+    || (evt.type == sfEvtKeyPressed && evt.key.code == var->key_attack))) {
         PLAYER->attack = sfTrue;
         PLAYER->rect.height = 77;
         PLAYER->rect.left = 616 - 77;
