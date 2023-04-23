@@ -43,6 +43,10 @@ void init_player(var_t *var)
     PLAYER->attack = sfFalse;
     PLAYER->direction = DOWN;
     PLAYER->exp = 0;
+    var->key_up = sfKeyZ; var->key_down = sfKeyS;
+    var->key_left = sfKeyQ; var->key_right = sfKeyD;
+    var->key_inv = sfKeyE;
+    var->key_attack = sfKeySpace;
 }
 
 void init_struct(var_t *var)
