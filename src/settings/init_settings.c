@@ -83,6 +83,7 @@ void init_mute(settings_t *menu)
     sfTexture *mute_texture = CREATE_FROM_FILE("assets/settings/mute.png");
     sfVector2f mute_music_pos = {50, 400};
     sfVector2f mute_sound_pos = {600, 400};
+    sfTexture *commands_tx = CREATE_FROM_FILE("assets/settings/commands.png");
 
     menu->mute_music = sfSprite_create();
     sfSprite_setTexture(menu->mute_music, mute_texture, sfTrue);
@@ -90,6 +91,9 @@ void init_mute(settings_t *menu)
     menu->mute_sound = sfSprite_create();
     sfSprite_setTexture(menu->mute_sound, mute_texture, sfTrue);
     sfSprite_setPosition(menu->mute_sound, mute_sound_pos);
+    menu->commands = sfSprite_create();
+    sfSprite_setTexture(menu->commands, commands_tx, sfTrue);
+    sfSprite_setPosition(menu->commands, (sfVector2f){1500, 500});
     init_resolution(menu);
 }
 
