@@ -20,7 +20,7 @@ sfText **init_texts_settings(void)
 {
     sfText **texts = malloc(sizeof(sfText *) * 6);
     sfFont *font = sfFont_createFromFile("assets/font/arial.ttf");
-    const char *str[6] = {"Z", "S", "Q", "D", "E", "SPACE"};
+    const char *str[6] = {"Z", "S", "D", "Q", "E", "SPACE"};
     unsigned int size = 0;
     sfVector2f position = {265.0f, 0.0f};
 
