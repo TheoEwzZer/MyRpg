@@ -14,6 +14,7 @@ sfRenderWindow *create_window(void)
     sfRenderWindow *window = sfRenderWindow_create(
         mode, "My Rpg", style, NULL
     );
+    sfRenderWindow_setFramerateLimit(window, 144);
     return window;
 }
 
